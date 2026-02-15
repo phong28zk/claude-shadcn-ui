@@ -6,7 +6,7 @@
 
 ## Overview
 
-Claude ShadCN UI is a React component library that combines Claude AI's design language with ShadCN UI patterns. It provides 21 production-ready components, a design system with CSS variables, and a complete monorepo structure with interactive playground and documentation site.
+Claude ShadCN UI is a React component library that combines Claude AI's design language with ShadCN UI patterns. It provides 21 production-ready components, a design system with CSS variables, and a complete monorepo structure with interactive playground and ShadCN Studio-style component simulator featuring live preview, props editor, and real-time theme customization.
 
 ## Project Structure
 
@@ -33,9 +33,26 @@ claude-shadcn-ui-monorepo/
 │   │   ├── src/stories/             # 21 component story files
 │   │   ├── .ladle/config.mjs        # Ladle configuration
 │   │   └── tailwind.config.js       # Shared styling
-│   └── docs/                        # TanStack Router documentation site
+│   └── docs/                        # TanStack Router docs + simulator
 │       ├── src/routes/              # File-based routing pages
-│       ├── src/components/          # Doc-specific components
+│       │   ├── components/
+│       │   │   ├── index.tsx        # Components grid (all 21)
+│       │   │   └── $name.tsx        # Dynamic simulator (live edit)
+│       │   └── ...                  # Other pages
+│       ├── src/components/          # Simulator UI components
+│       │   ├── component-card.tsx
+│       │   ├── component-preview.tsx
+│       │   ├── props-editor.tsx
+│       │   ├── code-snippet-panel.tsx
+│       │   ├── color-picker.tsx
+│       │   └── theme-customizer.tsx
+│       ├── src/lib/                 # Simulator logic
+│       │   ├── component-registry.ts
+│       │   ├── code-generator.ts
+│       │   ├── theme-generator.ts
+│       │   └── types.ts
+│       ├── src/hooks/
+│       │   └── use-theme-customizer.ts
 │       └── tailwind.config.js       # Shared styling
 ├── .github/workflows/               # GitHub Actions CI/CD
 │   ├── ci.yml                       # Build, test, lint pipeline
@@ -179,6 +196,105 @@ claude-shadcn-ui-monorepo/
   }
 }
 ```
+
+## Component Simulator (Docs Site Feature)
+
+The documentation site includes an interactive component simulator inspired by ShadCN Studio, providing live preview and customization for all 21 components.
+
+### Core Features
+
+**Live Component Preview**
+- Renders each component in a sandboxed preview panel
+- Real-time updates as props change
+- Responsive iframe with theme context
+
+**Props Editor**
+- Dynamic controls for each component's props
+- Supported control types: select, boolean, text, number
+- One-click reset to defaults
+- Visual feedback for modified props
+
+**Code Generation**
+- Auto-generates installation snippets
+- Multiple package manager tabs (bun, npm, yarn, pnpm)
+- Copy-to-clipboard functionality
+- Shows default props and component composition
+
+**Theme Customizer**
+- Real-time HSL color picker integration
+- Adjusts all theme colors dynamically
+- Persists custom theme to localStorage
+- Previews light/dark mode variations
+
+### Component Registry
+
+**File:** `apps/docs/src/lib/component-registry.ts`
+
+Central metadata source for all 21 components:
+- Component name, slug, description
+- Category (ui, chat, layout, theme)
+- Variant count
+- Prop schema with type, options, defaults
+- Import statements
+- Compound component detection
+
+**Helper Functions:**
+- `getComponent(slug)` - Fetch single component metadata
+- `getComponentsByCategory(category)` - Filter by category
+- `getAllCategories()` - List available categories
+- `getCategoryLabel(category)` - Get display name
+
+### Simulator Components
+
+| Component | Purpose | File |
+|-----------|---------|------|
+| **ComponentPreview** | Renders component with props in iframe | `component-preview.tsx` |
+| **PropsEditor** | Control panel for editing props | `props-editor.tsx` |
+| **CodeSnippetPanel** | Installation + usage code tabs | `code-snippet-panel.tsx` |
+| **ComponentCard** | Grid card for component listing | `component-card.tsx` |
+| **ThemeCustomizer** | Color picker + theme adjuster | `theme-customizer.tsx` |
+| **ColorPicker** | HSL color control widget | `color-picker.tsx` |
+
+### Utilities
+
+**Code Generator** (`code-generator.ts`)
+- Builds JSX code based on current props
+- Formats installation command by package manager
+- Generates component composition examples
+
+**Theme Generator** (`theme-generator.ts`)
+- HSL value parsing and adjustment
+- Color space conversions
+- Theme variable injection via CSS
+
+**Custom Hook** (`use-theme-customizer.ts`)
+- Manages theme state and persistence
+- Syncs with localStorage
+- Provides useTheme hook for components
+
+**Type Definitions** (`types.ts`)
+- ComponentMeta interface
+- PropSchema interface
+- ThemeColorKey union
+- Control type definitions
+
+### Dynamic Routing
+
+**File:** `apps/docs/src/routes/components/$name.tsx`
+
+- Wildcard route matches all component slugs
+- Renders simulator page with selected component
+- 404 handling for unknown components
+- State management for props and theme
+
+### Grid View
+
+**File:** `apps/docs/src/routes/components/index.tsx`
+
+- Displays all 21 components in grid
+- Filter by category
+- Quick access links to individual simulators
+- Variant count badges
 
 ## Testing Infrastructure
 
@@ -447,4 +563,4 @@ export { Component, componentVariants }
 ---
 
 **Generated:** 2026-02-15
-**Codebase Token Count:** 82,634 tokens across 103 files
+**Codebase Token Count:** ~95,000 tokens across 125 files (includes simulator)

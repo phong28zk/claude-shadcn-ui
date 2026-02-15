@@ -111,7 +111,7 @@ function App() {
             <p className="text-muted-foreground mb-3">
               ChatBubble, ChatInput, MessageList, TypingIndicator
             </p>
-            <Link to="/components/chat-bubble">
+            <Link to="/components/$name" params={{ name: 'chat-bubble' }}>
               <Button variant="outline" size="sm">
                 View Chat Components
               </Button>

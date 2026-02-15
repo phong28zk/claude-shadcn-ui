@@ -16,8 +16,9 @@ This document defines coding standards, patterns, and conventions used throughou
 5. [Naming Conventions](#naming-conventions)
 6. [Testing Standards](#testing-standards)
 7. [Documentation Standards](#documentation-standards)
-8. [Performance Guidelines](#performance-guidelines)
-9. [Accessibility Standards](#accessibility-standards)
+8. [Simulator Component Standards](#simulator-component-standards)
+9. [Performance Guidelines](#performance-guidelines)
+10. [Accessibility Standards](#accessibility-standards)
 
 ## TypeScript Standards
 
@@ -663,6 +664,191 @@ const MyComponent = React.forwardRef<HTMLElement, Props>((props, ref) => ...)
 \`\`\`
 
 Use `asChild` prop for composition patterns.
+```
+
+## Simulator Component Standards
+
+Simulator components (in `apps/docs/src/components/`) interact with the component registry and props editor. They follow different patterns than library components.
+
+### Core Simulator Components
+
+**ComponentPreview.tsx**
+- Renders library components dynamically with provided props
+- Uses component registry metadata
+- No React.forwardRef needed (internal-only component)
+- Props: `{ slug: string, componentProps: Record<string, unknown> }`
+
+```typescript
+interface ComponentPreviewProps {
+  slug: string                            // Component identifier
+  componentProps: Record<string, unknown> // Current prop values
+}
+
+export function ComponentPreview({ slug, componentProps }: ComponentPreviewProps) {
+  const meta = getComponent(slug)
+  // Dynamically render component based on slug and props
+}
+```
+
+**PropsEditor.tsx**
+- Renders controls for editing component props
+- Supports select, boolean, text, number input types
+- No state management (controlled by parent)
+- Props: `{ schema: PropSchema[], values, onChange }`
+
+```typescript
+interface PropsEditorProps {
+  schema: PropSchema[]                               // Prop definitions
+  values: Record<string, unknown>                    // Current values
+  onChange: (key: string, value: unknown) => void    // Update callback
+}
+
+export function PropsEditor({ schema, values, onChange }: PropsEditorProps) {
+  return schema.map(prop => (
+    // Render control based on prop.type
+  ))
+}
+```
+
+**CodeSnippetPanel.tsx**
+- Generates installation and usage code
+- Multiple package manager tabs
+- Copy-to-clipboard functionality
+- Props: `{ meta: ComponentMeta, currentProps: Record<string, unknown> }`
+
+```typescript
+interface CodeSnippetPanelProps {
+  meta: ComponentMeta                     // Component metadata
+  currentProps: Record<string, unknown>   // Current prop values
+}
+
+export function CodeSnippetPanel({ meta, currentProps }: CodeSnippetPanelProps) {
+  const code = generateCode(meta, currentProps)
+  const installCmd = generateInstall(meta)
+  // Render tabs with code snippets
+}
+```
+
+### Utility Function Standards
+
+**code-generator.ts**
+- Pure functions for generating code strings
+- No side effects or state mutations
+- Exported functions: `generateCode()`, `generateInstall()`
+
+```typescript
+export function generateCode(
+  meta: ComponentMeta,
+  props: Record<string, unknown>
+): string {
+  // Return JSX code as string
+  return `<${meta.name} ${propsToString(props)} />`
+}
+
+export function generateInstall(
+  manager: PackageManager,
+  meta: ComponentMeta
+): string {
+  // Return install command
+  const commands: Record<PackageManager, string> = { ... }
+  return commands[manager]
+}
+```
+
+**theme-generator.ts**
+- HSL color manipulation utilities
+- No DOM side effects
+- Exported functions: `parseHSL()`, `adjustHSL()`, `hslToCSS()`
+
+```typescript
+export function parseHSL(hslString: string): HSLColor {
+  // Parse "18 55% 43%" to { h: 18, s: 55, l: 43 }
+}
+
+export function adjustHSL(color: HSLColor, adjustment: Partial<HSLColor>): HSLColor {
+  // Return adjusted color
+}
+
+export function hslToCSS(color: HSLColor): string {
+  // Return "18 55% 43%"
+}
+```
+
+### Custom Hook Standards
+
+**use-theme-customizer.ts**
+- Manages theme state and persistence
+- Syncs to localStorage (key: 'theme-customizer')
+- Exported hook: `useThemeCustomizer()`
+
+```typescript
+export function useThemeCustomizer() {
+  const [theme, setTheme] = useState<ThemeColors>(() => {
+    // Load from localStorage or defaults
+  })
+
+  useEffect(() => {
+    // Persist to localStorage
+  }, [theme])
+
+  return {
+    theme,
+    updateColor: (key: ThemeColorKey, value: string) => setTheme(...)
+  }
+}
+```
+
+### Type Definitions
+
+**types.ts** defines all simulator types:
+- `ComponentCategory` - Union of categories
+- `PropControlType` - Union of control types
+- `ComponentMeta` - Component metadata interface
+- `PropSchema` - Individual prop definition
+- `ThemeColorKey` - Color variable names
+- `HSLColor` - HSL components interface
+
+All simulator props should be typed with these definitions:
+
+```typescript
+// Good
+function ComponentCard({ meta }: { meta: ComponentMeta }) { }
+
+// Avoid
+function ComponentCard({ meta }: { meta: any }) { }
+```
+
+### Registry Pattern
+
+The component registry is the single source of truth for all component metadata.
+
+**When adding a new component to library:**
+1. Create component in `packages/ui/src/components/`
+2. Add entry to `COMPONENT_REGISTRY` in `apps/docs/src/lib/component-registry.ts`
+3. Component automatically appears in simulator and grid
+
+**Registry entry format:**
+```typescript
+{
+  name: 'ComponentName',              // PascalCase
+  slug: 'component-name',             // kebab-case (URL slug)
+  description: 'One-line description',
+  category: 'ui',                     // Category of component
+  variantCount: 4,                    // Number of variants
+  props: [                            // Prop schema
+    {
+      name: 'variant',
+      type: 'select',
+      options: ['default', 'outline'],
+      default: 'default',
+      description: 'Visual style'
+    }
+  ],
+  defaultProps: { variant: 'default' },
+  importStatement: "import { ComponentName } from 'claude-shadcn-ui'",
+  hasChildren: false,
+  isCompound: false
+}
 ```
 
 ## Performance Guidelines

@@ -423,7 +423,7 @@ export const Variants = () => (
 
 ## Documentation Site Architecture (apps/docs)
 
-### Router Structure
+### Router Structure (Dynamic Component Simulator)
 
 ```
 apps/docs/src/routes/
@@ -431,22 +431,148 @@ apps/docs/src/routes/
 ├── index.tsx                    # Landing page
 ├── getting-started.tsx          # Setup guide
 ├── components/
-│   ├── index.tsx               # Components index
-│   ├── button.tsx              # Button page
-│   ├── input.tsx               # Input page
-│   └── ...                     # Other components
+│   ├── index.tsx               # Component grid (all 21)
+│   └── $name.tsx               # Dynamic simulator page
 └── theme.tsx                   # Theming guide
 ```
 
-### Component Page Pattern
+### Dynamic Simulator Pattern
+
+The `$name.tsx` route creates 21 unique paths dynamically:
+- `/components/button` → Button simulator
+- `/components/input` → Input simulator
+- `/components/chat-bubble` → ChatBubble simulator
+- ... (21 total components)
+
+Each simulator renders:
 
 ```
-Component Documentation Page:
-  ├─ Overview (description + use case)
-  ├─ Live Example (embedded story)
-  ├─ Code Snippet (copy-able)
-  ├─ Props Table (auto-generated)
-  └─ Theming Section (customization)
+Component Simulator Page:
+  ├─ Header
+  │   ├─ Component name
+  │   ├─ Variant count badge
+  │   └─ Compound indicator (if applicable)
+  ├─ Main Grid (lg: 3 columns)
+  │   ├─ Preview Section (lg: 2 columns)
+  │   │   ├─ ComponentPreview
+  │   │   │   └─ Renders component with live props
+  │   │   └─ CodeSnippetPanel
+  │   │       ├─ Installation snippets
+  │   │       └─ Package manager tabs
+  │   └─ Right Sidebar (lg: 1 column)
+  │       ├─ PropsEditor
+  │       │   ├─ Dynamic controls per prop
+  │       │   └─ Reset button
+  │       └─ ThemeCustomizer
+  │           └─ HSL color picker
+  └─ Back link to grid
+```
+
+### Component Registry System
+
+**Central Metadata Source** (`lib/component-registry.ts`)
+
+All 21 components defined with schema:
+
+```typescript
+{
+  name: 'Button',
+  slug: 'button',
+  description: 'Trigger actions...',
+  category: 'ui',
+  variantCount: 6,
+  props: [
+    { name: 'variant', type: 'select', options: [...], default: '...', ... },
+    { name: 'size', type: 'select', options: [...], default: '...', ... },
+    { name: 'disabled', type: 'boolean', default: false, ... }
+  ],
+  defaultProps: { variant: 'default', size: 'default', disabled: false },
+  importStatement: "import { Button } from 'claude-shadcn-ui'",
+  hasChildren: true,
+  isCompound: false
+}
+```
+
+Helper functions:
+- `getComponent(slug)` - Fetch component by slug
+- `getComponentsByCategory(category)` - Filter by category
+- `getAllCategories()` - List all categories
+- `getCategoryLabel(category)` - Get display name
+
+### Simulator Data Flow
+
+```
+User navigates to /components/$name
+  ↓
+Route loads ComponentMeta from registry
+  ↓
+State: props = defaultProps
+  ↓
+PropsEditor onChange → setProps(updated)
+  ↓
+Component re-renders with new props
+  ↓
+ComponentPreview generates JSX dynamically
+  ↓
+CodeSnippetPanel generates usage code
+```
+
+### Simulator Component Architecture
+
+**Component Library:**
+
+| Component | Purpose | Dependencies |
+|-----------|---------|--------------|
+| **ComponentPreview** | Renders component in sandbox | component-registry |
+| **PropsEditor** | Props control panel | types, component-registry |
+| **CodeSnippetPanel** | Installation + usage code | code-generator, component-registry |
+| **ComponentCard** | Grid card for listing | component-registry |
+| **ThemeCustomizer** | Color picker UI | theme-generator, use-theme-customizer |
+| **ColorPicker** | HSL color control | types |
+
+**Utility Layer:**
+
+| Utility | Purpose |
+|---------|---------|
+| **code-generator.ts** | Generates JSX and snippets from props |
+| **theme-generator.ts** | HSL conversions and color adjustments |
+| **types.ts** | TypeScript interfaces for simulator |
+| **use-theme-customizer.ts** | Theme state management hook |
+
+### Grid View Architecture
+
+**File:** `routes/components/index.tsx`
+
+Displays all 21 components in filterable grid:
+- Category filter tabs (UI, Chat, Layout, Theme)
+- ComponentCard for each component
+- Links to individual simulator pages
+- Variant count display
+
+### Type Safety
+
+**ComponentMeta Interface:**
+```typescript
+interface ComponentMeta {
+  name: string                    // Display name
+  slug: string                    // URL slug
+  description: string             // One-line description
+  category: ComponentCategory     // ui | chat | layout | theme
+  variantCount: number           // Number of variants
+  props: PropSchema[]            // Prop definitions
+  defaultProps: Record<string, unknown>  // Default values
+  importStatement: string         // Copy-ready import
+  hasChildren: boolean           // Accepts children
+  isCompound: boolean            // Has sub-components
+}
+
+interface PropSchema {
+  name: string
+  type: 'select' | 'boolean' | 'text' | 'number'
+  options?: string[]             // For select type
+  default: unknown
+  description: string
+}
 ```
 
 ## CI/CD Pipeline Architecture
