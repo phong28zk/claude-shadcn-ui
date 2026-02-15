@@ -1,0 +1,155 @@
+/**
+ * Claude AI Animation System
+ * Custom keyframes and animation utilities
+ */
+
+@layer utilities {
+  /* Keyframe Definitions */
+  @keyframes claude-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes claude-slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes claude-slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes claude-slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes claude-slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes claude-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes claude-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes claude-bounce {
+    0%, 100% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateY(-25%);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  @keyframes claude-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Animation Utility Classes */
+  .animate-claude-fade-in {
+    animation: claude-fade-in var(--transition-base) ease-out;
+  }
+
+  .animate-claude-slide-up {
+    animation: claude-slide-up var(--transition-base) ease-out;
+  }
+
+  .animate-claude-slide-down {
+    animation: claude-slide-down var(--transition-base) ease-out;
+  }
+
+  .animate-claude-slide-in-left {
+    animation: claude-slide-in-left var(--transition-base) ease-out;
+  }
+
+  .animate-claude-slide-in-right {
+    animation: claude-slide-in-right var(--transition-base) ease-out;
+  }
+
+  .animate-claude-pulse {
+    animation: claude-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-claude-spin {
+    animation: claude-spin 1s linear infinite;
+  }
+
+  .animate-claude-bounce {
+    animation: claude-bounce 1s infinite;
+  }
+
+  .animate-claude-scale-in {
+    animation: claude-scale-in var(--transition-base) ease-out;
+  }
+
+  /* Fast variants */
+  .animate-claude-fade-in-fast {
+    animation: claude-fade-in var(--transition-fast) ease-out;
+  }
+
+  .animate-claude-slide-up-fast {
+    animation: claude-slide-up var(--transition-fast) ease-out;
+  }
+
+  /* Slow variants */
+  .animate-claude-fade-in-slow {
+    animation: claude-fade-in var(--transition-slow) ease-out;
+  }
+
+  .animate-claude-slide-up-slow {
+    animation: claude-slide-up var(--transition-slow) ease-out;
+  }
+}

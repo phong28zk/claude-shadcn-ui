@@ -1,0 +1,21 @@
+{
+  "name": "claude-shadcn-ui-monorepo",
+  "private": true,
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
+    "playground": "turbo run dev --filter=playground",
+    "playground:build": "turbo run build --filter=playground",
+    "docs": "turbo run dev --filter=docs",
+    "docs:build": "turbo run build --filter=docs"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.4",
+    "prettier": "^3.5.0"
+  },
+  "packageManager": "bun@1.1.40"
+}
