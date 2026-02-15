@@ -41,3 +41,12 @@ coverage/
 # Misc
 *.local
 .vercel
+
+# Claude Code
+.claude/
+plans/
+CLAUDE.md
+AGENTS.md
+.opencode
+.repomixignore
+release-manifest.json

@@ -24,7 +24,7 @@ function App() {
 }`
 
   return (
-    <div className="max-w-5xl">
+    <div>
       {/* Hero Section */}
       <div className="mb-16">
         <h1 className="text-4xl font-bold tracking-tight mb-4">

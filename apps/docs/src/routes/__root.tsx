@@ -45,12 +45,13 @@ function RootLayout() {
           </div>
         </header>
 
-        <div className="container flex">
+        <div className="flex">
           {/* Left Sidebar - Navigation */}
           <aside
             className={`
               fixed inset-y-0 left-0 z-40 w-64 border-r border-border bg-background pt-14
-              transition-transform duration-300 md:sticky md:top-14 md:h-[calc(100vh-3.5rem)] md:translate-x-0
+              transition-transform duration-300
+              md:sticky md:top-14 md:h-[calc(100vh-3.5rem)] md:translate-x-0 md:flex-shrink-0
               ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
             `}
           >
@@ -134,8 +135,10 @@ function RootLayout() {
           )}
 
           {/* Main content */}
-          <main className="flex-1 min-w-0 py-6 px-6 md:px-8">
-            <Outlet />
+          <main className="flex-1 min-w-0 py-6 px-6 md:px-8 md:ml-0">
+            <div className="mx-auto max-w-5xl">
+              <Outlet />
+            </div>
           </main>
         </div>
 

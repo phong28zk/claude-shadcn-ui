@@ -53,36 +53,38 @@ export function CodeSnippetPanel({ meta, currentProps }: CodeSnippetPanelProps) 
   return (
     <div className="rounded-lg border border-border overflow-hidden">
       {/* Tab bar */}
-      <div className="flex border-b border-border bg-muted/30">
-        {packageManagers.map((pm) => (
+      <div className="flex border-b border-border bg-muted/30 overflow-x-auto">
+        <div className="flex flex-nowrap min-w-0">
+          {packageManagers.map((pm) => (
+            <button
+              key={pm}
+              onClick={() => setActiveTab(pm)}
+              className={`px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap
+                ${activeTab === pm
+                  ? 'bg-background text-foreground border-b-2 border-primary'
+                  : 'text-muted-foreground hover:text-foreground'
+                }`}
+            >
+              {pm}
+            </button>
+          ))}
           <button
-            key={pm}
-            onClick={() => setActiveTab(pm)}
-            className={`px-4 py-2 text-sm font-medium transition-colors
-              ${activeTab === pm
+            onClick={() => setActiveTab('manual')}
+            className={`px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap
+              ${activeTab === 'manual'
                 ? 'bg-background text-foreground border-b-2 border-primary'
                 : 'text-muted-foreground hover:text-foreground'
               }`}
           >
-            {pm}
+            Code
           </button>
-        ))}
-        <button
-          onClick={() => setActiveTab('manual')}
-          className={`px-4 py-2 text-sm font-medium transition-colors
-            ${activeTab === 'manual'
-              ? 'bg-background text-foreground border-b-2 border-primary'
-              : 'text-muted-foreground hover:text-foreground'
-            }`}
-        >
-          Code
-        </button>
+        </div>
 
         {/* Copy button */}
-        <div className="ml-auto px-2 py-1">
+        <div className="ml-auto px-2 py-1 flex-shrink-0">
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent"
+            className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent whitespace-nowrap"
           >
             {copied ? (
               <>
