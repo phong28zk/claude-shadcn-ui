@@ -9,15 +9,23 @@ export interface InputProps
   suffix?: React.ReactNode
   /** Wrapper className when using prefix/suffix */
   wrapperClassName?: string
+  /** Input style variant */
+  variant?: 'default' | 'solid'
+}
+
+const inputVariantStyles = {
+  default: 'glass-input border-0',
+  solid: 'solid-input bg-background border border-border',
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, prefix, suffix, wrapperClassName, ...props }, ref) => {
+  ({ className, type, prefix, suffix, wrapperClassName, variant = 'default', ...props }, ref) => {
     const inputElement = (
       <input
         type={type}
         className={cn(
-          'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+          'flex h-9 w-full rounded-md px-3 py-1 text-base transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+          inputVariantStyles[variant],
           prefix && 'pl-9',
           suffix && 'pr-9',
           className

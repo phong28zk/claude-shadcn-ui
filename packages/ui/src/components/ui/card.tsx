@@ -6,15 +6,25 @@ import { cn } from '@/lib/utils'
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Enable/disable animations (default: true) */
   animated?: boolean
+  /** Card style variant */
+  variant?: 'default' | 'solid' | 'subtle' | 'heavy'
+}
+
+const variantStyles = {
+  default: 'glass-card',
+  solid: 'solid-card bg-background border border-border shadow',
+  subtle: 'glass-subtle rounded-xl',
+  heavy: 'glass-heavy rounded-xl',
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, animated = true, ...props }, ref) => {
+  ({ className, animated = true, variant = 'default', ...props }, ref) => {
     const prefersReducedMotion = useReducedMotion()
     const shouldAnimate = animated && !prefersReducedMotion
 
     const baseClassName = cn(
-      'rounded-lg border bg-card text-card-foreground shadow',
+      'rounded-xl text-card-foreground',
+      variantStyles[variant],
       className
     )
 

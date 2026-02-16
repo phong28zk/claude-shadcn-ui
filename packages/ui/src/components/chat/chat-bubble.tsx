@@ -23,10 +23,23 @@ export interface ChatBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   actions?: React.ReactNode
   /** Enable/disable animations (default: true) */
   animated?: boolean
+  /** Bubble style variant */
+  variant?: 'default' | 'solid'
+}
+
+const bubbleStyleVariants = {
+  default: {
+    user: 'glass-medium text-foreground',
+    assistant: 'glass-subtle text-foreground font-serif',
+  },
+  solid: {
+    user: 'bg-primary text-primary-foreground',
+    assistant: 'bg-secondary text-secondary-foreground font-serif',
+  },
 }
 
 const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
-  ({ role, timestamp, avatar, actions, className, children, animated = true, ...props }, ref) => {
+  ({ role, timestamp, avatar, actions, className, children, animated = true, variant = 'default', ...props }, ref) => {
     const prefersReducedMotion = useReducedMotion()
     const shouldAnimate = animated && !prefersReducedMotion
 
@@ -46,9 +59,7 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
           <div
             className={cn(
               'max-w-[85%] rounded-lg px-4 py-3 text-sm',
-              role === 'user'
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-secondary text-secondary-foreground font-serif'
+              bubbleStyleVariants[variant][role]
             )}
           >
             <div className="whitespace-pre-wrap break-words">{children}</div>

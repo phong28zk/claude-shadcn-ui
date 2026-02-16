@@ -22,6 +22,54 @@ Design system documentation for claude-shadcn-ui library.
 
 ---
 
+## Glass-First Design (v0.2.0)
+
+**Principle:** All components default to glass morphism. Use `variant="solid"` for opaque backgrounds.
+
+### Glass Styling Defaults
+
+| Property | Desktop | Mobile | Purpose |
+|----------|---------|--------|---------|
+| Background | 25-60% RGBA | 25-60% RGBA | Semi-transparent fill |
+| Blur | 8-24px | 6-12px | Performance-optimized backdrop |
+| Border | 1px rgba(255,255,255,0.2) | Same | Subtle edge definition |
+| Shadow | 0 8px 32px rgba(0,0,0,0.12) | Reduced | Depth layering |
+
+### Implementation Pattern
+
+```tsx
+// Glass (Default)
+<Button>Glass Button</Button>
+<Card>Glass Card</Card>
+<Input />
+
+// Solid Variant
+<Button variant="solid">Solid Button</Button>
+<Card variant="solid">Solid Card</Card>
+<Input className="solid-variant" />
+```
+
+### Glass Tokens
+
+| Token | Light | Dark | Usage |
+|-------|-------|------|-------|
+| `--glass-blur-sm` | 6px (mobile), 8px (desktop) | Same | Subtle blur |
+| `--glass-blur-md` | 8px (mobile), 16px (desktop) | Same | Standard blur |
+| `--glass-blur-lg` | 12px (mobile), 24px (desktop) | Same | Strong blur |
+| `--glass-bg-light` | rgba(255,255,255,0.25) | rgba(255,255,255,0.08) | Light surface |
+| `--glass-bg-medium` | rgba(255,255,255,0.4) | rgba(255,255,255,0.12) | Medium surface |
+| `--glass-bg-heavy` | rgba(255,255,255,0.6) | rgba(255,255,255,0.18) | Heavy surface |
+| `--glass-border` | rgba(255,255,255,0.2) | rgba(255,255,255,0.12) | Border color |
+
+### Dark Mode Glass
+
+Glass components automatically adjust in dark mode:
+- Reduced background opacity (8-18% vs 25-60% light)
+- Lighter borders for contrast against dark backdrops
+- Maintains legibility with same blur values
+
+---
+
 ## Color System
 
 ### Brand Colors (Claude)

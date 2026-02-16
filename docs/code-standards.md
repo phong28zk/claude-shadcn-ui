@@ -107,6 +107,57 @@ type SizeStyles = Record<Size, string>
 type NativeButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'>
 ```
 
+## Glass-First Component Pattern
+
+### Default Glass Styling
+
+**Principle:** Components default to glass morphism. Add `variant="solid"` for solid backgrounds.
+
+```typescript
+import { cva, type VariantProps } from 'class-variance-authority'
+
+const buttonVariants = cva(
+  'base-classes text-foreground',  // Default is glass
+  {
+    variants: {
+      variant: {
+        default: 'glass-button',      // Glass with blur (default)
+        solid: 'solid-button bg-background border border-border', // Opaque
+        primary: 'bg-primary text-primary-foreground',
+        // ... other variants
+      }
+    },
+    defaultVariants: {
+      variant: 'default',  // Glass is default
+    }
+  }
+)
+```
+
+### Glass Classes (in globals.css)
+
+```css
+/* Glass classes apply blur + semi-transparent bg */
+.glass { backdrop-filter: blur(16px); background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.2); }
+.glass-button { backdrop-filter: blur(8px); background: rgba(255,255,255,0.25); }
+.glass-card { backdrop-filter: blur(16px); background: rgba(255,255,255,0.25); border-radius: 12px; }
+
+/* Solid classes disable glass effect */
+.solid-button { background: var(--background); border: 1px solid var(--border); backdrop-filter: none; }
+.solid-card { background: var(--background); border: 1px solid var(--border); }
+```
+
+### Mobile Performance
+
+Glass blur automatically reduces on mobile (max 12px) via media query:
+```css
+@media (max-width: 768px) {
+  :root { --glass-blur-sm: 6px; --glass-blur-md: 8px; }
+}
+```
+
+---
+
 ## Animation Pattern (Motion System)
 
 ### Default Animated Components

@@ -1,12 +1,12 @@
 # Claude ShadCN UI Library - Codebase Summary
 
-**Last Updated:** 2026-02-15
+**Last Updated:** 2026-02-16
 **Status:** Production Ready
-**Version:** 0.1.0
+**Version:** 0.2.0
 
 ## Overview
 
-Claude ShadCN UI is a React component library that combines Claude AI's design language with ShadCN UI patterns. It provides 21 production-ready components, a design system with CSS variables, and a complete monorepo structure with interactive playground and ShadCN Studio-style component simulator featuring live preview, props editor, and real-time theme customization.
+Claude ShadCN UI is a React component library that combines Claude AI's design language with ShadCN UI patterns. It provides 27+ production-ready components with Motion-Driven Swiss Modernism 2.0 and glass-first design system. Features CSS variables, complete monorepo structure with interactive playground, and ShadCN Studio-style component simulator with live preview, props editor, and real-time theme customization.
 
 ## Project Structure
 
@@ -16,7 +16,7 @@ claude-shadcn-ui-monorepo/
 │   └── ui/                          # Main library package
 │       ├── src/
 │       │   ├── components/
-│       │   │   ├── ui/              # 12 UI primitive components
+│       │   │   ├── ui/              # 16 UI primitive components (glass-first)
 │       │   │   ├── chat/            # 4 chat-specific components
 │       │   │   ├── layout/          # 3 layout components
 │       │   │   └── theme/           # 2 theme provider components

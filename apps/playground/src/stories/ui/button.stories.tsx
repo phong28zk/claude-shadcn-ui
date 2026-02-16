@@ -60,3 +60,19 @@ export const AllSizes: Story = () => (
     <Button size="lg">Large</Button>
   </div>
 )
+
+export const Glass: Story = () => (
+  <div className="min-h-[200px] bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 p-8 rounded-xl flex flex-wrap gap-4">
+    <Button variant="glass">Glass Button</Button>
+    <Button variant="glass" size="sm">Small Glass</Button>
+    <Button variant="glass" size="lg">Large Glass</Button>
+  </div>
+)
+
+export const GlassWithIcons: Story = () => (
+  <div className="min-h-[200px] bg-gradient-to-br from-sky-400 to-blue-600 p-8 rounded-xl flex flex-wrap gap-4">
+    <Button variant="glass" leftSlot={<span>🚀</span>}>Launch</Button>
+    <Button variant="glass" rightSlot={<span>→</span>}>Continue</Button>
+    <Button variant="glass" leftSlot={<span>⚡</span>} rightSlot={<span>✨</span>}>Magic</Button>
+  </div>
+)

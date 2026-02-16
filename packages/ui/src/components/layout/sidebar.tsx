@@ -5,11 +5,18 @@ import { cn } from '@/lib/utils'
 export interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultCollapsed?: boolean
   collapsible?: boolean
+  /** Sidebar style variant */
+  variant?: 'default' | 'solid'
+}
+
+const sidebarVariantStyles = {
+  default: 'glass-nav border-r-0',
+  solid: 'border-r bg-background backdrop-filter-none',
 }
 
 const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
   (
-    { className, children, defaultCollapsed = false, collapsible = true, ...props },
+    { className, children, defaultCollapsed = false, collapsible = true, variant = 'default', ...props },
     ref
   ) => {
     const [collapsed, setCollapsed] = React.useState(defaultCollapsed)
@@ -18,7 +25,8 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
       <aside
         ref={ref}
         className={cn(
-          'relative flex h-full flex-col border-r bg-background transition-all duration-300',
+          'relative flex h-full flex-col transition-all duration-300',
+          sidebarVariantStyles[variant],
           collapsed ? 'w-16' : 'w-64',
           className
         )}

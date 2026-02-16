@@ -79,3 +79,49 @@ export const LoginForm: Story = () => (
     </CardFooter>
   </Card>
 )
+
+// Glass Variants
+export const GlassCard: Story = () => (
+  <div className="min-h-[300px] bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 p-8 rounded-xl">
+    <Card variant="glass" className="w-[350px]">
+      <CardHeader>
+        <CardTitle className="text-white">Glass Card</CardTitle>
+        <CardDescription className="text-white/80">iOS 26 Liquid Glass Effect</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-white/90">Frosted glass with backdrop blur and subtle highlights.</p>
+      </CardContent>
+      <CardFooter>
+        <Button variant="glass">Glass Button</Button>
+      </CardFooter>
+    </Card>
+  </div>
+)
+
+export const GlassSubtle: Story = () => (
+  <div className="min-h-[300px] bg-gradient-to-br from-blue-600 to-cyan-400 p-8 rounded-xl">
+    <Card variant="glass-subtle" className="w-[350px]">
+      <CardHeader>
+        <CardTitle className="text-white">Subtle Glass</CardTitle>
+        <CardDescription className="text-white/70">Light blur, minimal opacity</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-white/80">Perfect for overlay content that needs readability.</p>
+      </CardContent>
+    </Card>
+  </div>
+)
+
+export const GlassHeavy: Story = () => (
+  <div className="min-h-[300px] bg-gradient-to-br from-emerald-500 to-teal-600 p-8 rounded-xl">
+    <Card variant="glass-heavy" className="w-[350px]">
+      <CardHeader>
+        <CardTitle className="text-white">Heavy Glass</CardTitle>
+        <CardDescription className="text-white/70">Strong blur + high opacity</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-white/80">Maximum frosted effect for prominent UI elements.</p>
+      </CardContent>
+    </Card>
+  </div>
+)

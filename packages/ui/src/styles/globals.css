@@ -156,6 +156,125 @@
   .bento-card-tall {
     @apply row-span-2;
   }
+
+  /* Glassmorphism Utilities (iOS 26 Liquid Glass) */
+  .glass {
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(var(--glass-blur-md));
+    -webkit-backdrop-filter: blur(var(--glass-blur-md));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-subtle {
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(var(--glass-blur-sm));
+    -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-medium {
+    background: var(--glass-bg-medium);
+    backdrop-filter: blur(var(--glass-blur-md));
+    -webkit-backdrop-filter: blur(var(--glass-blur-md));
+    border: 1px solid var(--glass-border-strong);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-heavy {
+    background: var(--glass-bg-heavy);
+    backdrop-filter: blur(var(--glass-blur-lg));
+    -webkit-backdrop-filter: blur(var(--glass-blur-lg));
+    border: 1px solid var(--glass-border-strong);
+    box-shadow: var(--glass-shadow-lg);
+  }
+
+  .glass-card {
+    @apply glass rounded-xl;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--glass-highlight);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .glass-button {
+    @apply glass-subtle rounded-lg;
+    transition: all var(--motion-duration-hover) var(--motion-ease-default);
+  }
+
+  .glass-button:hover {
+    background: var(--glass-bg-medium);
+    border-color: var(--glass-border-strong);
+    transform: translateY(-1px);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-input {
+    @apply glass-subtle rounded-lg;
+    transition: all var(--motion-duration-fast) var(--motion-ease-default);
+  }
+
+  .glass-input:focus {
+    background: var(--glass-bg-medium);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--glass-shadow), 0 0 0 2px hsl(var(--ring) / 0.2);
+  }
+
+  .glass-nav {
+    @apply glass-medium;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .glass-modal {
+    @apply glass-heavy rounded-2xl;
+    max-width: 90vw;
+  }
+
+  /* Solid Variant Utilities (non-glass, opaque backgrounds) */
+  .solid {
+    background: hsl(var(--surface-solid));
+    border: 1px solid hsl(var(--border));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .solid-elevated {
+    background: hsl(var(--surface-solid-elevated));
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-sm);
+  }
+
+  .solid-card {
+    @apply solid rounded-xl;
+  }
+
+  .solid-button {
+    @apply solid rounded-lg;
+    transition: all var(--motion-duration-hover) var(--motion-ease-default);
+  }
+
+  .solid-button:hover {
+    background: hsl(var(--surface-solid-muted));
+  }
+
+  .solid-input {
+    @apply solid rounded-lg;
+    transition: all var(--motion-duration-fast) var(--motion-ease-default);
+  }
+
+  .solid-input:focus {
+    border-color: hsl(var(--ring));
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+  }
 }
 
 /* Reduced Motion: disable all transitions and animations */

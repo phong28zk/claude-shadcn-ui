@@ -71,11 +71,16 @@
     /* ===== SEMANTIC TOKENS ===== */
     /* Contextual meaning - use in components */
 
-    /* Surfaces */
-    --surface-default: var(--primitive-white);
-    --surface-muted: var(--primitive-gray-100);
-    --surface-elevated: var(--primitive-white);
-    --surface-overlay: var(--primitive-white);
+    /* Surfaces - Glass-First (default) */
+    --surface-default: var(--glass-bg-light);
+    --surface-muted: var(--glass-bg-light);
+    --surface-elevated: var(--glass-bg-medium);
+    --surface-overlay: var(--glass-bg-heavy);
+
+    /* Surfaces - Solid Variants */
+    --surface-solid: var(--primitive-white);
+    --surface-solid-muted: var(--primitive-gray-100);
+    --surface-solid-elevated: var(--primitive-gray-50);
 
     /* Text */
     --text-primary: var(--primitive-gray-950);
@@ -112,16 +117,27 @@
     --button-secondary-text: var(--text-primary);
     --button-radius: var(--primitive-radius-md);
 
-    /* Card */
-    --card-bg: var(--surface-default);
-    --card-border: var(--border-default);
+    /* Card - Glass-First */
+    --card-bg: var(--glass-bg-light);
+    --card-bg-solid: var(--primitive-white);
+    --card-border: var(--glass-border);
     --card-radius: var(--primitive-radius-xl);
 
-    /* Input */
-    --input-bg: var(--surface-default);
-    --input-border: var(--border-default);
+    /* Input - Glass-First */
+    --input-bg: var(--glass-bg-light);
+    --input-bg-solid: var(--primitive-white);
+    --input-border: var(--glass-border);
+    --input-border-solid: var(--border-default);
     --input-border-focus: var(--border-focus);
     --input-radius: var(--primitive-radius-md);
+
+    /* Dialog - Glass-First */
+    --dialog-bg: var(--glass-bg-heavy);
+    --dialog-bg-solid: var(--primitive-white);
+
+    /* Popover - Glass-First */
+    --popover-bg: var(--glass-bg-medium);
+    --popover-bg-solid: var(--primitive-white);
 
     /* ===== SHADCN COMPATIBILITY LAYER ===== */
     /* Maps 3-tier tokens to ShadCN variable names */
@@ -211,6 +227,21 @@
     --motion-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
     --motion-scale-hover: 1.02;
     --motion-scale-press: 0.98;
+
+    /* Glassmorphism Tokens (iOS 26 Liquid Glass) - Desktop */
+    --glass-blur-sm: 8px;
+    --glass-blur-md: 16px;
+    --glass-blur-lg: 24px;
+    --glass-blur-xl: 40px;
+    /* Mobile blur values (8-12px for performance) - set via media query below */
+    --glass-bg-light: rgba(255, 255, 255, 0.25);
+    --glass-bg-medium: rgba(255, 255, 255, 0.4);
+    --glass-bg-heavy: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-border-strong: rgba(255, 255, 255, 0.35);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15);
+    --glass-highlight: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
   }
 
   .dark {
@@ -239,9 +270,39 @@
     /* Feedback */
     --feedback-error: var(--primitive-red-400);
 
-    /* Component Token Overrides */
-    --card-bg: var(--surface-elevated);
-    --input-bg: var(--surface-default);
+    /* Component Token Overrides - Glass-First Dark */
+    --card-bg: var(--glass-bg-light);
+    --card-bg-solid: var(--primitive-gray-900);
+    --input-bg: var(--glass-bg-light);
+    --input-bg-solid: var(--primitive-gray-900);
+    --dialog-bg: var(--glass-bg-heavy);
+    --dialog-bg-solid: var(--primitive-gray-900);
+    --popover-bg: var(--glass-bg-medium);
+    --popover-bg-solid: var(--primitive-gray-900);
+
+    /* Surfaces - Solid Variants Dark */
+    --surface-solid: var(--primitive-gray-950);
+    --surface-solid-muted: var(--primitive-gray-800);
+    --surface-solid-elevated: var(--primitive-gray-900);
+
+    /* Glassmorphism Dark Mode */
+    --glass-bg-light: rgba(255, 255, 255, 0.08);
+    --glass-bg-medium: rgba(255, 255, 255, 0.12);
+    --glass-bg-heavy: rgba(255, 255, 255, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-border-strong: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Mobile Glass Performance: Reduced blur (8-12px) */
+@media (max-width: 768px) {
+  :root {
+    --glass-blur-sm: 6px;
+    --glass-blur-md: 8px;
+    --glass-blur-lg: 12px;
+    --glass-blur-xl: 16px;
   }
 }
 

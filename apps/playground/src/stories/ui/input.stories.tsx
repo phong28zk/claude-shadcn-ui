@@ -35,3 +35,28 @@ export const FileInput: Story = () => (
 export const NumberInput: Story = () => (
   <Input type="number" placeholder="Enter a number..." />
 )
+
+export const Glass: Story = () => (
+  <div className="min-h-[200px] bg-gradient-to-br from-rose-400 via-pink-500 to-purple-500 p-8 rounded-xl space-y-4">
+    <Input variant="glass" placeholder="Glass input..." className="text-white placeholder:text-white/60" />
+    <Input variant="glass" type="email" placeholder="Email..." className="text-white placeholder:text-white/60" />
+    <Input variant="glass" type="password" placeholder="Password..." className="text-white placeholder:text-white/60" />
+  </div>
+)
+
+export const GlassWithPrefix: Story = () => (
+  <div className="min-h-[200px] bg-gradient-to-br from-amber-400 to-orange-500 p-8 rounded-xl space-y-4">
+    <Input
+      variant="glass"
+      placeholder="Search..."
+      prefix={<span>🔍</span>}
+      className="text-white placeholder:text-white/60"
+    />
+    <Input
+      variant="glass"
+      placeholder="Username"
+      prefix={<span>@</span>}
+      className="text-white placeholder:text-white/60"
+    />
+  </div>
+)

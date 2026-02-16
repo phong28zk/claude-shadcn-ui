@@ -5,15 +5,23 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   logo?: React.ReactNode
   nav?: React.ReactNode
   actions?: React.ReactNode
+  /** Header style variant */
+  variant?: 'default' | 'solid'
+}
+
+const headerVariantStyles = {
+  default: 'glass-nav border-b-0',
+  solid: 'border-b bg-background backdrop-filter-none',
 }
 
 const Header = React.forwardRef<HTMLElement, HeaderProps>(
-  ({ className, logo, nav, actions, children, ...props }, ref) => {
+  ({ className, logo, nav, actions, children, variant = 'default', ...props }, ref) => {
     return (
       <header
         ref={ref}
         className={cn(
-          'sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60',
+          'sticky top-0 z-40 w-full',
+          headerVariantStyles[variant],
           className
         )}
         {...props}
