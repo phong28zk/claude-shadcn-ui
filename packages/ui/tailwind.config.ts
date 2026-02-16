@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        /* ShadCN Compatibility */
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -42,10 +43,33 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        /* Claude Brand (legacy) */
         claude: {
           accent: 'hsl(var(--claude-accent))',
           'accent-hover': 'hsl(var(--claude-accent-hover))',
           'accent-active': 'hsl(var(--claude-accent-active))',
+        },
+        /* Semantic Token Colors */
+        surface: {
+          DEFAULT: 'hsl(var(--surface-default))',
+          muted: 'hsl(var(--surface-muted))',
+          elevated: 'hsl(var(--surface-elevated))',
+          overlay: 'hsl(var(--surface-overlay))',
+        },
+        text: {
+          primary: 'hsl(var(--text-primary))',
+          secondary: 'hsl(var(--text-secondary))',
+          muted: 'hsl(var(--text-muted))',
+          'on-accent': 'hsl(var(--text-on-accent))',
+        },
+        'accent-brand': {
+          DEFAULT: 'hsl(var(--accent-default))',
+          hover: 'hsl(var(--accent-hover))',
+          active: 'hsl(var(--accent-active))',
+          subtle: 'hsl(var(--accent-subtle))',
+        },
+        feedback: {
+          error: 'hsl(var(--feedback-error))',
         },
       },
       borderRadius: {

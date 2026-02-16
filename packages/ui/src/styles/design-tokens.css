@@ -1,73 +1,194 @@
 /**
  * Claude AI Design Tokens
+ * 3-Tier Architecture: Primitive → Semantic → Component
  * ShadCN-compatible CSS variables using HSL color space
  */
 
 @layer base {
   :root {
-    /* Claude Brand Colors */
-    --claude-accent: 18 55% 43%; /* #ae5630 */
-    --claude-accent-hover: 18 55% 38%;
-    --claude-accent-active: 18 55% 33%;
+    /* ===== PRIMITIVE TOKENS ===== */
+    /* Raw values - never use directly in components */
 
-    /* Light Mode Colors */
-    --background: 0 0% 100%; /* #ffffff */
-    --foreground: 0 0% 10%; /* #1a1a1a */
+    /* Colors - Terracotta (Claude Brand) */
+    --primitive-terracotta-300: 18 55% 53%;
+    --primitive-terracotta-400: 18 55% 48%;
+    --primitive-terracotta-500: 18 55% 43%; /* #ae5630 */
+    --primitive-terracotta-600: 18 55% 38%;
+    --primitive-terracotta-700: 18 55% 33%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    /* Colors - Gray Scale */
+    --primitive-gray-50: 0 0% 98%;
+    --primitive-gray-100: 0 0% 96%;
+    --primitive-gray-200: 0 0% 90%;
+    --primitive-gray-300: 0 0% 80%;
+    --primitive-gray-400: 0 0% 65%;
+    --primitive-gray-500: 0 0% 45%;
+    --primitive-gray-600: 0 0% 32%;
+    --primitive-gray-700: 0 0% 25%;
+    --primitive-gray-800: 0 0% 18%;
+    --primitive-gray-900: 0 0% 12%;
+    --primitive-gray-950: 0 0% 10%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
-
-    --primary: 18 55% 43%; /* Claude accent */
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 10%;
-
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 10%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 18 55% 43%; /* Claude accent */
-
-    /* Typography Scale */
-    --font-size-xs: 0.75rem; /* 12px */
-    --font-size-sm: 0.875rem; /* 14px */
-    --font-size-base: 1rem; /* 16px */
-    --font-size-lg: 1.125rem; /* 18px */
-    --font-size-xl: 1.25rem; /* 20px */
-    --font-size-2xl: 1.5rem; /* 24px */
-    --font-size-3xl: 1.875rem; /* 30px */
-    --font-size-4xl: 2.25rem; /* 36px */
+    /* Colors - Semantic */
+    --primitive-white: 0 0% 100%;
+    --primitive-black: 0 0% 0%;
+    --primitive-red-500: 0 84% 60%;
+    --primitive-red-600: 0 72% 51%;
+    --primitive-red-400: 0 62% 50%;
 
     /* Spacing Scale */
-    --spacing-1: 0.25rem; /* 4px */
-    --spacing-2: 0.5rem; /* 8px */
-    --spacing-3: 0.75rem; /* 12px */
-    --spacing-4: 1rem; /* 16px */
-    --spacing-5: 1.25rem; /* 20px */
-    --spacing-6: 1.5rem; /* 24px */
-    --spacing-8: 2rem; /* 32px */
-    --spacing-10: 2.5rem; /* 40px */
-    --spacing-12: 3rem; /* 48px */
-    --spacing-16: 4rem; /* 64px */
+    --primitive-space-0: 0;
+    --primitive-space-1: 0.25rem;  /* 4px */
+    --primitive-space-2: 0.5rem;   /* 8px */
+    --primitive-space-3: 0.75rem;  /* 12px */
+    --primitive-space-4: 1rem;     /* 16px */
+    --primitive-space-5: 1.25rem;  /* 20px */
+    --primitive-space-6: 1.5rem;   /* 24px */
+    --primitive-space-8: 2rem;     /* 32px */
+    --primitive-space-10: 2.5rem;  /* 40px */
+    --primitive-space-12: 3rem;    /* 48px */
+    --primitive-space-16: 4rem;    /* 64px */
 
     /* Border Radius */
-    --radius-sm: 0.25rem; /* 4px */
-    --radius: 0.5rem; /* 8px */
-    --radius-md: 0.75rem; /* 12px */
-    --radius-lg: 1rem; /* 16px */
-    --radius-xl: 1.5rem; /* 24px */
-    --radius-full: 9999px;
+    --primitive-radius-none: 0;
+    --primitive-radius-sm: 0.25rem;   /* 4px */
+    --primitive-radius-md: 0.5rem;    /* 8px */
+    --primitive-radius-lg: 0.75rem;   /* 12px */
+    --primitive-radius-xl: 1rem;      /* 16px */
+    --primitive-radius-2xl: 1.5rem;   /* 24px */
+    --primitive-radius-full: 9999px;
+
+    /* Typography Scale */
+    --primitive-font-xs: 0.75rem;    /* 12px */
+    --primitive-font-sm: 0.875rem;   /* 14px */
+    --primitive-font-base: 1rem;     /* 16px */
+    --primitive-font-lg: 1.125rem;   /* 18px */
+    --primitive-font-xl: 1.25rem;    /* 20px */
+    --primitive-font-2xl: 1.5rem;    /* 24px */
+    --primitive-font-3xl: 1.875rem;  /* 30px */
+    --primitive-font-4xl: 2.25rem;   /* 36px */
+
+    /* ===== SEMANTIC TOKENS ===== */
+    /* Contextual meaning - use in components */
+
+    /* Surfaces */
+    --surface-default: var(--primitive-white);
+    --surface-muted: var(--primitive-gray-100);
+    --surface-elevated: var(--primitive-white);
+    --surface-overlay: var(--primitive-white);
+
+    /* Text */
+    --text-primary: var(--primitive-gray-950);
+    --text-secondary: var(--primitive-gray-500);
+    --text-muted: var(--primitive-gray-400);
+    --text-on-accent: var(--primitive-white);
+    --text-on-muted: var(--primitive-gray-950);
+
+    /* Accent (Brand) */
+    --accent-default: var(--primitive-terracotta-500);
+    --accent-hover: var(--primitive-terracotta-600);
+    --accent-active: var(--primitive-terracotta-700);
+    --accent-subtle: var(--primitive-gray-100);
+    --accent-subtle-hover: var(--primitive-gray-200);
+
+    /* Borders */
+    --border-default: var(--primitive-gray-200);
+    --border-muted: var(--primitive-gray-100);
+    --border-focus: var(--primitive-terracotta-500);
+
+    /* Feedback */
+    --feedback-error: var(--primitive-red-500);
+    --feedback-error-text: var(--primitive-white);
+
+    /* ===== COMPONENT TOKENS ===== */
+    /* Component-specific overrides */
+
+    /* Button */
+    --button-primary-bg: var(--accent-default);
+    --button-primary-bg-hover: var(--accent-hover);
+    --button-primary-text: var(--text-on-accent);
+    --button-secondary-bg: var(--accent-subtle);
+    --button-secondary-bg-hover: var(--accent-subtle-hover);
+    --button-secondary-text: var(--text-primary);
+    --button-radius: var(--primitive-radius-md);
+
+    /* Card */
+    --card-bg: var(--surface-default);
+    --card-border: var(--border-default);
+    --card-radius: var(--primitive-radius-xl);
+
+    /* Input */
+    --input-bg: var(--surface-default);
+    --input-border: var(--border-default);
+    --input-border-focus: var(--border-focus);
+    --input-radius: var(--primitive-radius-md);
+
+    /* ===== SHADCN COMPATIBILITY LAYER ===== */
+    /* Maps 3-tier tokens to ShadCN variable names */
+
+    /* Claude Brand (legacy aliases) */
+    --claude-accent: var(--primitive-terracotta-500);
+    --claude-accent-hover: var(--primitive-terracotta-600);
+    --claude-accent-active: var(--primitive-terracotta-700);
+
+    /* ShadCN Color Variables */
+    --background: var(--surface-default);
+    --foreground: var(--text-primary);
+
+    --card: var(--card-bg);
+    --card-foreground: var(--text-primary);
+
+    --popover: var(--surface-overlay);
+    --popover-foreground: var(--text-primary);
+
+    --primary: var(--accent-default);
+    --primary-foreground: var(--text-on-accent);
+
+    --secondary: var(--accent-subtle);
+    --secondary-foreground: var(--text-on-muted);
+
+    --muted: var(--surface-muted);
+    --muted-foreground: var(--text-secondary);
+
+    --accent: var(--accent-subtle);
+    --accent-foreground: var(--text-on-muted);
+
+    --destructive: var(--feedback-error);
+    --destructive-foreground: var(--feedback-error-text);
+
+    --border: var(--border-default);
+    --input: var(--border-default);
+    --ring: var(--accent-default);
+
+    /* Typography Scale (legacy aliases) */
+    --font-size-xs: var(--primitive-font-xs);
+    --font-size-sm: var(--primitive-font-sm);
+    --font-size-base: var(--primitive-font-base);
+    --font-size-lg: var(--primitive-font-lg);
+    --font-size-xl: var(--primitive-font-xl);
+    --font-size-2xl: var(--primitive-font-2xl);
+    --font-size-3xl: var(--primitive-font-3xl);
+    --font-size-4xl: var(--primitive-font-4xl);
+
+    /* Spacing Scale (legacy aliases) */
+    --spacing-1: var(--primitive-space-1);
+    --spacing-2: var(--primitive-space-2);
+    --spacing-3: var(--primitive-space-3);
+    --spacing-4: var(--primitive-space-4);
+    --spacing-5: var(--primitive-space-5);
+    --spacing-6: var(--primitive-space-6);
+    --spacing-8: var(--primitive-space-8);
+    --spacing-10: var(--primitive-space-10);
+    --spacing-12: var(--primitive-space-12);
+    --spacing-16: var(--primitive-space-16);
+
+    /* Border Radius (legacy aliases) */
+    --radius-sm: var(--primitive-radius-sm);
+    --radius: var(--primitive-radius-md);
+    --radius-md: var(--primitive-radius-lg);
+    --radius-lg: var(--primitive-radius-xl);
+    --radius-xl: var(--primitive-radius-2xl);
+    --radius-full: var(--primitive-radius-full);
 
     /* Transitions */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -83,34 +204,34 @@
   }
 
   .dark {
-    /* Dark Mode Colors */
-    --background: 0 0% 10%; /* #1a1a1a */
-    --foreground: 0 0% 98%;
+    /* ===== DARK MODE SEMANTIC OVERRIDES ===== */
 
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 98%;
+    /* Surfaces */
+    --surface-default: var(--primitive-gray-950);
+    --surface-muted: var(--primitive-gray-800);
+    --surface-elevated: var(--primitive-gray-900);
+    --surface-overlay: var(--primitive-gray-900);
 
-    --popover: 0 0% 12%;
-    --popover-foreground: 0 0% 98%;
+    /* Text */
+    --text-primary: var(--primitive-gray-50);
+    --text-secondary: var(--primitive-gray-400);
+    --text-muted: var(--primitive-gray-500);
+    --text-on-muted: var(--primitive-gray-50);
 
-    --primary: 18 55% 43%; /* Claude accent - same in dark mode */
-    --primary-foreground: 0 0% 100%;
+    /* Accent (Brand) - stays warm */
+    --accent-subtle: var(--primitive-gray-800);
+    --accent-subtle-hover: var(--primitive-gray-700);
 
-    --secondary: 0 0% 18%;
-    --secondary-foreground: 0 0% 98%;
+    /* Borders */
+    --border-default: var(--primitive-gray-700);
+    --border-muted: var(--primitive-gray-800);
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 65%;
+    /* Feedback */
+    --feedback-error: var(--primitive-red-400);
 
-    --accent: 0 0% 18%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 18 55% 43%; /* Claude accent */
+    /* Component Token Overrides */
+    --card-bg: var(--surface-elevated);
+    --input-bg: var(--surface-default);
   }
 }
 

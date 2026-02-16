@@ -37,17 +37,25 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  /** Slot for content before children (e.g., icon) */
+  leftSlot?: React.ReactNode
+  /** Slot for content after children (e.g., icon, badge) */
+  rightSlot?: React.ReactNode
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, leftSlot, rightSlot, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+      >
+        {leftSlot && <span className="shrink-0">{leftSlot}</span>}
+        {children}
+        {rightSlot && <span className="shrink-0">{rightSlot}</span>}
+      </Comp>
     )
   }
 )
