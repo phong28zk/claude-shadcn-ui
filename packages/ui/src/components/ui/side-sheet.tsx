@@ -16,6 +16,7 @@ const sideSheetVariants = cva(
       variant: {
         default: 'glass-heavy',
         solid: 'bg-background',
+        spatial: 'glass-heavy spatial animate-spatial-emerge',
       },
     },
     defaultVariants: {

@@ -2,11 +2,11 @@
 
 **Last Updated:** 2026-02-16
 **Status:** Production Ready
-**Version:** 0.2.0
+**Version:** 0.3.0
 
 ## Overview
 
-Claude ShadCN UI is a React component library that combines Claude AI's design language with ShadCN UI patterns. It provides 27+ production-ready components with Motion-Driven Swiss Modernism 2.0 and glass-first design system. Features CSS variables, complete monorepo structure with interactive playground, and ShadCN Studio-style component simulator with live preview, props editor, and real-time theme customization.
+Claude ShadCN UI is a React component library that combines Claude AI's design language with ShadCN UI patterns. It provides 37+ production-ready components with Motion-Driven Swiss Modernism 2.0, glass-first design system, and Apple Vision Pro-inspired Spatial UI 3D effects. Features CSS variables, complete monorepo structure with interactive playground, and ShadCN Studio-style component simulator with live preview, props editor, and real-time theme customization.
 
 ## Project Structure
 
@@ -62,24 +62,30 @@ claude-shadcn-ui-monorepo/
 └── plans/                           # Implementation documentation
 ```
 
-## Component Library (21 Total)
+## Component Library (37+ Total)
 
-### UI Primitives (12)
+All components support the new `spatial` variant (v0.3.0) with 3D depth, elevation shadows, and hover lift effects.
+
+### UI Primitives (16)
 
 | Component | Props | Key Features |
 |-----------|-------|--------------|
-| **Button** | `variant`, `size`, `asChild` | 6 variants (default, destructive, outline, secondary, ghost, link) with icon support |
-| **Input** | `type`, `disabled`, `placeholder` | Focus ring, placeholder styling, disabled state |
-| **Textarea** | `rows`, `disabled`, `placeholder` | Auto-resize, multi-line input |
-| **Card** | - | Composite: CardHeader, CardTitle, CardDescription, CardContent, CardFooter |
-| **Badge** | `variant` | Pill-shaped, muted color variants |
-| **Avatar** | `src`, `alt`, `fallback` | Circular with image/fallback, optional accent ring |
-| **Dialog** | `open`, `onOpenChange` | Fade-in overlay, slide-up content, portal-based |
-| **DropdownMenu** | `open`, `onOpenChange` | Composite with trigger, content, items, separators |
-| **Tooltip** | `content`, `side`, `delayMs` | Dark background, smooth fade animation |
-| **Separator** | `orientation` | Subtle border divider |
-| **Toggle** | `pressed`, `onPressedChange`, `variant` | Accent active state, icon support |
-| **Switch** | `checked`, `onCheckedChange` | Accent track color, smooth animation |
+| **Button** | `variant`, `size`, `asChild` | 7 variants (default, destructive, outline, secondary, ghost, link, **spatial**) with icon support |
+| **Input** | `type`, `disabled`, `placeholder` | Focus ring, placeholder styling, disabled state, **spatial focus-lift** |
+| **Textarea** | `rows`, `disabled`, `placeholder` | Auto-resize, multi-line input, **spatial focus-lift** |
+| **Card** | `variant` | Composite: CardHeader, CardTitle, CardDescription, CardContent, CardFooter, **spatial lift-on-hover** |
+| **Badge** | `variant` | Pill-shaped, muted color variants, **spatial float effect** |
+| **Avatar** | `src`, `alt`, `fallback` | Circular with image/fallback, optional accent ring, **spatial lift** |
+| **Dialog** | `open`, `onOpenChange` | Fade-in overlay, slide-up content, portal-based, **spatial emerge-from-depth** |
+| **DropdownMenu** | `open`, `onOpenChange` | Composite with trigger, content, items, separators, **spatial lift** |
+| **Tooltip** | `content`, `side`, `delayMs` | Dark background, smooth fade animation, **spatial near-plane** |
+| **Separator** / **Divider** | `orientation` | Subtle border divider, **spatial fixed-depth** |
+| **Toggle** | `pressed`, `onPressedChange`, `variant` | Accent active state, icon support, **spatial lift** |
+| **Switch** | `checked`, `onCheckedChange` | Accent track color, smooth animation, **spatial lift** |
+| **Checkbox** / **Radio** | - | Native form control styling, **spatial subtle-lift** |
+| **Slider** | - | Range input with track, **spatial lift** |
+| **Select** | - | Dropdown selection, **spatial lift** |
+| **Progress** | - | Progress bar visualization, **spatial fixed-depth** |
 
 **Common Patterns:**
 - All use `React.forwardRef` for ref forwarding
@@ -87,30 +93,39 @@ claude-shadcn-ui-monorepo/
 - Class Variance Authority (CVA) for variant management
 - TypeScript prop interfaces exported
 - `cn()` utility for class merging
+- **NEW:** `spatial` variant applies 3D transforms + elevation shadows
 
 ### Chat Components (4)
 
 | Component | Purpose | Key Features |
 |-----------|---------|--------------|
-| **ChatBubble** | Message display | Asymmetric user/assistant styling, plain text |
-| **ChatInput** | Message input | Multi-line, Shift+Enter for new line, send button |
-| **MessageList** | Conversation display | Scrollable, auto-scroll to bottom, flexible layout |
-| **TypingIndicator** | Loading state | Animated dots, "thinking" pattern |
+| **ChatBubble** | Message display | Asymmetric user/assistant styling, plain text, **spatial emerge-on-enter** |
+| **ChatInput** | Message input | Multi-line, Shift+Enter for new line, send button, **spatial focus-lift** |
+| **MessageList** | Conversation display | Scrollable, auto-scroll to bottom, flexible layout, **spatial fixed-baseline** |
+| **TypingIndicator** | Loading state | Animated dots, "thinking" pattern, **spatial float-idle** |
 
-### Layout Components (3)
+### Navigation Components (4)
 
 | Component | Purpose | Key Features |
 |-----------|---------|--------------|
-| **Sidebar** | Navigation container | Collapsible, responsive, responsive collapse on mobile |
-| **Header** | Top bar | Navigation slots, flexible content |
-| **Container** | Content wrapper | Max-width constraint, responsive padding |
+| **Tabs** | Tab navigation | Horizontal tabs with indicator, **spatial lift** |
+| **TopAppBar** | Top app bar | Header with title/actions, **spatial fixed-depth** |
+| **NavigationRail** | Side navigation | Vertical rail with icons, **spatial fixed-depth** |
+| **BottomNavigation** | Bottom nav | Mobile-optimized navigation, **spatial fixed-depth** |
+
+### Layout Components (2)
+
+| Component | Purpose | Key Features |
+|-----------|---------|--------------|
+| **Sidebar** | Navigation container | Collapsible, responsive, responsive collapse on mobile, **spatial fixed-depth** |
+| **Header** | Top bar | Navigation slots, flexible content, **spatial fixed-depth** |
 
 ### Theme Components (2)
 
 | Component | Purpose | Key Features |
 |-----------|---------|--------------|
 | **ThemeProvider** | Theme context | Light/dark mode, localStorage persistence, SSR-safe |
-| **ThemeToggle** | Theme switcher | Sun/moon icon button, smooth transitions |
+| **ThemeToggle** | Theme switcher | Sun/moon icon button, smooth transitions, **spatial lift** |
 
 ## Design System
 
@@ -151,6 +166,7 @@ claude-shadcn-ui-monorepo/
 **Timing Functions:**
 - Fast: 150ms cubic-bezier(0.4, 0, 0.2, 1)
 - Base: 200ms cubic-bezier(0.4, 0, 0.2, 1)
+- Spatial Transition: 250ms cubic-bezier(0.4, 0, 0.2, 1)
 - Slow: 300ms cubic-bezier(0.4, 0, 0.2, 1)
 
 **Keyframes:**
@@ -160,6 +176,9 @@ claude-shadcn-ui-monorepo/
 - `claude-pulse`: Opacity pulse at 0.5
 - `claude-spin`: 360° rotation
 - `claude-scale-in`: Scale 0.95 → 1 with fade
+- **`spatial-emerge`** *(NEW v0.3.0)*: TranslateZ -20px → 0 with fade (entrance animation)
+- **`spatial-float-idle`** *(NEW v0.3.0)*: TranslateZ ±4px bob animation (3s loop)
+- **`spatial-focus-lift`** *(NEW v0.3.0)*: TranslateZ 0 → 20px on focus (250ms)
 
 ## Build Architecture
 

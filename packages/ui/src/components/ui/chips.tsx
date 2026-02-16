@@ -10,6 +10,7 @@ const chipVariants = cva(
       variant: {
         default: 'glass-subtle border-glass-border',
         solid: 'bg-secondary text-secondary-foreground border border-border',
+        spatial: 'glass-subtle spatial border-glass-border hover:-translate-y-1',
       },
       type: {
         filter: 'px-3 py-1.5 cursor-pointer hover:glass-medium',
@@ -48,7 +49,7 @@ export interface ChipProps
   selected?: boolean
   onSelect?: () => void
   type?: 'filter' | 'input' | 'suggestion'
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
   removable?: boolean
   onRemove?: () => void
 }
@@ -98,7 +99,7 @@ const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
     if (isInteractive) {
       return (
         <button
-          ref={ref as any}
+          ref={ref as React.Ref<HTMLButtonElement>}
           className={baseClassName}
           onClick={onSelect}
           type="button"

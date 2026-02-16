@@ -186,6 +186,57 @@ h1-h6 {
 
 ---
 
+## Spatial UI 3D Glass (v0.3.0)
+
+**Principle:** Components with `spatial` variant use 3D depth, perspective transforms, and Apple Vision Pro-inspired elevation effects.
+
+### Spatial Tokens
+
+| Token | Value | Purpose |
+|-------|-------|---------|
+| `--spatial-perspective` | 1000px (600px mobile) | 3D perspective container depth |
+| `--spatial-z-near` | 20px (10px mobile) | Near depth plane |
+| `--spatial-z-mid` | 0px | Baseline depth |
+| `--spatial-z-far` | -20px (-10px mobile) | Far depth plane |
+| `--spatial-z-hover` | 30px (15px mobile) | Hover lift distance |
+
+### Spatial Shadows
+
+| Shadow | Usage |
+|--------|-------|
+| `--spatial-shadow-near` | Elements at near z-plane |
+| `--spatial-shadow-mid` | Standard elevation shadow |
+| `--spatial-shadow-far` | Background layer shadow |
+| `--spatial-shadow-hover` | Elevated hover state |
+
+### Implementation Pattern
+
+```tsx
+// Default: no spatial effect
+<Card>Regular Card</Card>
+
+// Spatial variant: 3D depth on hover
+<Card variant="spatial">Spatial Card</Card>
+```
+
+### Spatial Utility Classes
+
+```css
+.spatial-scene { perspective: var(--spatial-perspective); }
+.spatial { transform: translateZ(0); }
+.spatial-lift:hover { transform: translateZ(var(--spatial-z-hover)) scale(1.02); }
+.spatial-float { animation: spatial-float-idle 3s ease-in-out infinite; }
+.spatial-recessed { transform: translateZ(var(--spatial-z-far)); }
+```
+
+### Mobile & Accessibility
+
+- Depth values automatically reduced 50% on devices ≤ 768px
+- `prefers-reduced-motion` disables all 3D transforms (graceful degradation)
+- Keyboard focus triggers `spatial-focus-lift` animation
+
+---
+
 ## Motion System
 
 ### Timing Standards
@@ -194,6 +245,7 @@ h1-h6 {
 |--------|----------|-------|
 | Fast/Hover | 150ms | Micro-interactions, state feedback |
 | Button/Standard | 200ms | Button taps, small element transitions |
+| Spatial Transition | 250ms | 3D depth, hover lift effects |
 | Base/Entrance | 300ms | Component entrance, primary animations |
 | Slow/Page | 500ms | Page transitions, complex sequences |
 
@@ -205,8 +257,8 @@ h1-h6 {
 ### Motion Principles
 
 1. **Every animation communicates** - Status change, behavior guidance, or feedback
-2. **GPU-accelerated** - Transform + opacity only (no layout shifts)
-3. **Respects preferences** - `prefers-reduced-motion` honored (set `animated={false}`)
+2. **GPU-accelerated** - Transform + opacity + translateZ (no layout shifts)
+3. **Respects preferences** - `prefers-reduced-motion` honored (set `animated={false}` or disabled via CSS)
 4. **Purposeful** - No frivolous decoration, drives user understanding
 
 ### Component Animations

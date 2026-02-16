@@ -242,6 +242,22 @@
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15);
     --glass-highlight: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
+
+    /* Spatial/3D Depth Tokens (Apple Vision Pro inspired) */
+    --spatial-perspective: 1000px;
+    --spatial-z-near: 20px;
+    --spatial-z-mid: 0px;
+    --spatial-z-far: -20px;
+    --spatial-z-hover: 30px;
+    --spatial-rotate-subtle: 2deg;
+    --spatial-rotate-hover: 5deg;
+    --spatial-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Spatial Shadows (elevation-based diffusion) */
+    --spatial-shadow-near: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    --spatial-shadow-mid: 0 8px 24px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+    --spatial-shadow-far: 0 16px 48px rgba(0,0,0,0.16), 0 8px 16px rgba(0,0,0,0.08);
+    --spatial-shadow-hover: 0 24px 64px rgba(0,0,0,0.18), 0 12px 24px rgba(0,0,0,0.1);
   }
 
   .dark {
@@ -293,6 +309,12 @@
     --glass-border-strong: rgba(255, 255, 255, 0.2);
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+
+    /* Spatial Shadows Dark Mode */
+    --spatial-shadow-near: 0 4px 12px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
+    --spatial-shadow-mid: 0 8px 24px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.15);
+    --spatial-shadow-far: 0 16px 48px rgba(0,0,0,0.4), 0 8px 16px rgba(0,0,0,0.2);
+    --spatial-shadow-hover: 0 24px 64px rgba(0,0,0,0.45), 0 12px 24px rgba(0,0,0,0.25);
   }
 }
 
@@ -303,6 +325,11 @@
     --glass-blur-md: 8px;
     --glass-blur-lg: 12px;
     --glass-blur-xl: 16px;
+    /* Reduced spatial depth for mobile GPU performance */
+    --spatial-perspective: 600px;
+    --spatial-z-near: 10px;
+    --spatial-z-far: -10px;
+    --spatial-z-hover: 15px;
   }
 }
 

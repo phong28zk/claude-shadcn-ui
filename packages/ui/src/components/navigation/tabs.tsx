@@ -14,7 +14,7 @@ export interface TabsProps
   tabs: Tab[]
   value: string
   onChange: (value: string) => void
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
@@ -24,6 +24,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     const variantClasses = {
       default: 'glass-subtle rounded-lg',
       solid: 'solid rounded-lg',
+      spatial: 'glass-subtle spatial rounded-lg',
     }
 
     return (

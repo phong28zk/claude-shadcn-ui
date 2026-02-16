@@ -22,6 +22,7 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
+        spatial: 'glass-button spatial text-foreground',
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -72,12 +73,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     if (shouldAnimate) {
+      const isSpatial = variant === 'spatial'
       return (
         <motion.button
           className={baseClassName}
           ref={ref}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={isSpatial ? { scale: 1.02, y: -2 } : { scale: 1.02 }}
+          whileTap={isSpatial ? { scale: 0.98, y: 1 } : { scale: 0.98 }}
           transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
           {...(props as React.ComponentProps<typeof motion.button>)}
         >

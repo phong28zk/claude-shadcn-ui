@@ -4,10 +4,13 @@ import { cn } from '@/lib/utils'
 
 export interface MessageListProps extends React.HTMLAttributes<HTMLDivElement> {
   autoScroll?: boolean
+  /** List style variant */
+  variant?: 'default' | 'spatial'
 }
 
 const MessageList = React.forwardRef<HTMLDivElement, MessageListProps>(
-  ({ className, children, autoScroll = true, ...props }, ref) => {
+  ({ className, children, autoScroll = true, variant = 'default', ...props }, ref) => {
+    const spatialClass = variant === 'spatial' ? 'spatial-scene' : ''
     const scrollRef = React.useRef<HTMLDivElement>(null)
     const [showScrollButton, setShowScrollButton] = React.useState(false)
 
@@ -40,6 +43,7 @@ const MessageList = React.forwardRef<HTMLDivElement, MessageListProps>(
           onScroll={handleScroll}
           className={cn(
             'flex flex-col gap-4 overflow-y-auto h-full p-4',
+            spatialClass,
             className
           )}
           {...props}

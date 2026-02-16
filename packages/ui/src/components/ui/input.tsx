@@ -10,12 +10,13 @@ export interface InputProps
   /** Wrapper className when using prefix/suffix */
   wrapperClassName?: string
   /** Input style variant */
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const inputVariantStyles = {
   default: 'glass-input border-0',
   solid: 'solid-input bg-background border border-border',
+  spatial: 'glass-input border-0 spatial focus:-translate-y-0.5 focus:shadow-[var(--spatial-shadow-mid)]',
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(

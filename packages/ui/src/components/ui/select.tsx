@@ -10,12 +10,13 @@ const SelectValue = SelectPrimitive.Value
 interface SelectTriggerProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
   /** Trigger style variant */
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const selectTriggerVariants = {
   default: 'glass-input border-0',
   solid: 'solid-input bg-background border border-border',
+  spatial: 'glass-input spatial border-0 hover:-translate-y-0.5',
 }
 
 const SelectTrigger = React.forwardRef<
@@ -70,12 +71,13 @@ SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayNam
 interface SelectContentProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> {
   /** Content style variant */
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const selectContentVariants = {
   default: 'glass-heavy border-0',
   solid: 'border bg-popover backdrop-filter-none',
+  spatial: 'glass-heavy spatial-float border-0 animate-spatial-emerge',
 }
 
 const SelectContent = React.forwardRef<

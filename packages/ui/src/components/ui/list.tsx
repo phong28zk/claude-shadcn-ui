@@ -7,6 +7,7 @@ const listVariants = cva('w-full overflow-hidden rounded-xl', {
     variant: {
       default: 'glass border',
       solid: 'bg-background border',
+      spatial: 'glass spatial border',
     },
     dense: {
       true: '',
@@ -52,8 +53,8 @@ const List = React.forwardRef<HTMLDivElement, ListProps>(
   ({ className, variant, dense, children, ...props }, ref) => (
     <div ref={ref} className={cn(listVariants({ variant, dense }), className)} {...props}>
       {React.Children.map(children, (child) => {
-        if (React.isValidElement(child) && child.type === ListItem) {
-          return React.cloneElement(child, { dense } as any)
+        if (React.isValidElement<ListItemProps>(child) && child.type === ListItem) {
+          return React.cloneElement(child, { dense })
         }
         return child
       })}

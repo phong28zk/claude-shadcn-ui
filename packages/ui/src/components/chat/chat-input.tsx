@@ -6,6 +6,13 @@ export interface ChatInputProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'onSend'> {
   onSend?: (message: string) => void
   maxRows?: number
+  /** Input style variant */
+  variant?: 'default' | 'spatial'
+}
+
+const inputVariantStyles = {
+  default: '',
+  spatial: 'spatial focus:-translate-y-0.5 focus:shadow-[var(--spatial-shadow-mid)]',
 }
 
 const ChatInput = React.forwardRef<HTMLTextAreaElement, ChatInputProps>(
@@ -16,6 +23,7 @@ const ChatInput = React.forwardRef<HTMLTextAreaElement, ChatInputProps>(
       maxRows = 5,
       disabled,
       placeholder = 'Type a message...',
+      variant = 'default',
       ...props
     },
     ref
@@ -62,7 +70,8 @@ const ChatInput = React.forwardRef<HTMLTextAreaElement, ChatInputProps>(
           disabled={disabled}
           placeholder={placeholder}
           className={cn(
-            'flex min-h-[60px] w-full resize-none rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+            'flex min-h-[60px] w-full resize-none rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm transition-all',
+            inputVariantStyles[variant],
             className
           )}
           rows={1}

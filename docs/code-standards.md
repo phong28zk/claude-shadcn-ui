@@ -107,11 +107,67 @@ type SizeStyles = Record<Size, string>
 type NativeButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'>
 ```
 
+## Spatial Variant Pattern (v0.3.0)
+
+### Overview
+
+All 37+ components support a `spatial` variant that applies 3D depth effects, elevation shadows, and hover lift animations using CSS perspective transforms. This is a non-breaking addition to existing variants.
+
+### Implementation
+
+```typescript
+const buttonVariants = cva(
+  'base-classes text-foreground',
+  {
+    variants: {
+      variant: {
+        default: 'glass-button',           // Glass (no depth)
+        solid: 'solid-button',             // Solid (no depth)
+        spatial: 'glass-button spatial spatial-lift'  // NEW: Glass with 3D depth
+      }
+    }
+  }
+)
+```
+
+### CSS Classes Applied
+
+- **`.spatial`** - Applies `transform: translateZ(0)` + `transform-style: preserve-3d`
+- **`.spatial-lift`** - On hover: `translateZ(30px)` + `scale(1.02)` with shadow transition
+- **`.spatial-float`** - Animated idle float using `spatial-float-idle` keyframe
+- **`.spatial-recessed`** - Fixed at `translateZ(-20px)` for background depth
+- **`.spatial-scene`** - Perspective container (parent wrapper needed)
+
+### Mobile Behavior
+
+All spatial depth values automatically reduced 50% on devices ≤ 768px via media query.
+
+### Reduced Motion
+
+When `prefers-reduced-motion: reduce` is set:
+- All `translateZ()` transforms collapse to `0`
+- Scale transforms preserved (subtle feedback)
+- Animations disabled
+
+### Multi-Variant Components
+
+For components with multiple variants (e.g., Button with size + variant):
+
+```typescript
+<Button variant="spatial" size="lg">
+  {/* Both spatial depth AND size styling applied */}
+</Button>
+
+// CSS: glass-button spatial spatial-lift h-10 rounded-md px-8
+```
+
+---
+
 ## Glass-First Component Pattern
 
 ### Default Glass Styling
 
-**Principle:** Components default to glass morphism. Add `variant="solid"` for solid backgrounds.
+**Principle:** Components default to glass morphism. Add `variant="solid"` for solid backgrounds. New `variant="spatial"` adds 3D depth and elevation effects.
 
 ```typescript
 import { cva, type VariantProps } from 'class-variance-authority'

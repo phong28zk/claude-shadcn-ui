@@ -165,4 +165,47 @@
   .animate-claude-slide-up-slow {
     animation: claude-slide-up var(--transition-slow) ease-out;
   }
+
+  /* Spatial 3D Keyframes (Apple Vision Pro inspired) */
+  @keyframes spatial-emerge {
+    from {
+      opacity: 0;
+      transform: translateZ(-40px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateZ(0) scale(1);
+    }
+  }
+
+  @keyframes spatial-float-idle {
+    0%, 100% {
+      transform: translateZ(var(--spatial-z-near)) translateY(0);
+    }
+    50% {
+      transform: translateZ(var(--spatial-z-near)) translateY(-4px);
+    }
+  }
+
+  @keyframes spatial-focus-lift {
+    from {
+      transform: translateZ(0);
+    }
+    to {
+      transform: translateZ(var(--spatial-z-near));
+    }
+  }
+
+  /* Spatial animation utility classes */
+  .animate-spatial-emerge {
+    animation: spatial-emerge var(--spatial-transition) ease-out;
+  }
+
+  .animate-spatial-float {
+    animation: spatial-float-idle 3s ease-in-out infinite;
+  }
+
+  .animate-spatial-focus {
+    animation: spatial-focus-lift var(--spatial-transition) ease-out forwards;
+  }
 }

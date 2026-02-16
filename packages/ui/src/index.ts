@@ -63,10 +63,11 @@ export {
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
+  type TooltipContentProps,
 } from './components/ui/tooltip'
-export { Separator } from './components/ui/separator'
+export { Separator, type SeparatorProps } from './components/ui/separator'
 export { Toggle, type ToggleProps } from './components/ui/toggle'
-export { Switch } from './components/ui/switch'
+export { Switch, type SwitchProps } from './components/ui/switch'
 export {
   Select,
   SelectGroup,

@@ -14,7 +14,7 @@ export interface BottomNavigationProps
   items: BottomNavigationItem[]
   value: string
   onChange: (value: string) => void
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const BottomNavigation = React.forwardRef<HTMLElement, BottomNavigationProps>(
@@ -24,6 +24,7 @@ const BottomNavigation = React.forwardRef<HTMLElement, BottomNavigationProps>(
     const variantClasses = {
       default: 'glass-nav border-t border-glass-border',
       solid: 'solid-elevated border-t',
+      spatial: 'glass-nav spatial-fixed border-t border-glass-border',
     }
 
     return (

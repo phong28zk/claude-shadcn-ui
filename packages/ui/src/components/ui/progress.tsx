@@ -11,6 +11,7 @@ const progressVariants = cva('relative overflow-hidden', {
     variant: {
       default: 'glass-subtle',
       solid: 'solid',
+      spatial: 'glass-subtle spatial-fixed',
     },
     size: {
       sm: '',

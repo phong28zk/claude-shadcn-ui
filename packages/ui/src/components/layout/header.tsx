@@ -6,12 +6,13 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   nav?: React.ReactNode
   actions?: React.ReactNode
   /** Header style variant */
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const headerVariantStyles = {
   default: 'glass-nav border-b-0',
   solid: 'border-b bg-background backdrop-filter-none',
+  spatial: 'glass-nav spatial-fixed border-b-0',
 }
 
 const Header = React.forwardRef<HTMLElement, HeaderProps>(

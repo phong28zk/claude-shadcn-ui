@@ -6,12 +6,13 @@ export interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultCollapsed?: boolean
   collapsible?: boolean
   /** Sidebar style variant */
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const sidebarVariantStyles = {
   default: 'glass-nav border-r-0',
   solid: 'border-r bg-background backdrop-filter-none',
+  spatial: 'glass-nav spatial-fixed border-r-0',
 }
 
 const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(

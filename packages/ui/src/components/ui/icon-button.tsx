@@ -13,6 +13,7 @@ const iconButtonVariants = cva(
         solid:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
+        spatial: 'glass-button spatial text-foreground hover:text-foreground',
       },
       size: {
         sm: 'h-8 w-8 [&_svg]:h-4 [&_svg]:w-4',
@@ -40,12 +41,13 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     const shouldAnimate = animated && !prefersReducedMotion
 
     if (shouldAnimate) {
+      const isSpatial = variant === 'spatial'
       return (
         <motion.button
           className={cn(iconButtonVariants({ variant, size, className }))}
           ref={ref}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={isSpatial ? { scale: 1.05, y: -2 } : { scale: 1.05 }}
+          whileTap={isSpatial ? { scale: 0.95, y: 1 } : { scale: 0.95 }}
           transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
           {...(props as React.ComponentProps<typeof motion.button>)}
         >

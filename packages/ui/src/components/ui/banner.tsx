@@ -12,6 +12,7 @@ const bannerVariants = cva(
         info: 'glass border-l-blue-500 [&_svg]:text-blue-500',
         warning: 'glass border-l-yellow-500 [&_svg]:text-yellow-500',
         error: 'glass border-l-destructive [&_svg]:text-destructive',
+        spatial: 'glass spatial-float border-l-border',
       },
     },
     defaultVariants: {

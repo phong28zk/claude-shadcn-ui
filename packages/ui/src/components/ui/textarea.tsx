@@ -3,12 +3,13 @@ import { cn } from '@/lib/utils'
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Textarea style variant */
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const textareaVariantStyles = {
   default: 'glass-input border-0',
   solid: 'solid-input bg-background border border-border',
+  spatial: 'glass-input spatial border-0 focus:-translate-y-0.5 focus:shadow-[var(--spatial-shadow-mid)]',
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(

@@ -12,6 +12,7 @@ const sliderTrackVariants = cva(
       variant: {
         default: 'glass-subtle border-glass-border',
         solid: 'bg-secondary',
+        spatial: 'glass-subtle border-glass-border',
       },
     },
     defaultVariants: {
@@ -25,6 +26,7 @@ const sliderRangeVariants = cva('absolute h-full', {
     variant: {
       default: 'glass-medium border-glass-border-strong',
       solid: 'bg-primary',
+      spatial: 'glass-medium border-glass-border-strong',
     },
   },
   defaultVariants: {
@@ -41,6 +43,8 @@ const sliderThumbVariants = cva(
           'glass-heavy border-glass-border-strong hover:glass-heavy hover:scale-110 active:scale-95',
         solid:
           'bg-background border-primary hover:bg-accent hover:scale-110 active:scale-95',
+        spatial:
+          'glass-heavy spatial border-glass-border-strong hover:glass-heavy hover:scale-110 hover:-translate-y-1 active:scale-95',
       },
     },
     defaultVariants: {
@@ -52,7 +56,7 @@ const sliderThumbVariants = cva(
 export interface SliderProps
   extends React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>,
     VariantProps<typeof sliderVariants> {
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const Slider = React.forwardRef<

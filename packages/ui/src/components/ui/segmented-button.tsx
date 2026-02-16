@@ -11,6 +11,7 @@ const segmentedButtonVariants = cva(
       variant: {
         default: 'glass',
         solid: 'solid',
+        spatial: 'glass spatial',
       },
     },
     defaultVariants: {

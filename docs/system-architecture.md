@@ -165,11 +165,37 @@ components/ui/button.tsx
 
   /* Shadows */
   --shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+
+  /* Spatial/3D Tokens (NEW v0.3.0) */
+  --spatial-perspective: 1000px;
+  --spatial-z-near: 20px;             /* Front depth plane */
+  --spatial-z-mid: 0px;               /* Baseline depth */
+  --spatial-z-far: -20px;             /* Background depth plane */
+  --spatial-z-hover: 30px;            /* Hover lift distance */
+  --spatial-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --spatial-shadow-near: 0 4px 12px rgba(0,0,0,0.08), ...;
+  --spatial-shadow-mid: 0 8px 24px rgba(0,0,0,0.12), ...;
+  --spatial-shadow-far: 0 16px 48px rgba(0,0,0,0.16), ...;
+  --spatial-shadow-hover: 0 24px 64px rgba(0,0,0,0.18), ...;
 }
 
 .dark {
   --background: 0 0% 10%;             /* Dark background */
   /* ... dark mode overrides */
+  --spatial-shadow-near: 0 4px 12px rgba(0,0,0,0.2), ...;  /* Adjusted for dark mode */
+  --spatial-shadow-mid: 0 8px 24px rgba(0,0,0,0.3), ...;
+  --spatial-shadow-far: 0 16px 48px rgba(0,0,0,0.4), ...;
+  --spatial-shadow-hover: 0 24px 64px rgba(0,0,0,0.45), ...;
+}
+
+/* Mobile: 50% depth reduction for performance */
+@media (max-width: 768px) {
+  :root {
+    --spatial-perspective: 600px;
+    --spatial-z-near: 10px;
+    --spatial-z-far: -10px;
+    --spatial-z-hover: 15px;
+  }
 }
 ```
 
@@ -267,45 +293,67 @@ CSS Processing:
 
 ```
 index.ts (barrel export)
-  ├─ UI Primitives
-  │   ├─ Button
+  ├─ UI Primitives (16 components)
+  │   ├─ Button (+ spatial variant)
   │   │   └─ @radix-ui/react-slot
-  │   ├─ Input
-  │   ├─ Textarea
-  │   ├─ Card
-  │   ├─ Badge
-  │   ├─ Avatar
-  │   │   └─ @radix-ui/react-avatar
-  │   ├─ Dialog
+  │   ├─ Input, Textarea (+ spatial focus-lift)
+  │   ├─ Card (+ spatial lift-on-hover)
+  │   ├─ Badge (+ spatial float)
+  │   ├─ Avatar (+ spatial lift)
+  │   ├─ Dialog (+ spatial emerge)
   │   │   └─ @radix-ui/react-dialog
-  │   ├─ DropdownMenu
+  │   ├─ DropdownMenu (+ spatial lift)
   │   │   └─ @radix-ui/react-dropdown-menu
-  │   ├─ Tooltip
+  │   ├─ Tooltip (+ spatial near-plane)
   │   │   └─ @radix-ui/react-tooltip
-  │   ├─ Separator
+  │   ├─ Separator/Divider (+ spatial fixed-depth)
   │   │   └─ @radix-ui/react-separator
-  │   ├─ Toggle
+  │   ├─ Toggle (+ spatial lift)
   │   │   └─ @radix-ui/react-toggle
-  │   └─ Switch
-  │       └─ @radix-ui/react-switch
+  │   ├─ Switch, Checkbox, Radio (+ spatial subtle-lift)
+  │   │   └─ @radix-ui/react-switch
+  │   ├─ Slider, Select (+ spatial lift)
+  │   └─ Progress (+ spatial fixed-depth)
   │
-  ├─ Chat Components
-  │   ├─ ChatBubble
-  │   ├─ ChatInput (uses: Button, Textarea)
-  │   ├─ MessageList
-  │   └─ TypingIndicator
+  ├─ Chat Components (4)
+  │   ├─ ChatBubble (+ spatial emerge)
+  │   ├─ ChatInput (+ spatial focus-lift)
+  │   ├─ MessageList (+ spatial fixed-baseline)
+  │   └─ TypingIndicator (+ spatial float-idle)
   │
-  ├─ Layout Components
-  │   ├─ Sidebar
-  │   ├─ Header
-  │   └─ Container
+  ├─ Navigation Components (4)
+  │   ├─ Tabs (+ spatial lift)
+  │   ├─ TopAppBar (+ spatial fixed-depth)
+  │   ├─ NavigationRail (+ spatial fixed-depth)
+  │   └─ BottomNavigation (+ spatial fixed-depth)
+  │
+  ├─ Layout Components (2)
+  │   ├─ Sidebar (+ spatial fixed-depth)
+  │   └─ Header (+ spatial fixed-depth)
   │
   ├─ Theme System
   │   ├─ ThemeProvider (context wrapper)
-  │   └─ ThemeToggle (uses: Button, Icon)
+  │   └─ ThemeToggle (uses: Button, Icon, + spatial lift)
   │
   └─ Utilities
       └─ cn() (classname merging)
+```
+
+### Spatial Variant Architecture (NEW v0.3.0)
+
+All 37+ components support a `spatial` variant that applies 3D depth effects via CSS transforms:
+
+```
+Component with spatial variant
+  ├─ Base classes (glass-button, card, etc.)
+  ├─ .spatial (perspective + preserve-3d)
+  ├─ .spatial-lift (hover: translateZ + scale)
+  ├─ .spatial-float (idle animation: bob effect)
+  ├─ .spatial-recessed (fixed background depth)
+  ├─ CSS Variables (--spatial-z-near/mid/far/hover)
+  ├─ Shadows (--spatial-shadow-*)
+  └─ Mobile reduction (50% depth on ≤ 768px)
+      └─ Graceful degradation (prefers-reduced-motion: none)
 ```
 
 ## Theme Architecture

@@ -15,7 +15,7 @@ export interface NavigationRailProps
   value: string
   onChange: (value: string) => void
   collapsed?: boolean
-  variant?: 'default' | 'solid'
+  variant?: 'default' | 'solid' | 'spatial'
 }
 
 const NavigationRail = React.forwardRef<HTMLElement, NavigationRailProps>(
@@ -36,6 +36,7 @@ const NavigationRail = React.forwardRef<HTMLElement, NavigationRailProps>(
     const variantClasses = {
       default: 'glass-nav border-r border-glass-border',
       solid: 'solid-elevated border-r',
+      spatial: 'glass-nav spatial-fixed border-r border-glass-border',
     }
 
     return (

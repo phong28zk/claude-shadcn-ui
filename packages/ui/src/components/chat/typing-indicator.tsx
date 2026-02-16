@@ -29,10 +29,13 @@ export interface TypingIndicatorProps
   text?: string
   /** Enable/disable animations (default: true) */
   animated?: boolean
+  /** Indicator style variant */
+  variant?: 'default' | 'spatial'
 }
 
 const TypingIndicator = React.forwardRef<HTMLDivElement, TypingIndicatorProps>(
-  ({ className, text = 'Claude is thinking', animated = true, ...props }, ref) => {
+  ({ className, text = 'Claude is thinking', animated = true, variant = 'default', ...props }, ref) => {
+    const spatialClass = variant === 'spatial' ? 'spatial-float animate-spatial-float' : ''
     const prefersReducedMotion = useReducedMotion()
     const shouldAnimate = animated && !prefersReducedMotion
 
@@ -40,7 +43,7 @@ const TypingIndicator = React.forwardRef<HTMLDivElement, TypingIndicatorProps>(
       return (
         <div
           ref={ref}
-          className={cn('flex items-center gap-2 text-muted-foreground', className)}
+          className={cn('flex items-center gap-2 text-muted-foreground', spatialClass, className)}
           {...props}
         >
           <div className="flex items-center gap-1">
@@ -56,7 +59,7 @@ const TypingIndicator = React.forwardRef<HTMLDivElement, TypingIndicatorProps>(
     return (
       <div
         ref={ref}
-        className={cn('flex items-center gap-2 text-muted-foreground', className)}
+        className={cn('flex items-center gap-2 text-muted-foreground', spatialClass, className)}
         {...props}
       >
         <motion.div

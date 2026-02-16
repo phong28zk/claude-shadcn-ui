@@ -275,6 +275,48 @@
     border-color: hsl(var(--ring));
     box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
   }
+
+  /* Spatial 3D Utilities (Apple Vision Pro inspired) */
+  .spatial-scene {
+    perspective: var(--spatial-perspective);
+    perspective-origin: center center;
+  }
+
+  .spatial {
+    transform: translateZ(var(--spatial-z-mid));
+    transition: transform var(--spatial-transition), box-shadow var(--spatial-transition);
+    transform-style: preserve-3d;
+  }
+
+  .spatial-lift:hover {
+    transform: translateZ(var(--spatial-z-hover)) scale(1.02);
+    box-shadow: var(--spatial-shadow-hover);
+  }
+
+  .spatial-float {
+    transform: translateZ(var(--spatial-z-near));
+    box-shadow: var(--spatial-shadow-mid);
+  }
+
+  .spatial-recessed {
+    transform: translateZ(var(--spatial-z-far));
+    box-shadow: var(--spatial-shadow-near);
+  }
+
+  .spatial-fixed {
+    transform: translateZ(var(--spatial-z-near));
+    box-shadow: var(--spatial-shadow-near);
+  }
+
+  /* Glass + Spatial combo */
+  .glass-spatial {
+    @apply glass spatial;
+  }
+
+  .glass-spatial:hover {
+    transform: translateZ(var(--spatial-z-hover)) scale(1.02);
+    box-shadow: var(--spatial-shadow-hover);
+  }
 }
 
 /* Reduced Motion: disable all transitions and animations */

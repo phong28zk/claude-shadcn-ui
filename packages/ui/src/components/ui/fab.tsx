@@ -11,6 +11,7 @@ const fabVariants = cva(
       variant: {
         default: 'glass-button text-foreground hover:text-foreground',
         solid: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        spatial: 'glass-button spatial text-foreground hover:text-foreground',
       },
       size: {
         sm: 'h-10 w-10 rounded-xl [&_svg]:h-4 [&_svg]:w-4',
@@ -69,14 +70,15 @@ const FAB = React.forwardRef<HTMLButtonElement, FABProps>(
     )
 
     if (shouldAnimate) {
+      const isSpatial = variant === 'spatial'
       return (
         <motion.button
           className={cn(
             fabVariants({ variant, size, extended: isExtended, className })
           )}
           ref={ref}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={isSpatial ? { scale: 1.05, y: -3 } : { scale: 1.05 }}
+          whileTap={isSpatial ? { scale: 0.95, y: 1 } : { scale: 0.95 }}
           transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
           {...(props as React.ComponentProps<typeof motion.button>)}
         >

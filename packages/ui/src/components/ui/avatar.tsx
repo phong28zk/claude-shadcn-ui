@@ -1,17 +1,34 @@
 import * as React from 'react'
 import * as AvatarPrimitive from '@radix-ui/react-avatar'
+import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
+
+const avatarVariants = cva(
+  'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full',
+  {
+    variants: {
+      variant: {
+        default: '',
+        spatial: 'spatial hover:-translate-y-1 transition-transform',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+)
+
+export interface AvatarProps
+  extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
+    VariantProps<typeof avatarVariants> {}
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
->(({ className, ...props }, ref) => (
+  AvatarProps
+>(({ className, variant, ...props }, ref) => (
   <AvatarPrimitive.Root
     ref={ref}
-    className={cn(
-      'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full',
-      className
-    )}
+    className={cn(avatarVariants({ variant }), className)}
     {...props}
   />
 ))
@@ -44,4 +61,4 @@ const AvatarFallback = React.forwardRef<
 ))
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
 
-export { Avatar, AvatarImage, AvatarFallback }
+export { Avatar, AvatarImage, AvatarFallback, avatarVariants }

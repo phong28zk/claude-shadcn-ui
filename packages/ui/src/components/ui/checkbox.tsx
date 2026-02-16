@@ -15,6 +15,8 @@ const checkboxVariants = cva(
           'glass-subtle border-glass-border data-[state=checked]:glass-medium data-[state=checked]:border-glass-border-strong data-[state=checked]:text-primary',
         solid:
           'bg-background border border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground',
+        spatial:
+          'glass-subtle spatial border-glass-border data-[state=checked]:glass-medium data-[state=checked]:border-glass-border-strong data-[state=checked]:text-primary hover:-translate-y-0.5',
       },
     },
     defaultVariants: {

@@ -15,6 +15,8 @@ const radioItemVariants = cva(
           'glass-subtle border-glass-border data-[state=checked]:glass-medium data-[state=checked]:border-glass-border-strong',
         solid:
           'bg-background border border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary',
+        spatial:
+          'glass-subtle spatial border-glass-border data-[state=checked]:glass-medium data-[state=checked]:border-glass-border-strong hover:-translate-y-0.5',
       },
     },
     defaultVariants: {
@@ -23,8 +25,7 @@ const radioItemVariants = cva(
   }
 )
 
-export interface RadioGroupProps
-  extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {}
+export type RadioGroupProps = React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 
 export interface RadioGroupItemProps
   extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>,

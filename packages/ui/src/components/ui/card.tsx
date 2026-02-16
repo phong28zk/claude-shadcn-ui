@@ -7,7 +7,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Enable/disable animations (default: true) */
   animated?: boolean
   /** Card style variant */
-  variant?: 'default' | 'solid' | 'subtle' | 'heavy'
+  variant?: 'default' | 'solid' | 'subtle' | 'heavy' | 'spatial'
 }
 
 const variantStyles = {
@@ -15,6 +15,7 @@ const variantStyles = {
   solid: 'solid-card bg-background border border-border shadow',
   subtle: 'glass-subtle rounded-xl',
   heavy: 'glass-heavy rounded-xl',
+  spatial: 'glass-card spatial',
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
@@ -29,16 +30,17 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     )
 
     if (shouldAnimate) {
+      const hoverProps = variant === 'spatial'
+        ? { scale: 1.02, y: -4, boxShadow: 'var(--spatial-shadow-hover)' }
+        : { scale: 1.02, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }
+
       return (
         <motion.div
           ref={ref}
           className={baseClassName}
-          whileHover={{
-            scale: 1.02,
-            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-          }}
+          whileHover={hoverProps}
           transition={{
-            duration: 0.2,
+            duration: 0.25,
             ease: [0.4, 0, 0.2, 1],
           }}
           {...(props as React.ComponentProps<typeof motion.div>)}

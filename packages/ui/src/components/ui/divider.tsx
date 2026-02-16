@@ -12,6 +12,7 @@ const dividerVariants = cva('shrink-0', {
     variant: {
       default: 'bg-[var(--glass-border)]',
       solid: 'bg-border',
+      spatial: 'bg-[var(--glass-border)] spatial-recessed',
     },
   },
   defaultVariants: {
