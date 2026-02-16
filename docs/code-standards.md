@@ -107,6 +107,69 @@ type SizeStyles = Record<Size, string>
 type NativeButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'>
 ```
 
+## Animation Pattern (Motion System)
+
+### Default Animated Components
+
+**Principle:** All components animate by default (opt-out model). Use `useReducedMotion()` hook to respect user preferences.
+
+```typescript
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
+
+interface ComponentProps extends React.HTMLAttributes<HTMLDivElement> {
+  animated?: boolean  // Default: true
+}
+
+const Component = React.forwardRef<HTMLDivElement, ComponentProps>(
+  ({ animated = true, className, ...props }, ref) => {
+    const prefersReduced = useReducedMotion()
+    const shouldAnimate = animated && !prefersReduced
+
+    if (shouldAnimate) {
+      return (
+        <motion.div
+          ref={ref}
+          whileHover={{ scale: 1.02, y: -2 }}
+          transition={{ duration: 0.15 }}
+          className={cn('component', className)}
+          {...props}
+        />
+      )
+    }
+
+    // Static fallback when animation disabled
+    return (
+      <div
+        ref={ref}
+        className={cn('component', className)}
+        {...props}
+      />
+    )
+  }
+)
+```
+
+### Timing Constants
+
+```typescript
+// Use for consistent motion timing
+const TIMING = {
+  fast: 150,      // Hover, micro-interactions
+  button: 200,    // Button taps
+  base: 300,      // Entrance, primary
+  slow: 500,      // Page transitions
+} as const
+```
+
+**Easing:**
+
+```typescript
+const EASING = {
+  standard: [0.4, 0, 0.2, 1],
+  bounce: [0.34, 1.56, 0.64, 1],
+} as const
+```
+
 ## React Component Patterns
 
 ### Component Structure Template
@@ -851,6 +914,87 @@ The component registry is the single source of truth for all component metadata.
 }
 ```
 
+## Swiss Grid Implementation
+
+### 12-Column Grid Usage
+
+**Basic Layout:**
+
+```typescript
+// Import Swiss grid utilities
+import { cn } from '@/lib/utils'
+
+// Simple 12-column layout
+<div className="swiss-grid">
+  <div className="col-span-8">Main content (8 columns)</div>
+  <div className="col-span-4">Sidebar (4 columns)</div>
+</div>
+
+// Responsive columns
+<div className="col-span-12 md:col-span-6 lg:col-span-4">
+  Card that stacks on mobile
+</div>
+```
+
+### Bento Grid Pattern
+
+```typescript
+// Bento layout component
+<div className="bento-grid">
+  <div className="bento-card-lg">
+    {/* Featured card spans 2x2 */}
+    Featured item
+  </div>
+  <div className="bento-card">Card 2</div>
+  <div className="bento-card">Card 3</div>
+  <div className="bento-card">Card 4</div>
+</div>
+
+// CSS classes available:
+// - bento-card: Standard 1x1
+// - bento-card-lg: Featured 2x2
+// - bento-card-tall: 1x2 vertical
+// - bento-card-wide: 2x1 horizontal
+```
+
+### Max-Width Containers
+
+```typescript
+// Use max-width presets for consistent widths
+<div className="mx-auto max-w-swiss-content px-4">
+  {/* 960px max-width with responsive padding */}
+</div>
+
+// Preset values (Tailwind)
+// - max-w-swiss-sm: 640px
+// - max-w-swiss-md: 768px
+// - max-w-swiss-lg: 960px
+// - max-w-swiss-content: 960px (standard body)
+```
+
+### Spacing Scale Implementation
+
+```typescript
+// Swiss spacing scale in Tailwind
+// 8px base unit system
+
+const spacingScale = {
+  'xs': '0.5rem',    // 8px
+  'sm': '1rem',      // 16px
+  'md': '1.5rem',    // 24px
+  'lg': '2rem',      // 32px
+  'xl': '3rem',      // 48px
+  '2xl': '4rem',     // 64px
+  '3xl': '6rem',     // 96px
+  '4xl': '8rem',     // 128px
+}
+
+// Use in components
+<div className="p-md m-lg">
+  Padding: 24px, Margin: 32px
+</div>
+```
+
 ## Performance Guidelines
 
 ### Code Splitting
@@ -941,6 +1085,34 @@ className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ri
 .dark {
   --primary: 18 55% 43%;        /* Same hue, adjusted for contrast */
 }
+```
+
+## Development Server Configuration
+
+### Port Configuration
+
+| Port | Service | Purpose |
+|------|---------|---------|
+| 6312 | Documentation Site | Design guidelines, component showcase |
+| 6313 | Component Playground | Interactive component testing with props editor |
+
+**Start Servers:**
+
+```bash
+# Documentation site (localhost:6312)
+npm run docs
+
+# Component playground (localhost:6313)
+npm run playground
+
+# Both simultaneously
+npm run dev
+```
+
+**Port Override (if needed):**
+
+```bash
+PORT=8080 npm run docs
 ```
 
 ## Code Review Checklist

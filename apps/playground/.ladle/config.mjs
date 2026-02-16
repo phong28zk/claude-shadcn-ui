@@ -1,7 +1,7 @@
 /** @type {import('@ladle/react').UserConfig} */
 export default {
   stories: "src/stories/**/*.stories.{ts,tsx}",
-  port: 5174,
+  port: 6313,
   outDir: "dist",
   base: "/",
   addons: {

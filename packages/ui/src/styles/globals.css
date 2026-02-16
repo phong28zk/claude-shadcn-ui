@@ -127,4 +127,45 @@
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
     @apply disabled:pointer-events-none disabled:opacity-50;
   }
+
+  /* Swiss Grid + Bento Layout Utilities */
+  .swiss-grid {
+    @apply grid grid-cols-swiss-12 gap-swiss-md;
+  }
+
+  .swiss-grid-compact {
+    @apply grid grid-cols-swiss-12 gap-swiss-sm;
+  }
+
+  .bento-grid {
+    @apply grid grid-cols-bento-2x2 gap-swiss-md auto-rows-fr;
+  }
+
+  .bento-grid-featured {
+    @apply grid grid-cols-swiss-12 gap-swiss-md;
+  }
+
+  .bento-card-lg {
+    @apply col-span-2 row-span-2;
+  }
+
+  .bento-card-wide {
+    @apply col-span-2;
+  }
+
+  .bento-card-tall {
+    @apply row-span-2;
+  }
+}
+
+/* Reduced Motion: disable all transitions and animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

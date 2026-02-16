@@ -1,5 +1,18 @@
 import * as React from 'react'
+import { motion } from 'framer-motion'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
 import { cn } from '@/lib/utils'
+
+const bubbleVariants = {
+  user: {
+    initial: { opacity: 0, x: 10 },
+    animate: { opacity: 1, x: 0 },
+  },
+  assistant: {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+  },
+}
 
 export interface ChatBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   role: 'user' | 'assistant'
@@ -8,24 +21,25 @@ export interface ChatBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   avatar?: React.ReactNode
   /** Slot for action buttons (copy, edit, etc.) */
   actions?: React.ReactNode
+  /** Enable/disable animations (default: true) */
+  animated?: boolean
 }
 
 const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
-  ({ role, timestamp, avatar, actions, className, children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'group flex w-full gap-3',
-          role === 'user' ? 'flex-row-reverse' : 'flex-row',
-          className
-        )}
-        {...props}
-      >
+  ({ role, timestamp, avatar, actions, className, children, animated = true, ...props }, ref) => {
+    const prefersReducedMotion = useReducedMotion()
+    const shouldAnimate = animated && !prefersReducedMotion
+
+    const baseClassName = cn(
+      'group flex w-full gap-3',
+      role === 'user' ? 'flex-row-reverse' : 'flex-row',
+      className
+    )
+
+    const content = (
+      <>
         {/* Avatar slot */}
-        {avatar && (
-          <div className="shrink-0 self-end">{avatar}</div>
-        )}
+        {avatar && <div className="shrink-0 self-end">{avatar}</div>}
 
         {/* Bubble content */}
         <div className="flex flex-col gap-1">
@@ -57,6 +71,27 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
             </div>
           )}
         </div>
+      </>
+    )
+
+    if (shouldAnimate) {
+      return (
+        <motion.div
+          ref={ref}
+          className={baseClassName}
+          initial={bubbleVariants[role].initial}
+          animate={bubbleVariants[role].animate}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          {...(props as React.ComponentProps<typeof motion.div>)}
+        >
+          {content}
+        </motion.div>
+      )
+    }
+
+    return (
+      <div ref={ref} className={baseClassName} {...props}>
+        {content}
       </div>
     )
   }

@@ -138,44 +138,116 @@ h1-h6 {
 
 ---
 
-## Animations
+## Motion System
 
-### Transitions
+### Timing Standards
 
-| Token | Duration | Usage |
-|-------|----------|-------|
-| `--transition-fast` | 150ms | Micro-interactions |
-| `--transition-base` | 200ms | Default transitions |
-| `--transition-slow` | 300ms | Page transitions |
+| Timing | Duration | Usage |
+|--------|----------|-------|
+| Fast/Hover | 150ms | Micro-interactions, state feedback |
+| Button/Standard | 200ms | Button taps, small element transitions |
+| Base/Entrance | 300ms | Component entrance, primary animations |
+| Slow/Page | 500ms | Page transitions, complex sequences |
+
+**Easing Functions:**
+
+- **Standard:** `cubic-bezier(0.4, 0, 0.2, 1)` - Natural, responsive feel
+- **Bounce:** `cubic-bezier(0.34, 1.56, 0.64, 1)` - Playful emphasis
+
+### Motion Principles
+
+1. **Every animation communicates** - Status change, behavior guidance, or feedback
+2. **GPU-accelerated** - Transform + opacity only (no layout shifts)
+3. **Respects preferences** - `prefers-reduced-motion` honored (set `animated={false}`)
+4. **Purposeful** - No frivolous decoration, drives user understanding
+
+### Component Animations
+
+| Component | Animation | Timing | Easing |
+|-----------|-----------|--------|--------|
+| Card | Hover scale + shadow | 150ms | Standard |
+| Button | Tap scale, active press | 150ms | Standard |
+| Dialog | Entrance fade + scale | 300ms | Standard |
+| ChatBubble | Slide from left/right | 300ms | Standard |
+| Toast | Entrance slide + fade | 200ms | Standard |
 
 ### Animation Classes
 
-| Class | Effect |
-|-------|--------|
-| `.animate-claude-fade-in` | Opacity 0→1 |
-| `.animate-claude-slide-up` | Slide + fade from below |
-| `.animate-claude-slide-down` | Slide + fade from above |
-| `.animate-claude-slide-in-left` | Slide + fade from left |
-| `.animate-claude-slide-in-right` | Slide + fade from right |
-| `.animate-claude-scale-in` | Scale 0.95→1 + fade |
-| `.animate-claude-pulse` | Breathing opacity |
-| `.animate-claude-spin` | 360deg rotation |
-| `.animate-claude-bounce` | Vertical bounce |
+| Class | Effect | Timing |
+|-------|--------|--------|
+| `.animate-claude-fade-in` | Opacity 0→1 | 200ms (default) |
+| `.animate-claude-slide-up` | Slide + fade from below | 300ms |
+| `.animate-claude-scale-in` | Scale 0.95→1 + fade | 200ms |
+| `.animate-claude-bounce` | Vertical bounce | 600ms |
 
-### Speed Variants
-
-```tsx
-// Fast (150ms)
-<div className="animate-claude-fade-in-fast" />
-
-// Default (200ms)
-<div className="animate-claude-fade-in" />
-
-// Slow (300ms)
-<div className="animate-claude-fade-in-slow" />
-```
+**Speed Variants:** Add `-fast` (150ms) or `-slow` (500ms) suffix
 
 ---
+
+## Swiss Modernism Grid
+
+### 12-Column Swiss Grid
+
+**Base Unit:** 8px (rem-based: 0.5rem)
+
+**Grid Setup:**
+```css
+.swiss-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;  /* 24px */
+}
+```
+
+**Breakpoints:**
+- Mobile: 1 column
+- Tablet: 4 columns
+- Desktop: 12 columns
+
+### Spacing Scale (Swiss)
+
+| Size | Value | Usage |
+|------|-------|-------|
+| xs | 8px | Micro spacing |
+| sm | 16px | Component padding |
+| md | 24px | Section spacing |
+| lg | 32px | Card spacing |
+| xl | 48px | Section separation |
+| 2xl | 64px | Major spacing |
+| 3xl | 96px | Hero spacing |
+| 4xl | 128px | Full-width gaps |
+
+### Max-Width Presets
+
+| Preset | Width | Usage |
+|--------|-------|-------|
+| `swiss-sm` | 640px | Narrow content |
+| `swiss-md` | 768px | Standard content |
+| `swiss-lg` | 960px | Wide content |
+| `swiss-content` | 960px | Main body copy |
+
+### Bento Grid Patterns
+
+```tsx
+// 2+1 Layout
+<div className="swiss-grid">
+  <div className="col-span-8">Featured Card</div>
+  <div className="col-span-4">Sidebar</div>
+</div>
+
+// 1+1+2 Layout
+<div className="swiss-grid">
+  <div className="col-span-4">Card A</div>
+  <div className="col-span-4">Card B</div>
+  <div className="col-span-4">Card C</div>
+</div>
+
+// 3+3+3+3 Layout
+<div className="swiss-grid">
+  <div className="col-span-3">Item</div>
+  {/* repeat 4x */}
+</div>
+```
 
 ## Component Patterns
 

@@ -23,7 +23,7 @@ bun install
 bun run dev
 ```
 
-The docs site will be available at `http://localhost:5173`
+The docs site will be available at `http://localhost:6312`
 
 ## Build
 

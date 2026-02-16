@@ -15,6 +15,7 @@ export {
   CardTitle,
   CardDescription,
   CardContent,
+  type CardProps,
 } from './components/ui/card'
 export { Badge, type BadgeProps } from './components/ui/badge'
 export { Avatar, AvatarImage, AvatarFallback } from './components/ui/avatar'
@@ -29,6 +30,7 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
+  type DialogContentProps,
 } from './components/ui/dialog'
 export {
   DropdownMenu,
@@ -71,3 +73,11 @@ export { Container, type ContainerProps } from './components/layout/container'
 // Theme
 export { ThemeProvider, useTheme, type Theme } from './components/theme/theme-provider'
 export { ThemeToggle } from './components/theme/theme-toggle'
+
+// Motion Components
+export { FadeIn, type FadeInProps } from './components/motion/fade-in'
+export { SlideUp, type SlideUpProps } from './components/motion/slide-up'
+export { ScaleIn, type ScaleInProps } from './components/motion/scale-in'
+
+// Hooks
+export { useReducedMotion } from './hooks/use-reduced-motion'

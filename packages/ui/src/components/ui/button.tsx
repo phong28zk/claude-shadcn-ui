@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { motion } from 'framer-motion'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
@@ -41,21 +43,51 @@ export interface ButtonProps
   leftSlot?: React.ReactNode
   /** Slot for content after children (e.g., icon, badge) */
   rightSlot?: React.ReactNode
+  /** Enable/disable animations (default: true) */
+  animated?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, leftSlot, rightSlot, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button'
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      >
+  ({ className, variant, size, asChild = false, leftSlot, rightSlot, children, animated = true, ...props }, ref) => {
+    const prefersReducedMotion = useReducedMotion()
+    const shouldAnimate = animated && !prefersReducedMotion && !asChild
+
+    const baseClassName = cn(buttonVariants({ variant, size, className }))
+    const content = (
+      <>
         {leftSlot && <span className="shrink-0">{leftSlot}</span>}
         {children}
         {rightSlot && <span className="shrink-0">{rightSlot}</span>}
-      </Comp>
+      </>
+    )
+
+    if (asChild) {
+      return (
+        <Slot className={baseClassName} ref={ref} {...props}>
+          {content}
+        </Slot>
+      )
+    }
+
+    if (shouldAnimate) {
+      return (
+        <motion.button
+          className={baseClassName}
+          ref={ref}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
+          {...(props as React.ComponentProps<typeof motion.button>)}
+        >
+          {content}
+        </motion.button>
+      )
+    }
+
+    return (
+      <button className={baseClassName} ref={ref} {...props}>
+        {content}
+      </button>
     )
   }
 )

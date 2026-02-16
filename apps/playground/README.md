@@ -20,7 +20,7 @@ bun run playground
 bun run dev
 ```
 
-Open http://localhost:5174 to view the playground.
+Open http://localhost:6313 to view the playground.
 
 ## Story Structure
 
