@@ -8,6 +8,56 @@ All significant changes to the Glasscn UI library are documented here.
 
 ---
 
+## [2026-02-18] - feat - MUI X Picker Patterns (DatePicker/TimePicker Enhancement)
+
+**Summary:** Added Material-UI X-inspired picker enhancements including floating labels, quick shortcuts, analog clock support, and advanced navigation controls.
+
+**New Component:**
+- **FloatingLabelInput** - MUI X-style outlined input with animated floating label
+
+**Components Updated:**
+- **DatePicker** - New props: `label`, `showShortcuts`; Month/year click-to-navigate (click label to switch between month/year/day views)
+- **TimePicker** - New props: `label`, `clockType` ('analog' | 'digital', default: 'digital'); Analog clock with drag interaction and 24-hour inner ring
+
+**New Utility Module:** `lib/date-time-segment-utils.ts`
+
+**Utilities Added:**
+- Segment-based date/time parsing for robust input handling
+- Analog clock position calculations
+- Drag-to-select time logic
+- 24-hour format inner ring support
+
+**Key Features:**
+- **FloatingLabelInput**: Animated label that floats above input on focus/fill
+- **DatePicker Quick Shortcuts**: Rapid access to common dates (Today, Tomorrow, Last 7 days, etc.)
+- **Month/Year Navigation**: Click month or year to switch calendar views (year → month → day picker)
+- **Analog Clock**: Interactive clock face with 12/24-hour support
+- **Digital Clock Option**: Maintains existing digital spinner interface
+- **Segment-based Parsing**: More robust date/time input validation
+
+**Breaking Changes:** None
+
+**Migration Guide:** None required. Use new props optionally:
+```typescript
+// Floating label
+<FloatingLabelInput label="Enter date" />
+
+// DatePicker with shortcuts
+<DatePicker label="Select date" showShortcuts />
+
+// TimePicker with analog clock
+<TimePicker label="Select time" clockType="analog" />
+
+// TimePicker with digital (default)
+<TimePicker label="Select time" />  // clockType="digital" is default
+```
+
+**Related Documentation:**
+- [Code Standards - Picker Components](/docs/code-standards.md)
+- [Codebase Summary - DatePicker/TimePicker](/docs/codebase-summary.md)
+
+---
+
 ## [2026-02-18] - feat - DatePicker/TimePicker i18n Support
 
 **Summary:** Added full internationalization support to DatePicker and TimePicker components with automatic date format detection, localized labels, and input masking.

@@ -179,8 +179,18 @@ export { Stepper, type StepperProps, type Step } from './components/ui/stepper'
 export { DataTable, type DataTableProps, type Column } from './components/ui/data-table'
 
 // M3 Selection Components
-export { DatePicker, type DatePickerProps } from './components/ui/date-picker'
-export { TimePicker, type TimePickerProps } from './components/ui/time-picker'
+export {
+  DatePicker,
+  type DatePickerProps,
+  type DatePickerShortcut,
+  DEFAULT_DATE_SHORTCUTS,
+} from './components/ui/date-picker'
+export {
+  TimePicker,
+  type TimePickerProps,
+  type ClockType,
+} from './components/ui/time-picker'
+export { FloatingLabelInput, type FloatingLabelInputProps } from './components/ui/floating-label-input'
 export {
   ContextMenu,
   ContextMenuTrigger,

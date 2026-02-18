@@ -273,6 +273,22 @@
     max-width: 90vw;
   }
 
+  /* M3 Picker Popup - shared glass + specular for DatePicker/TimePicker */
+  .glass-picker-popup {
+    @apply glass-heavy rounded-3xl;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-picker-popup::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 0%, transparent 50%);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
   /* Solid Variant Utilities (non-glass, opaque backgrounds) */
   .solid {
     background: hsl(var(--surface-solid));
@@ -351,6 +367,23 @@
     transform: translateZ(var(--spatial-z-hover)) scale(1.02);
     box-shadow: var(--spatial-shadow-hover);
   }
+}
+
+/* Analog clock touch behavior */
+.analog-clock-svg {
+  touch-action: none;
+  user-select: none;
+}
+
+/* Clock hand transition */
+.clock-hand {
+  transition: transform 150ms ease;
+}
+
+/* Floating label input notch */
+.floating-label-notch {
+  background: inherit;
+  padding: 0 4px;
 }
 
 /* Reduced Motion: disable all transitions and animations */
