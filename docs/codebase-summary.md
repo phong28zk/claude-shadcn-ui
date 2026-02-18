@@ -1,23 +1,25 @@
-# Claude ShadCN UI Library - Codebase Summary
+# Glasscn UI Library - Codebase Summary
 
-**Last Updated:** 2026-02-16
+**Last Updated:** 2026-02-18
 **Status:** Production Ready
-**Version:** 0.3.0
+**Version:** 0.1.0
 
 ## Overview
 
-Claude ShadCN UI is a React component library that combines Claude AI's design language with ShadCN UI patterns. It provides 37+ production-ready components with Motion-Driven Swiss Modernism 2.0, glass-first design system, and Apple Vision Pro-inspired Spatial UI 3D effects. Features CSS variables, complete monorepo structure with interactive playground, and ShadCN Studio-style component simulator with live preview, props editor, and real-time theme customization.
+Glasscn UI is a React component library featuring a liquid glass design system with 50+ production-ready M3 components. Built on ShadCN UI patterns with iOS 26-inspired liquid glass effects (enhanced opacity, specular highlights, noise texture, inner glow), Google Sans typography, and Apple Vision Pro-inspired Spatial UI 3D depth. Features CSS variables, complete monorepo structure with interactive playground, and ShadCN Studio-style component simulator with live preview, props editor, and real-time theme customization.
 
 ## Project Structure
 
 ```
-claude-shadcn-ui-monorepo/
+glasscn-ui-monorepo/
 ├── packages/
 │   └── ui/                          # Main library package
 │       ├── src/
 │       │   ├── components/
-│       │   │   ├── ui/              # 16 UI primitive components (glass-first)
+│       │   │   ├── ui/              # 29 UI primitive components (liquid glass)
 │       │   │   ├── chat/            # 4 chat-specific components
+│       │   │   ├── navigation/      # 7 M3 navigation components
+│       │   │   ├── motion/          # 3 motion wrapper components
 │       │   │   ├── layout/          # 3 layout components
 │       │   │   └── theme/           # 2 theme provider components
 │       │   ├── styles/              # CSS variables, animations, globals
@@ -62,17 +64,17 @@ claude-shadcn-ui-monorepo/
 └── plans/                           # Implementation documentation
 ```
 
-## Component Library (37+ Total)
+## Component Library (50+ Total)
 
-All components support the new `spatial` variant (v0.3.0) with 3D depth, elevation shadows, and hover lift effects.
+All components support the new `spatial` variant with 3D depth, elevation shadows, and hover lift effects. Liquid glass effects applied to all glass-variant components.
 
-### UI Primitives (16)
+### UI Primitives (29)
 
 | Component | Props | Key Features |
 |-----------|-------|--------------|
 | **Button** | `variant`, `size`, `asChild` | 7 variants (default, destructive, outline, secondary, ghost, link, **spatial**) with icon support |
-| **Input** | `type`, `disabled`, `placeholder` | Focus ring, placeholder styling, disabled state, **spatial focus-lift** |
-| **Textarea** | `rows`, `disabled`, `placeholder` | Auto-resize, multi-line input, **spatial focus-lift** |
+| **Input** | `type`, `disabled`, `placeholder` | Focus ring, placeholder styling, solid default (BREAKING), **spatial focus-lift** |
+| **Textarea** | `rows`, `disabled`, `placeholder` | Auto-resize, multi-line input, solid default (BREAKING), **spatial focus-lift** |
 | **Card** | `variant` | Composite: CardHeader, CardTitle, CardDescription, CardContent, CardFooter, **spatial lift-on-hover** |
 | **Badge** | `variant` | Pill-shaped, muted color variants, **spatial float effect** |
 | **Avatar** | `src`, `alt`, `fallback` | Circular with image/fallback, optional accent ring, **spatial lift** |
@@ -104,7 +106,7 @@ All components support the new `spatial` variant (v0.3.0) with 3D depth, elevati
 | **MessageList** | Conversation display | Scrollable, auto-scroll to bottom, flexible layout, **spatial fixed-baseline** |
 | **TypingIndicator** | Loading state | Animated dots, "thinking" pattern, **spatial float-idle** |
 
-### Navigation Components (4)
+### Navigation Components (7)
 
 | Component | Purpose | Key Features |
 |-----------|---------|--------------|
@@ -112,6 +114,38 @@ All components support the new `spatial` variant (v0.3.0) with 3D depth, elevati
 | **TopAppBar** | Top app bar | Header with title/actions, **spatial fixed-depth** |
 | **NavigationRail** | Side navigation | Vertical rail with icons, **spatial fixed-depth** |
 | **BottomNavigation** | Bottom nav | Mobile-optimized navigation, **spatial fixed-depth** |
+| **NavigationDrawer** | M3 drawer nav | Collapsible drawer with sections |
+| **SearchBar** | M3 search input | Icon search with clear, prefix/suffix slots |
+| **Breadcrumbs** | Breadcrumb trail | Navigation hierarchy with separators |
+
+### Containment Components (6)
+
+| Component | Purpose | Key Features |
+|-----------|---------|--------------|
+| **Accordion** | Expandable sections | Radix-based with smooth animations |
+| **Carousel** | Content carousel | Swipeable slides with controls |
+| **Timeline** | Event timeline | Vertical event history display |
+| **Stepper** | Step progression | Linear multi-step form navigation |
+| **DataTable** | Data display | Sortable/filterable table with pagination |
+| **Banner** | Alert/notification | Full-width banner with actions |
+
+### Selection Components (3)
+
+| Component | Purpose | Key Features |
+|-----------|---------|--------------|
+| **DatePicker** | Date selection | Calendar with range support |
+| **TimePicker** | Time selection | Spinner-based time input |
+| **ContextMenu** | Right-click menu | Radix-based context menu |
+
+### Misc Components (5)
+
+| Component | Purpose | Key Features |
+|-----------|---------|--------------|
+| **Skeleton** | Loading state | Animated skeleton placeholder |
+| **EmptyState** | No data state | Helpful empty content card |
+| **ErrorBoundary** | Error recovery | React error boundary wrapper |
+| **SpeedDial** | FAB menu | Material 3 floating action button |
+| **SegmentedButton** | Toggle group | Exclusive selection from options |
 
 ### Layout Components (2)
 
@@ -149,8 +183,8 @@ All components support the new `spatial` variant (v0.3.0) with 3D depth, elevati
 
 ### Typography
 
-- **Body Font:** Inter (system fallbacks)
-- **Display Font:** GT Alpina (serif, fallback to Georgia)
+- **Body Font:** Google Sans (system fallbacks)
+- **Display Font:** Google Sans (system fallbacks)
 - **Monospace Font:** JetBrains Mono (fallback to Courier New)
 
 **Size Scale:** 12px (xs) → 14px (sm) → 16px (base) → 36px (4xl)
@@ -218,7 +252,7 @@ All components support the new `spatial` variant (v0.3.0) with 3D depth, elevati
 
 ## Component Simulator (Docs Site Feature)
 
-The documentation site includes an interactive component simulator inspired by ShadCN Studio, providing live preview and customization for all 21 components.
+The documentation site includes an interactive component simulator inspired by ShadCN Studio, providing live preview and customization for all 50+ components.
 
 ### Core Features
 
@@ -249,7 +283,7 @@ The documentation site includes an interactive component simulator inspired by S
 
 **File:** `apps/docs/src/lib/component-registry.ts`
 
-Central metadata source for all 21 components:
+Central metadata source for all 50+ components:
 - Component name, slug, description
 - Category (ui, chat, layout, theme)
 - Variant count
@@ -310,7 +344,7 @@ Central metadata source for all 21 components:
 
 **File:** `apps/docs/src/routes/components/index.tsx`
 
-- Displays all 21 components in grid
+- Displays all 50+ components in grid
 - Filter by category
 - Quick access links to individual simulators
 - Variant count badges
@@ -466,13 +500,13 @@ export { Component, componentVariants }
 
 ```json
 {
-  "name": "claude-shadcn-ui",
+  "name": "glasscn-ui",
   "version": "0.1.0",
-  "description": "Claude AI-styled React component library built on ShadCN UI",
+  "description": "Liquid glass design system with M3 components - React UI library",
   "author": "phong28zk",
   "license": "MIT",
-  "keywords": ["react", "components", "ui", "claude", "shadcn", "tailwind", "typescript"],
-  "repository": "https://github.com/phong28zk/claude-shadcn-ui",
+  "keywords": ["react", "components", "ui", "glasscn", "glass", "m3", "material3", "tailwind", "typescript"],
+  "repository": "https://github.com/phong28zk/glasscn-ui",
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
@@ -573,8 +607,8 @@ export { Component, componentVariants }
 
 ## Resources
 
-- **GitHub:** https://github.com/phong28zk/claude-shadcn-ui
-- **NPM:** https://npmjs.com/claude-shadcn-ui
+- **GitHub:** https://github.com/phong28zk/glasscn-ui
+- **NPM:** https://npmjs.com/glasscn-ui
 - **Radix UI Docs:** https://radix-ui.com
 - **Tailwind CSS:** https://tailwindcss.com
 - **Vite Docs:** https://vitejs.dev

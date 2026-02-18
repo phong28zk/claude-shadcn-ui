@@ -4,7 +4,7 @@
     "include": ["src/figma/**/*.figma.tsx"],
     "parser": "react",
     "importPaths": {
-      "claude-shadcn-ui": ["../components/ui/*", "../components/chat/*"]
+      "glasscn-ui": ["../components/ui/*", "../components/chat/*"]
     }
   }
 }

@@ -155,6 +155,54 @@ export {
   type NavigationRailProps,
   type NavigationRailItem,
 } from './components/navigation/navigation-rail'
+export {
+  NavigationDrawer,
+  NavigationDrawerTrigger,
+  type NavigationDrawerProps,
+  type NavigationDrawerItem,
+} from './components/navigation/navigation-drawer'
+export { SearchBar, type SearchBarProps, type SearchSuggestion } from './components/navigation/search-bar'
+export { Breadcrumbs, type BreadcrumbsProps, type BreadcrumbItem } from './components/navigation/breadcrumbs'
+
+// M3 Containment Components
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  type AccordionProps,
+} from './components/ui/accordion'
+export { Carousel, CarouselItem, type CarouselProps } from './components/ui/carousel'
+export { Timeline, type TimelineProps, type TimelineItem } from './components/ui/timeline'
+export { Stepper, type StepperProps, type Step } from './components/ui/stepper'
+export { DataTable, type DataTableProps, type Column } from './components/ui/data-table'
+
+// M3 Selection Components
+export { DatePicker, type DatePickerProps } from './components/ui/date-picker'
+export { TimePicker, type TimePickerProps } from './components/ui/time-picker'
+export {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuCheckboxItem,
+  ContextMenuRadioItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuGroup,
+  ContextMenuPortal,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuRadioGroup,
+} from './components/ui/context-menu'
+
+// M3 Misc Components
+export { Skeleton, type SkeletonProps } from './components/ui/skeleton'
+export { EmptyState, type EmptyStateProps } from './components/ui/empty-state'
+export { ErrorBoundary, type ErrorBoundaryProps } from './components/ui/error-boundary'
+export { SpeedDial, type SpeedDialProps, type SpeedDialAction } from './components/ui/speed-dial'
 
 // Theme
 export { ThemeProvider, useTheme, type Theme } from './components/theme/theme-provider'

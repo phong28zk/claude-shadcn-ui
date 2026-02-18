@@ -1,5 +1,5 @@
 {
-  "name": "claude-shadcn-ui-monorepo",
+  "name": "glasscn-ui-monorepo",
   "private": true,
   "workspaces": ["packages/*", "apps/*"],
   "scripts": {

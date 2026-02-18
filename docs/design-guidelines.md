@@ -1,6 +1,6 @@
-# Claude ShadCN UI - Design Guidelines
+# Glasscn UI - Design Guidelines
 
-Design system documentation for claude-shadcn-ui library.
+Design system documentation for glasscn-ui library with liquid glass effects and M3 typography.
 
 ---
 
@@ -22,51 +22,74 @@ Design system documentation for claude-shadcn-ui library.
 
 ---
 
-## Glass-First Design (v0.2.0)
+## Glass-First Design (Liquid Glass - iOS 26 Spec)
 
-**Principle:** All components default to glass morphism. Use `variant="solid"` for opaque backgrounds.
+**Principle:** All components default to liquid glass morphism. Use `variant="solid"` for opaque backgrounds.
 
 ### Glass Styling Defaults
 
 | Property | Desktop | Mobile | Purpose |
 |----------|---------|--------|---------|
-| Background | 25-60% RGBA | 25-60% RGBA | Semi-transparent fill |
-| Blur | 8-24px | 6-12px | Performance-optimized backdrop |
-| Border | 1px rgba(255,255,255,0.2) | Same | Subtle edge definition |
-| Shadow | 0 8px 32px rgba(0,0,0,0.12) | Reduced | Depth layering |
+| Background | 35-65% RGBA | 35-65% RGBA | Enhanced opacity for liquid effect |
+| Blur | 12-40px | 12-32px | iOS 26 optimized backdrop blur |
+| Border | 1px rgba(255,255,255,0.25) | Same | Liquid glass edge definition |
+| Shadow | 0 8px 32px rgba(0,0,0,0.12-0.15) | Reduced | Enhanced depth layering |
+| Specular | Yes (shimmer overlay) | Yes | Top-left highlight for depth |
+| Inner Glow | Yes (inset) | Yes | Elevated surface definition |
+| Noise Texture | Yes (subtle grain) | Yes | Tactile surface feel |
 
 ### Implementation Pattern
 
 ```tsx
-// Glass (Default)
+// Glass (Default for most components)
 <Button>Glass Button</Button>
 <Card>Glass Card</Card>
-<Input />
+
+// Solid Default (BREAKING CHANGE v0.1.0)
+<Input />                          // Solid by default
+<Textarea />                       // Solid by default
+
+// Glass Variant
+<Button variant="glass">Glass Button</Button>
+<Input className="glass-variant" />
+<Textarea className="glass-variant" />
 
 // Solid Variant
 <Button variant="solid">Solid Button</Button>
 <Card variant="solid">Solid Card</Card>
-<Input className="solid-variant" />
 ```
 
-### Glass Tokens
+### Liquid Glass Tokens (iOS 26 Enhanced)
 
-| Token | Light | Dark | Usage |
-|-------|-------|------|-------|
-| `--glass-blur-sm` | 6px (mobile), 8px (desktop) | Same | Subtle blur |
-| `--glass-blur-md` | 8px (mobile), 16px (desktop) | Same | Standard blur |
-| `--glass-blur-lg` | 12px (mobile), 24px (desktop) | Same | Strong blur |
-| `--glass-bg-light` | rgba(255,255,255,0.25) | rgba(255,255,255,0.08) | Light surface |
-| `--glass-bg-medium` | rgba(255,255,255,0.4) | rgba(255,255,255,0.12) | Medium surface |
-| `--glass-bg-heavy` | rgba(255,255,255,0.6) | rgba(255,255,255,0.18) | Heavy surface |
-| `--glass-border` | rgba(255,255,255,0.2) | rgba(255,255,255,0.12) | Border color |
+| Token | Desktop | Mobile | Usage |
+|-------|---------|--------|-------|
+| `--glass-blur-sm` | 12px | 12px | Subtle blur |
+| `--glass-blur-md` | 20px | 16px | Standard blur |
+| `--glass-blur-lg` | 32px | 20px | Strong blur |
+| `--glass-blur-xl` | 40px | 24px | Maximum blur |
+| `--glass-bg-light` | rgba(255,255,255,0.35) | Same | Light liquid surface |
+| `--glass-bg-medium` | rgba(255,255,255,0.5) | Same | Medium liquid surface |
+| `--glass-bg-heavy` | rgba(255,255,255,0.65) | Same | Heavy liquid surface |
+| `--glass-border` | rgba(255,255,255,0.25) | Same | Liquid glass edge |
+| `--glass-border-strong` | rgba(255,255,255,0.4) | Same | Prominent edge |
+| `--glass-highlight` | linear-gradient (135°) | Same | Specular shimmer (top-left) |
+| `--glass-inner-glow` | inset 0 1px 1px rgba(255,255,255,0.4) | Same | Elevated surface definition |
+| `--glass-noise` | SVG noise filter | Same | Subtle grain texture |
 
 ### Dark Mode Glass
 
 Glass components automatically adjust in dark mode:
-- Reduced background opacity (8-18% vs 25-60% light)
+- Reduced background opacity (8-18% vs 35-65% light)
 - Lighter borders for contrast against dark backdrops
-- Maintains legibility with same blur values
+- Maintains legibility with enhanced blur values
+
+### Breaking Changes (v0.1.0)
+
+**Input & Textarea Components:**
+- **OLD:** Default was glass variant
+- **NEW:** Default is solid (opaque white background)
+- **Migration:** Add `className="glass-variant"` or use `variant="glass"` to restore glass appearance
+- **Rationale:** Solid defaults improve form field clarity and accessibility per M3 guidelines
 
 ---
 
@@ -110,13 +133,13 @@ Glass components automatically adjust in dark mode:
 
 ## Typography
 
-### Font Families
+### Font Families (M3 Scale)
 
 | Token | Stack | Usage |
 |-------|-------|-------|
-| `--font-body` | Inter, system | Body text, UI |
-| `--font-display` | GT Alpina, Georgia | Headings, hero |
-| `--font-mono` | JetBrains Mono, Fira Code | Code blocks |
+| `--font-body` | Google Sans, system | Body text, UI (M3 headline/label scale) |
+| `--font-display` | Google Sans, system | Headings, hero (M3 display scale) |
+| `--font-mono` | JetBrains Mono, system | Code blocks |
 
 ### Size Scale
 

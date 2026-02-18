@@ -3,7 +3,7 @@
  */
 
 import { useCallback, useMemo } from 'react'
-import { Input } from 'claude-shadcn-ui'
+import { Input } from 'glasscn-ui'
 import {
   cssValueToHsl,
   hslToCssValue,

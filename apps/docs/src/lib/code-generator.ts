@@ -4,7 +4,7 @@
 
 import type { ComponentMeta, PackageManager } from './types'
 
-const PACKAGE_NAME = 'claude-shadcn-ui'
+const PACKAGE_NAME = 'glasscn-ui'
 
 /**
  * Generate install command for package manager
@@ -151,6 +151,91 @@ function getDefaultChildren(slug: string, custom?: string): string {
       return '{messages.map((msg) => <ChatBubble key={msg.id} role={msg.role}>{msg.content}</ChatBubble>)}'
     case 'theme-provider':
       return '{children}'
+    case 'list':
+      return `<ListItem>
+    <ListItemText>
+      <ListItemTitle>Item Title</ListItemTitle>
+      <ListItemDescription>Item description</ListItemDescription>
+    </ListItemText>
+  </ListItem>
+  <ListItem>
+    <ListItemText>
+      <ListItemTitle>Another Item</ListItemTitle>
+      <ListItemDescription>Another description</ListItemDescription>
+    </ListItemText>
+  </ListItem>`
+    case 'radio-group':
+      return `<div className="flex items-center gap-2">
+    <RadioGroupItem value="option-1" id="r1" />
+    <label htmlFor="r1">Option 1</label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="option-2" id="r2" />
+    <label htmlFor="r2">Option 2</label>
+  </div>`
+    case 'select':
+      return `<SelectTrigger>
+    <SelectValue placeholder="Select an option" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="option-1">Option 1</SelectItem>
+    <SelectItem value="option-2">Option 2</SelectItem>
+    <SelectItem value="option-3">Option 3</SelectItem>
+  </SelectContent>`
+    case 'bottom-sheet':
+      return `<BottomSheetTrigger asChild>
+    <Button variant="outline">Open Bottom Sheet</Button>
+  </BottomSheetTrigger>
+  <BottomSheetContent>
+    <BottomSheetHeader>
+      <BottomSheetTitle>Title</BottomSheetTitle>
+      <BottomSheetDescription>Description</BottomSheetDescription>
+    </BottomSheetHeader>
+  </BottomSheetContent>`
+    case 'side-sheet':
+      return `<SideSheetTrigger asChild>
+    <Button variant="outline">Open Side Sheet</Button>
+  </SideSheetTrigger>
+  <SideSheetContent>
+    <SideSheetHeader>
+      <SideSheetTitle>Title</SideSheetTitle>
+      <SideSheetDescription>Description</SideSheetDescription>
+    </SideSheetHeader>
+  </SideSheetContent>`
+    case 'context-menu':
+      return `<ContextMenuTrigger>
+    <div>Right-click here</div>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Cut</ContextMenuItem>
+    <ContextMenuItem>Copy</ContextMenuItem>
+    <ContextMenuItem>Paste</ContextMenuItem>
+  </ContextMenuContent>`
+    case 'chip':
+      return 'Filter'
+    case 'accordion':
+      return `<AccordionItem value="item-1">
+    <AccordionTrigger>Section 1</AccordionTrigger>
+    <AccordionContent>Content for section 1.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Section 2</AccordionTrigger>
+    <AccordionContent>Content for section 2.</AccordionContent>
+  </AccordionItem>`
+    case 'carousel':
+      return `<CarouselItem>
+    <div>Slide 1</div>
+  </CarouselItem>
+  <CarouselItem>
+    <div>Slide 2</div>
+  </CarouselItem>
+  <CarouselItem>
+    <div>Slide 3</div>
+  </CarouselItem>`
+    case 'navigation-drawer':
+      return `<NavigationDrawerTrigger asChild>
+    <Button variant="outline">Open Drawer</Button>
+  </NavigationDrawerTrigger>`
     default:
       return 'Content'
   }

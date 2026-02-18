@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Story } from '@ladle/react'
-import { Textarea } from 'claude-shadcn-ui'
+import { Textarea } from 'glasscn-ui'
 
 export const Default: Story = () => (
   <Textarea placeholder="Type your message here..." />

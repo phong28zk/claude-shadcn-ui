@@ -7,7 +7,7 @@ import {
   CardContent,
   CardFooter,
   Button,
-} from 'claude-shadcn-ui'
+} from 'glasscn-ui'
 
 export const Default: Story = () => (
   <Card className="w-[350px]">

@@ -208,4 +208,51 @@
   .animate-spatial-focus {
     animation: spatial-focus-lift var(--spatial-transition) ease-out forwards;
   }
+
+  /* Skeleton shimmer animation */
+  @keyframes skeleton-shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .animate-skeleton-shimmer {
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    background: linear-gradient(90deg, var(--glass-bg-light) 25%, var(--glass-bg-medium) 50%, var(--glass-bg-light) 75%);
+    background-size: 200% 100%;
+  }
+
+  /* Accordion animations */
+  @keyframes accordion-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  .animate-accordion-down {
+    animation: accordion-down 0.2s ease-out;
+  }
+
+  .animate-accordion-up {
+    animation: accordion-up 0.2s ease-out;
+  }
 }

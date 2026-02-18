@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { Button, Card } from 'claude-shadcn-ui'
+import { Button, Card } from 'glasscn-ui'
 import { CodeBlock } from '@/components/code-block'
 import { ArrowRight } from 'lucide-react'
 
@@ -8,12 +8,12 @@ export const Route = createFileRoute('/')({
 })
 
 function HomePage() {
-  const installCode = `npm install claude-shadcn-ui
+  const installCode = `npm install glasscn-ui
 # or
-bun add claude-shadcn-ui`
+bun add glasscn-ui`
 
-  const quickStartCode = `import { Button, ThemeProvider } from 'claude-shadcn-ui'
-import 'claude-shadcn-ui/styles'
+  const quickStartCode = `import { Button, ThemeProvider } from 'glasscn-ui'
+import 'glasscn-ui/styles'
 
 function App() {
   return (

@@ -16,7 +16,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "claude-shadcn-ui": ["../../packages/ui/src/index.ts"]
+      "glasscn-ui": ["../../packages/ui/src/index.ts"]
     }
   },
   "include": ["src"],

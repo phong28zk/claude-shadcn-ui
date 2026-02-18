@@ -15,7 +15,7 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-} from 'claude-shadcn-ui'
+} from 'glasscn-ui'
 
 export default {
   title: 'Glass / Showcase',

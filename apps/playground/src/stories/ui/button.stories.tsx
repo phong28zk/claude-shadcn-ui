@@ -1,5 +1,5 @@
 import type { Story } from '@ladle/react'
-import { Button } from 'claude-shadcn-ui'
+import { Button } from 'glasscn-ui'
 
 export const Default: Story = () => <Button>Button</Button>
 

@@ -3,7 +3,7 @@
  */
 
 // Component categories matching the UI library structure
-export type ComponentCategory = 'ui' | 'chat' | 'layout' | 'theme'
+export type ComponentCategory = 'ui' | 'chat' | 'layout' | 'theme' | 'navigation' | 'motion'
 
 // Prop control types for the props editor
 export type PropControlType = 'select' | 'boolean' | 'text' | 'number'

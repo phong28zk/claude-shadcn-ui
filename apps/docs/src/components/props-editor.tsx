@@ -2,7 +2,7 @@
  * PropsEditor - Dynamic form controls based on PropSchema
  */
 
-import { Input, Switch } from 'claude-shadcn-ui'
+import { Input, Switch } from 'glasscn-ui'
 import { RotateCcw } from 'lucide-react'
 import type { PropSchema } from '../lib/types'
 

@@ -1015,7 +1015,7 @@ The component registry is the single source of truth for all component metadata.
     }
   ],
   defaultProps: { variant: 'default' },
-  importStatement: "import { ComponentName } from 'claude-shadcn-ui'",
+  importStatement: "import { ComponentName } from 'glasscn-ui'",
   hasChildren: false,
   isCompound: false
 }

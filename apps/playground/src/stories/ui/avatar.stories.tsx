@@ -1,5 +1,5 @@
 import type { Story } from '@ladle/react'
-import { Avatar, AvatarImage, AvatarFallback } from 'claude-shadcn-ui'
+import { Avatar, AvatarImage, AvatarFallback } from 'glasscn-ui'
 
 export const Default: Story = () => (
   <Avatar>

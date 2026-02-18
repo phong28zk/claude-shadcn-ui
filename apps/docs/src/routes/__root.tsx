@@ -3,7 +3,7 @@
  */
 
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
-import { ThemeProvider, ThemeToggle } from 'claude-shadcn-ui'
+import { ThemeProvider, ThemeToggle } from 'glasscn-ui'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { ThemeCustomizer } from '../components/theme-customizer'

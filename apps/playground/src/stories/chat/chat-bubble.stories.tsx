@@ -1,5 +1,5 @@
 import type { Story } from '@ladle/react'
-import { ChatBubble } from 'claude-shadcn-ui'
+import { ChatBubble } from 'glasscn-ui'
 
 export const UserMessage: Story = () => (
   <ChatBubble role="user">Hello, how can I help you today?</ChatBubble>

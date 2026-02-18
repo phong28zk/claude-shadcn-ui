@@ -229,19 +229,26 @@
     --motion-scale-press: 0.98;
 
     /* Glassmorphism Tokens (iOS 26 Liquid Glass) - Desktop */
-    --glass-blur-sm: 8px;
-    --glass-blur-md: 16px;
-    --glass-blur-lg: 24px;
+    --glass-blur-sm: 12px;
+    --glass-blur-md: 20px;
+    --glass-blur-lg: 32px;
     --glass-blur-xl: 40px;
-    /* Mobile blur values (8-12px for performance) - set via media query below */
-    --glass-bg-light: rgba(255, 255, 255, 0.25);
-    --glass-bg-medium: rgba(255, 255, 255, 0.4);
-    --glass-bg-heavy: rgba(255, 255, 255, 0.6);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-border-strong: rgba(255, 255, 255, 0.35);
+    /* Enhanced opacity for liquid glass effect */
+    --glass-bg-light: rgba(255, 255, 255, 0.35);
+    --glass-bg-medium: rgba(255, 255, 255, 0.5);
+    --glass-bg-heavy: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-border-strong: rgba(255, 255, 255, 0.4);
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15);
-    --glass-highlight: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
+    /* Specular highlight - top-left shimmer */
+    --glass-highlight: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 40%, transparent 60%);
+    /* Inner glow for elevated surfaces */
+    --glass-inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    /* Noise texture - subtle grain overlay */
+    --glass-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    /* Refraction gradient - simulates light bending */
+    --glass-refraction: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 100%);
 
     /* Spatial/3D Depth Tokens (Apple Vision Pro inspired) */
     --spatial-perspective: 1000px;
@@ -301,14 +308,18 @@
     --surface-solid-muted: var(--primitive-gray-800);
     --surface-solid-elevated: var(--primitive-gray-900);
 
-    /* Glassmorphism Dark Mode */
-    --glass-bg-light: rgba(255, 255, 255, 0.08);
-    --glass-bg-medium: rgba(255, 255, 255, 0.12);
-    --glass-bg-heavy: rgba(255, 255, 255, 0.18);
-    --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-border-strong: rgba(255, 255, 255, 0.2);
+    /* Glassmorphism Dark Mode - Enhanced liquid glass */
+    --glass-bg-light: rgba(255, 255, 255, 0.1);
+    --glass-bg-medium: rgba(255, 255, 255, 0.15);
+    --glass-bg-heavy: rgba(255, 255, 255, 0.22);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-border-strong: rgba(255, 255, 255, 0.25);
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+    --glass-highlight: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.03) 40%, transparent 60%);
+    --glass-inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    --glass-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+    --glass-refraction: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
 
     /* Spatial Shadows Dark Mode */
     --spatial-shadow-near: 0 4px 12px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
@@ -335,8 +346,24 @@
 
 /* Font Family Variables */
 :root {
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  --font-display: 'GT Alpina', Georgia, 'Times New Roman', serif;
+  --font-body: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* M3 Typography Scale */
+  --m3-display-large: 57px;
+  --m3-display-medium: 45px;
+  --m3-display-small: 36px;
+  --m3-headline-large: 32px;
+  --m3-headline-medium: 28px;
+  --m3-headline-small: 24px;
+  --m3-title-large: 22px;
+  --m3-title-medium: 16px;
+  --m3-title-small: 14px;
+  --m3-body-large: 16px;
+  --m3-body-medium: 14px;
+  --m3-body-small: 12px;
+  --m3-label-large: 14px;
+  --m3-label-medium: 12px;
+  --m3-label-small: 11px;
 }

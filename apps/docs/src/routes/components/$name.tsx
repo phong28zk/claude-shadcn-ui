@@ -5,7 +5,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
-import { Badge, Button } from 'claude-shadcn-ui'
+import { Badge, Button } from 'glasscn-ui'
 import { getComponent } from '../../lib/component-registry'
 import { ComponentPreview } from '../../components/component-preview'
 import { PropsEditor } from '../../components/props-editor'

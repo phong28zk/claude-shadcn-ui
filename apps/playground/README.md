@@ -64,7 +64,7 @@ Stories use Ladle's CSF 3.0 format:
 
 ```tsx
 import type { Story } from '@ladle/react'
-import { Button } from 'claude-shadcn-ui'
+import { Button } from 'glasscn-ui'
 
 export const Primary: Story = () => <Button>Click me</Button>
 

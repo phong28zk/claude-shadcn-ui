@@ -6,14 +6,14 @@ export const Route = createFileRoute('/getting-started')({
 })
 
 function GettingStartedPage() {
-  const installCode = `npm install claude-shadcn-ui
+  const installCode = `npm install glasscn-ui
 # or
-bun add claude-shadcn-ui
+bun add glasscn-ui
 # or
-yarn add claude-shadcn-ui`
+yarn add glasscn-ui`
 
-  const setupCode = `import { ThemeProvider } from 'claude-shadcn-ui'
-import 'claude-shadcn-ui/styles'
+  const setupCode = `import { ThemeProvider } from 'glasscn-ui'
+import 'glasscn-ui/styles'
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
   )
 }`
 
-  const basicUsageCode = `import { Button, Input, Card } from 'claude-shadcn-ui'
+  const basicUsageCode = `import { Button, Input, Card } from 'glasscn-ui'
 
 function MyComponent() {
   return (

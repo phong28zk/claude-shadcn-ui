@@ -9,12 +9,14 @@ export interface InputProps
   suffix?: React.ReactNode
   /** Wrapper className when using prefix/suffix */
   wrapperClassName?: string
-  /** Input style variant */
-  variant?: 'default' | 'solid' | 'spatial'
+  /** Input style variant - default is solid for better readability */
+  variant?: 'default' | 'glass' | 'solid' | 'spatial'
 }
 
 const inputVariantStyles = {
-  default: 'glass-input border-0',
+  // BREAKING: default is now solid for better readability (glasscn-ui v0.1.0)
+  default: 'solid-input bg-background border border-border',
+  glass: 'glass-input border-0',
   solid: 'solid-input bg-background border border-border',
   spatial: 'glass-input border-0 spatial focus:-translate-y-0.5 focus:shadow-[var(--spatial-shadow-mid)]',
 }

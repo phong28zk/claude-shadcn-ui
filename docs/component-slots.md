@@ -31,7 +31,7 @@ Slots allow inserting custom content without breaking component instances in Fig
 | `rightSlot` | `ReactNode` | Icon/badge after label |
 
 ```tsx
-import { Button } from 'claude-shadcn-ui'
+import { Button } from 'glasscn-ui'
 import { Send, ChevronRight } from 'lucide-react'
 
 // Left icon
@@ -62,7 +62,7 @@ import { Send, ChevronRight } from 'lucide-react'
 | `wrapperClassName` | `string` | Styles for slot wrapper |
 
 ```tsx
-import { Input } from 'claude-shadcn-ui'
+import { Input } from 'glasscn-ui'
 import { Search, X } from 'lucide-react'
 
 // Search input with icon
@@ -95,8 +95,8 @@ import { Search, X } from 'lucide-react'
 | `actions` | `ReactNode` | Copy/edit actions (show on hover) |
 
 ```tsx
-import { ChatBubble } from 'claude-shadcn-ui'
-import { Avatar } from 'claude-shadcn-ui'
+import { ChatBubble } from 'glasscn-ui'
+import { Avatar } from 'glasscn-ui'
 import { Copy, Edit } from 'lucide-react'
 
 <ChatBubble

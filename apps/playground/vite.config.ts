@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      'claude-shadcn-ui': resolve(__dirname, '../../packages/ui/src/index.ts'),
+      'glasscn-ui': resolve(__dirname, '../../packages/ui/src/index.ts'),
     },
   },
   server: {

@@ -122,7 +122,7 @@ export function CodeSnippetPanel({ meta, currentProps }: CodeSnippetPanelProps) 
           <p className="text-xs text-muted-foreground">
             Don't forget to import styles:{' '}
             <code className="font-mono bg-muted px-1 rounded">
-              import 'claude-shadcn-ui/styles'
+              import 'glasscn-ui/styles'
             </code>
           </p>
         </div>

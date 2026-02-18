@@ -2,12 +2,14 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  /** Textarea style variant */
-  variant?: 'default' | 'solid' | 'spatial'
+  /** Textarea style variant - default is solid for better readability */
+  variant?: 'default' | 'glass' | 'solid' | 'spatial'
 }
 
 const textareaVariantStyles = {
-  default: 'glass-input border-0',
+  // BREAKING: default is now solid for better readability (glasscn-ui v0.1.0)
+  default: 'solid-input bg-background border border-border',
+  glass: 'glass-input border-0',
   solid: 'solid-input bg-background border border-border',
   spatial: 'glass-input spatial border-0 focus:-translate-y-0.5 focus:shadow-[var(--spatial-shadow-mid)]',
 }

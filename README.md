@@ -14,16 +14,16 @@ A React component library styled with Claude AI's design language, built on Shad
 ## Installation
 
 ```bash
-npm install claude-shadcn-ui
+npm install glasscn-ui
 # or
-bun add claude-shadcn-ui
+bun add glasscn-ui
 ```
 
 ## Quick Start
 
 ```tsx
-import { Button, ThemeProvider } from 'claude-shadcn-ui'
-import 'claude-shadcn-ui/styles'
+import { Button, ThemeProvider } from 'glasscn-ui'
+import 'glasscn-ui/styles'
 
 function App() {
   return (

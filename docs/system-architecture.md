@@ -10,7 +10,7 @@ The Claude ShadCN UI Library follows a monorepo architecture using Turborepo wit
 ## Monorepo Structure
 
 ```
-claude-shadcn-ui/
+glasscn-ui/
 ├── packages/ui/                  # Core library (published to NPM)
 ├── apps/playground/              # StoryLite component showcase
 ├── apps/docs/                    # TanStack Router documentation
@@ -456,7 +456,7 @@ apps/playground/
 
 ```typescript
 // Button Story Example
-import { Button } from 'claude-shadcn-ui'
+import { Button } from 'glasscn-ui'
 
 export const Basic = () => <Button>Click me</Button>
 
@@ -535,7 +535,7 @@ All 21 components defined with schema:
     { name: 'disabled', type: 'boolean', default: false, ... }
   ],
   defaultProps: { variant: 'default', size: 'default', disabled: false },
-  importStatement: "import { Button } from 'claude-shadcn-ui'",
+  importStatement: "import { Button } from 'glasscn-ui'",
   hasChildren: true,
   isCompound: false
 }

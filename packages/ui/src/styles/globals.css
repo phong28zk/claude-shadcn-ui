@@ -1,7 +1,10 @@
 /**
- * Claude AI Global Styles
+ * glasscn-ui Global Styles
  * Main stylesheet importing design tokens, animations, and base styles
  */
+
+/* Import Google Sans font */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap');
 
 /* Import design tokens and animations */
 @import './design-tokens.css';
@@ -26,13 +29,16 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Heading typography */
+  /* Heading typography - M3 weights */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 500;
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
+
+  /* M3 heading weights: h1-h3 = 400 (regular), h4-h6 = 500 (medium) */
+  h1, h2, h3 { font-weight: 400; }
+  h4, h5, h6 { font-weight: 500; }
 
   h1 {
     @apply text-4xl;
@@ -164,6 +170,20 @@
     -webkit-backdrop-filter: blur(var(--glass-blur-md));
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Noise texture overlay for glass surfaces */
+  .glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--glass-noise);
+    background-repeat: repeat;
+    pointer-events: none;
+    border-radius: inherit;
+    mix-blend-mode: overlay;
   }
 
   .glass-subtle {
@@ -178,7 +198,7 @@
     backdrop-filter: blur(var(--glass-blur-md));
     -webkit-backdrop-filter: blur(var(--glass-blur-md));
     border: 1px solid var(--glass-border-strong);
-    box-shadow: var(--glass-shadow);
+    box-shadow: var(--glass-shadow), var(--glass-inner-glow);
   }
 
   .glass-heavy {
@@ -186,7 +206,21 @@
     backdrop-filter: blur(var(--glass-blur-lg));
     -webkit-backdrop-filter: blur(var(--glass-blur-lg));
     border: 1px solid var(--glass-border-strong);
-    box-shadow: var(--glass-shadow-lg);
+    box-shadow: var(--glass-shadow-lg), var(--glass-inner-glow);
+  }
+
+  /* Refraction overlay helper */
+  .glass-refraction {
+    position: relative;
+  }
+
+  .glass-refraction::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--glass-refraction);
+    pointer-events: none;
+    border-radius: inherit;
   }
 
   .glass-card {

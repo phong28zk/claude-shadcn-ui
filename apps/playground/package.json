@@ -9,7 +9,7 @@
     "preview": "ladle preview"
   },
   "dependencies": {
-    "claude-shadcn-ui": "workspace:*",
+    "glasscn-ui": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

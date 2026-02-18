@@ -53,7 +53,7 @@ src/
 ## Adding New Component Docs
 
 1. Create a new route file in `src/routes/components/`
-2. Import the component from `claude-shadcn-ui`
+2. Import the component from `glasscn-ui`
 3. Add live examples with code snippets
 4. Document props using PropsTable
 5. Update the sidebar in `__root.tsx`

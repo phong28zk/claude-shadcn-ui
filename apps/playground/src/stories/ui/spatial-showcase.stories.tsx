@@ -18,7 +18,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from 'claude-shadcn-ui'
+} from 'glasscn-ui'
 
 export default {
   title: 'Spatial / Showcase',

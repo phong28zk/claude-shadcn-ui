@@ -280,7 +280,7 @@ root.classList.add(systemTheme)  // line 41
 
 ```ts
 // Consumers must do:
-import { Button } from 'claude-shadcn-ui'  // Works ✓
+import { Button } from 'glasscn-ui'  // Works ✓
 // Modern bundlers (webpack 5+, Vite, Rollup) support tree-shaking via ES modules ✓
 ```
 
