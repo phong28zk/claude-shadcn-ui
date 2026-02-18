@@ -6,7 +6,7 @@
 
 ## Overview
 
-Glasscn UI is a React component library featuring a liquid glass design system with 50+ production-ready M3 components. Built on ShadCN UI patterns with iOS 26-inspired liquid glass effects (enhanced opacity, specular highlights, noise texture, inner glow), Google Sans typography, and Apple Vision Pro-inspired Spatial UI 3D depth. Features CSS variables, complete monorepo structure with interactive playground, and ShadCN Studio-style component simulator with live preview, props editor, and real-time theme customization.
+Glasscn UI is a React component library featuring a liquid glass design system with 58 production-ready M3 components. Built on ShadCN UI patterns with iOS 26-inspired liquid glass effects (enhanced opacity, specular highlights, noise texture, inner glow), Google Sans typography, and Apple Vision Pro-inspired Spatial UI 3D depth. Features CSS variables, complete monorepo structure with interactive playground, and ShadCN Studio-style component simulator with live preview, props editor, and real-time theme customization.
 
 ## Project Structure
 
@@ -16,7 +16,7 @@ glasscn-ui-monorepo/
 │   └── ui/                          # Main library package
 │       ├── src/
 │       │   ├── components/
-│       │   │   ├── ui/              # 29 UI primitive components (liquid glass)
+│       │   │   ├── ui/              # 38 UI primitive components (liquid glass)
 │       │   │   ├── chat/            # 4 chat-specific components
 │       │   │   ├── navigation/      # 7 M3 navigation components
 │       │   │   ├── motion/          # 3 motion wrapper components
@@ -38,7 +38,7 @@ glasscn-ui-monorepo/
 │   └── docs/                        # TanStack Router docs + simulator
 │       ├── src/routes/              # File-based routing pages
 │       │   ├── components/
-│       │   │   ├── index.tsx        # Components grid (all 21)
+│       │   │   ├── index.tsx        # Components grid (all 58)
 │       │   │   └── $name.tsx        # Dynamic simulator (live edit)
 │       │   └── ...                  # Other pages
 │       ├── src/components/          # Simulator UI components
@@ -64,11 +64,11 @@ glasscn-ui-monorepo/
 └── plans/                           # Implementation documentation
 ```
 
-## Component Library (50+ Total)
+## Component Library (58 Total)
 
 All components support the new `spatial` variant with 3D depth, elevation shadows, and hover lift effects. Liquid glass effects applied to all glass-variant components.
 
-### UI Primitives (29)
+### UI Primitives (38)
 
 | Component | Props | Key Features |
 |-----------|-------|--------------|
@@ -252,7 +252,7 @@ All components support the new `spatial` variant with 3D depth, elevation shadow
 
 ## Component Simulator (Docs Site Feature)
 
-The documentation site includes an interactive component simulator inspired by ShadCN Studio, providing live preview and customization for all 50+ components.
+The documentation site includes an interactive component simulator inspired by ShadCN Studio, providing live preview and customization for all 58 components.
 
 ### Core Features
 
@@ -283,7 +283,7 @@ The documentation site includes an interactive component simulator inspired by S
 
 **File:** `apps/docs/src/lib/component-registry.ts`
 
-Central metadata source for all 50+ components:
+Central metadata source for all 58 components:
 - Component name, slug, description
 - Category (ui, chat, layout, theme)
 - Variant count
@@ -344,7 +344,7 @@ Central metadata source for all 50+ components:
 
 **File:** `apps/docs/src/routes/components/index.tsx`
 
-- Displays all 50+ components in grid
+- Displays all 58 components in grid
 - Filter by category
 - Quick access links to individual simulators
 - Variant count badges
@@ -356,7 +356,7 @@ Central metadata source for all 50+ components:
 **Test Files:** `packages/ui/src/__tests__/integration/`
 
 **Test Coverage:**
-- Component render smoke tests (all 21 components)
+- Component render smoke tests (all 58 components)
 - Dark/light mode switching
 - Chat component integration flow
 - SSR compatibility (ThemeProvider, ThemeToggle)

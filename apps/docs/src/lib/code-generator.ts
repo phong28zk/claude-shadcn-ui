@@ -236,6 +236,14 @@ function getDefaultChildren(slug: string, custom?: string): string {
       return `<NavigationDrawerTrigger asChild>
     <Button variant="outline">Open Drawer</Button>
   </NavigationDrawerTrigger>`
+    case 'fade-in':
+      return '<div>Animated content</div>'
+    case 'scale-in':
+      return '<div>Animated content</div>'
+    case 'slide-up':
+      return '<div>Animated content</div>'
+    case 'icon-button':
+      return '<Settings className="h-4 w-4" />'
     default:
       return 'Content'
   }

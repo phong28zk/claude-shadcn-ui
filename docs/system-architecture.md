@@ -5,7 +5,7 @@
 
 ## Architecture Overview
 
-The Claude ShadCN UI Library follows a monorepo architecture using Turborepo with three primary packages: the core component library (`packages/ui`), an interactive playground (`apps/playground`), and a documentation site (`apps/docs`). The system employs a modular component design pattern with CSS variables for theming, enabling consistent light/dark mode support across all 21 components.
+The Claude ShadCN UI Library follows a monorepo architecture using Turborepo with three primary packages: the core component library (`packages/ui`), an interactive playground (`apps/playground`), and a documentation site (`apps/docs`). The system employs a modular component design pattern with CSS variables for theming, enabling consistent light/dark mode support across all 58 components.
 
 ## Monorepo Structure
 
@@ -341,7 +341,7 @@ index.ts (barrel export)
 
 ### Spatial Variant Architecture (NEW v0.3.0)
 
-All 37+ components support a `spatial` variant that applies 3D depth effects via CSS transforms:
+All 58 components support a `spatial` variant that applies 3D depth effects via CSS transforms:
 
 ```
 Component with spatial variant
@@ -411,7 +411,7 @@ Test Setup (vitest.config.ts):
 
 Test Files:
   ├─ __tests__/integration/component-render.test.tsx
-  │   └─ Smoke tests for all 21 components
+  │   └─ Smoke tests for all 58 components
   │
   ├─ __tests__/integration/theme-switching.test.tsx
   │   └─ Dark/light mode toggle verification
@@ -486,11 +486,11 @@ apps/docs/src/routes/
 
 ### Dynamic Simulator Pattern
 
-The `$name.tsx` route creates 21 unique paths dynamically:
+The `$name.tsx` route creates 58 unique paths dynamically:
 - `/components/button` → Button simulator
 - `/components/input` → Input simulator
 - `/components/chat-bubble` → ChatBubble simulator
-- ... (21 total components)
+- ... (58 total components)
 
 Each simulator renders:
 
@@ -520,7 +520,7 @@ Component Simulator Page:
 
 **Central Metadata Source** (`lib/component-registry.ts`)
 
-All 21 components defined with schema:
+All 58 components defined with schema:
 
 ```typescript
 {
@@ -591,7 +591,7 @@ CodeSnippetPanel generates usage code
 
 **File:** `routes/components/index.tsx`
 
-Displays all 21 components in filterable grid:
+Displays all 58 components in filterable grid:
 - Category filter tabs (UI, Chat, Layout, Theme)
 - ComponentCard for each component
 - Links to individual simulator pages
@@ -669,7 +669,7 @@ Build:
   └─ Type declaration generation
 
 Tests:
-  ├─ 39 integration tests
+  ├─ 58+ integration tests
   └─ 100% pass rate required
 ```
 
