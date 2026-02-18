@@ -386,6 +386,12 @@
   padding: 0 4px;
 }
 
+/* Segment input selection highlighting - MUI X style */
+.segment-input::selection {
+  background-color: hsl(var(--primary) / 0.25);
+  color: hsl(var(--foreground));
+}
+
 /* Reduced Motion: disable all transitions and animations */
 @media (prefers-reduced-motion: reduce) {
   *,

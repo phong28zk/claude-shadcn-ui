@@ -2,11 +2,11 @@ import * as React from 'react'
 import { Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getEffectiveLocale } from '@/lib/date-time-utils'
-import { getTimeMaskConfig, getTimePlaceholder, incrementTimeSegment } from '@/lib/date-time-segment-utils'
+import { getTimePlaceholder } from '@/lib/date-time-segment-utils'
+import { useSegmentInput, type SegmentConfig } from '@/hooks/use-segment-input'
 import { FloatingLabelInput } from './floating-label-input'
 import { TimePickerDigital } from './time-picker-digital'
 import { TimePickerAnalogClock } from './time-picker-analog-clock'
-import IMask from 'imask'
 
 export type ClockType = 'analog' | 'digital'
 
@@ -21,100 +21,117 @@ export interface TimePickerProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   locale?: string
   label?: string
   clockType?: ClockType
+  error?: boolean
+  helperText?: string
+}
+
+/** Build segment configs for time format */
+function getTimeSegmentConfigs(format: '12h' | '24h'): { segments: SegmentConfig[]; delimiter: string } {
+  const hour: SegmentConfig = format === '24h'
+    ? { type: 'hour', min: 0, max: 23, length: 2, placeholder: 'HH' }
+    : { type: 'hour', min: 1, max: 12, length: 2, placeholder: 'HH' }
+  const minute: SegmentConfig = { type: 'minute', min: 0, max: 59, length: 2, placeholder: 'MM' }
+
+  if (format === '24h') return { segments: [hour, minute], delimiter: ':' }
+  const period: SegmentConfig = { type: 'period', min: 0, max: 1, length: 2, placeholder: 'AM', cycleValues: ['AM', 'PM'] }
+  return { segments: [hour, minute, period], delimiter: ':' }
 }
 
 const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
-  ({ value = '', onChange, format = '12h', minuteStep = 5, placeholder, disabled = false, variant = 'default', locale, label, clockType = 'digital', className, ...props }, ref) => {
+  ({ value = '', onChange, format = '12h', minuteStep = 5, placeholder, disabled = false, variant = 'default', locale, label, clockType = 'digital', error, helperText, className, ...props }, ref) => {
     const [isOpen, setIsOpen] = React.useState(false)
-    const [selectedHour, setSelectedHour] = React.useState<number | null>(null)
-    const [selectedMinute, setSelectedMinute] = React.useState<number | null>(null)
-    const [period, setPeriod] = React.useState<'AM' | 'PM'>('AM')
-    const [inputValue, setInputValue] = React.useState('')
+    const [internalError, setInternalError] = React.useState<string | null>(null)
     const containerRef = React.useRef<HTMLDivElement>(null)
     const inputRef = React.useRef<HTMLInputElement>(null)
-    const maskRef = React.useRef<ReturnType<typeof IMask> | null>(null)
 
     const effectiveLocale = React.useMemo(() => getEffectiveLocale(locale), [locale])
     const segmentPlaceholder = React.useMemo(() => placeholder || getTimePlaceholder(format), [placeholder, format])
+    const { segments: segConfigs, delimiter } = React.useMemo(() => getTimeSegmentConfigs(format), [format])
+    const delimiterKeys = React.useMemo(() => format === '12h' ? [':', ' '] : [':'], [format])
 
     const hours = format === '12h' ? Array.from({ length: 12 }, (_, i) => i + 1) : Array.from({ length: 24 }, (_, i) => i)
     const minutes = Array.from({ length: 60 / minuteStep }, (_, i) => i * minuteStep)
 
-    // Setup IMask - must run before value sync
-    React.useEffect(() => {
-      if (!inputRef.current) return
-      const config = getTimeMaskConfig(format)
-      const mask = IMask(inputRef.current, config as any)
-      maskRef.current = mask
-      mask.on('accept', () => {
-        const val = mask.value || ''
-        setInputValue(val)
-        if (val && val.includes(':')) {
-          const [h, rest] = val.split(':')
-          const hour = parseInt(h, 10), minute = parseInt(rest?.split(' ')[0] || '0', 10)
-          if (!isNaN(hour) && !isNaN(minute)) { setSelectedHour(hour); setSelectedMinute(minute); onChange?.(val) }
-        }
-      })
-      // Sync initial value
-      if (value) {
-        mask.value = value
-        setInputValue(value)
-      }
-      return () => { mask.destroy(); maskRef.current = null }
-    }, [format]) // eslint-disable-line react-hooks/exhaustive-deps
+    const formatTime = React.useCallback((h: number, m: number, p?: 'AM' | 'PM') => {
+      const hourStr = String(h).padStart(2, '0'), minStr = String(m).padStart(2, '0')
+      return format === '12h' ? `${hourStr}:${minStr} ${p}` : `${hourStr}:${minStr}`
+    }, [format])
 
-    // Sync from value prop changes
+    // onChange callback from segment hook
+    const handleSegmentChange = React.useCallback((_compositeValue: string, parsed: Record<string, number | string>) => {
+      const hour = parsed.hour as number
+      const minute = parsed.minute as number
+
+      if (hour !== undefined && minute !== undefined && !isNaN(hour) && !isNaN(minute)) {
+        setInternalError(null)
+        const timeStr = format === '12h'
+          ? `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')} ${parsed.period || 'AM'}`
+          : `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`
+        onChange?.(timeStr)
+      }
+    }, [format, onChange])
+
+    const {
+      displayValue, segments: segmentStates, handleKeyDown: segmentKeyDown,
+      handleFocus, handleMouseUp, setSegmentValues, clear,
+    } = useSegmentInput({
+      segments: segConfigs, delimiter, inputRef, delimiterKeys, onChange: handleSegmentChange,
+    })
+
+    // Derive hour/minute/period from segment states for clock popup
+    const selectedHour = segmentStates[0]?.value ? parseInt(segmentStates[0].value, 10) : null
+    const selectedMinute = segmentStates[1]?.value ? parseInt(segmentStates[1].value, 10) : null
+    const period: 'AM' | 'PM' = (format === '12h' && segmentStates[2]?.value) ? segmentStates[2].value as 'AM' | 'PM' : 'AM'
+
+    // Blur validation
+    const handleBlur = React.useCallback(() => {
+      if (!displayValue || displayValue === segmentPlaceholder) { setInternalError(null); return }
+      if (/[HM]/.test(displayValue)) { setInternalError('Incomplete time'); return }
+      const colonIdx = displayValue.indexOf(':')
+      if (colonIdx === -1) { setInternalError('Invalid time'); return }
+      const hourStr = displayValue.slice(0, colonIdx)
+      const minuteStr = displayValue.slice(colonIdx + 1, colonIdx + 3)
+      const hour = parseInt(hourStr, 10), minute = parseInt(minuteStr, 10)
+      if (isNaN(hour) || isNaN(minute)) { setInternalError('Invalid time'); return }
+      if (format === '24h' && (hour < 0 || hour > 23 || minute < 0 || minute > 59)) { setInternalError('Invalid time'); return }
+      if (format === '12h' && (hour < 1 || hour > 12 || minute < 0 || minute > 59)) { setInternalError('Invalid time'); return }
+      setInternalError(null)
+    }, [displayValue, segmentPlaceholder, format])
+
+    const displayError = error ?? !!internalError
+    const displayHelperText = helperText ?? internalError ?? undefined
+
+    // Sync value prop -> segments
     React.useEffect(() => {
-      if (!maskRef.current) return
       if (value) {
-        setInputValue(value)
-        maskRef.current.value = value
-        const [hourStr, minStr] = value.split(':')
-        let hour = parseInt(hourStr, 10)
-        const minute = parseInt(minStr?.split(' ')[0] || '0', 10)
-        if (format === '12h') { setPeriod(hour >= 12 ? 'PM' : 'AM'); hour = hour % 12 || 12 }
-        setSelectedHour(hour); setSelectedMinute(minute)
+        const [hourStr, rest] = value.split(':')
+        const [minuteStr, periodStr] = (rest || '').split(' ')
+        if (format === '12h') {
+          setSegmentValues([hourStr?.padStart(2, '0'), minuteStr?.padStart(2, '0'), periodStr?.toUpperCase() || 'AM'])
+        } else {
+          setSegmentValues([hourStr?.padStart(2, '0'), minuteStr?.padStart(2, '0')])
+        }
       } else {
-        setInputValue(''); maskRef.current.value = ''
-        setSelectedHour(null); setSelectedMinute(null)
+        clear()
       }
     }, [value, format])
 
-    const formatTime = (h: number, m: number, p?: 'AM' | 'PM') => {
-      const hourStr = String(h).padStart(2, '0'), minStr = String(m).padStart(2, '0')
-      return format === '12h' ? `${hourStr}:${minStr} ${p}` : `${hourStr}:${minStr}`
-    }
-
     const handleSelect = (hour: number, minute: number) => {
-      setSelectedHour(hour); setSelectedMinute(minute)
-      const timeStr = formatTime(hour, minute, period)
-      setInputValue(timeStr); if (maskRef.current) maskRef.current.value = timeStr; onChange?.(timeStr)
+      const h = String(hour).padStart(2, '0'), m = String(minute).padStart(2, '0')
+      if (format === '12h') { setSegmentValues([h, m, period]) } else { setSegmentValues([h, m]) }
+      onChange?.(formatTime(hour, minute, format === '12h' ? period : undefined))
     }
 
     const handlePeriodChange = (newPeriod: 'AM' | 'PM') => {
-      setPeriod(newPeriod)
-      if (selectedHour !== null && selectedMinute !== null) {
-        const timeStr = formatTime(selectedHour, selectedMinute, newPeriod)
-        setInputValue(timeStr); if (maskRef.current) maskRef.current.value = timeStr; onChange?.(timeStr)
+      if (format === '12h') {
+        const h = segmentStates[0]?.value || '12', m = segmentStates[1]?.value || '00'
+        setSegmentValues([h, m, newPeriod])
+        onChange?.(`${h}:${m} ${newPeriod}`)
       }
     }
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-        e.preventDefault()
-        const delta = e.key === 'ArrowUp' ? 1 : -1
-        const cursorPos = inputRef.current?.selectionStart ?? 0
-        const result = incrementTimeSegment(inputValue, format, cursorPos, delta)
-        if (result.togglePeriod) {
-          const newPeriod = period === 'AM' ? 'PM' : 'AM'
-          setPeriod(newPeriod)
-          const timeStr = formatTime(selectedHour ?? (format === '12h' ? 12 : 0), selectedMinute ?? 0, newPeriod)
-          setInputValue(timeStr); if (maskRef.current) maskRef.current.value = timeStr; onChange?.(timeStr)
-        } else if (maskRef.current) {
-          maskRef.current.value = result.value; maskRef.current.updateValue()
-          setTimeout(() => inputRef.current?.setSelectionRange(cursorPos, cursorPos), 0)
-        }
-      }
+      segmentKeyDown(e)
       if (e.key === 'Enter') setIsOpen(false)
     }
 
@@ -125,19 +142,27 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
       return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [isOpen])
 
-    const hasValue = !!value || (inputValue !== '' && inputValue !== segmentPlaceholder)
+    const hasValue = !!value || (displayValue !== '' && displayValue !== segmentPlaceholder)
 
     return (
       <div ref={ref} className={cn('relative', className)} {...props}>
         <FloatingLabelInput
-          label={label}
-          hasValue={hasValue}
-          variant={variant}
-          disabled={disabled}
+          label={label} hasValue={hasValue} variant={variant} disabled={disabled}
+          error={displayError} helperText={displayHelperText} segmented
           icon={<Clock className="h-5 w-5 text-muted-foreground" />}
           onIconClick={() => !disabled && setIsOpen(!isOpen)}
           inputRef={inputRef}
-          inputProps={{ value: inputValue, onChange: (e) => setInputValue(e.target.value), onKeyDown: handleKeyDown, placeholder: label ? '' : segmentPlaceholder, 'aria-label': 'Time input' }}
+          inputProps={{
+            value: displayValue,
+            onChange: () => {},
+            onKeyDown: handleKeyDown,
+            onFocus: handleFocus,
+            onBlur: handleBlur,
+            onMouseUp: handleMouseUp,
+            placeholder: label ? '' : segmentPlaceholder,
+            'aria-label': 'Time input',
+            'aria-invalid': displayError || undefined,
+          }}
         />
 
         {isOpen && (

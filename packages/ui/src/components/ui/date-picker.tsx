@@ -1,18 +1,17 @@
 import * as React from 'react'
 import { Calendar } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { type DateFormat, getEffectiveLocale, detectDateFormat, formatDateByPattern, parseDateFromInput } from '@/lib/date-time-utils'
-import { getDateMaskConfig, getSegmentPlaceholder, incrementDateSegment } from '@/lib/date-time-segment-utils'
+import { type DateFormat, getEffectiveLocale, detectDateFormat, parseDateFromInput } from '@/lib/date-time-utils'
+import { getSegmentPlaceholder } from '@/lib/date-time-segment-utils'
+import { useSegmentInput, type SegmentConfig } from '@/hooks/use-segment-input'
 import { FloatingLabelInput } from './floating-label-input'
 import { DatePickerCalendar } from './date-picker-calendar'
 import { DatePickerShortcuts, type DatePickerShortcut, DEFAULT_DATE_SHORTCUTS } from './date-picker-shortcuts'
-import IMask from 'imask'
 
-export interface DatePickerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface DatePickerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'onError'> {
   value?: Date | null
   onChange?: (date: Date | null) => void
   placeholder?: string
-  formatDate?: (date: Date) => string
   dateFormat?: DateFormat
   locale?: string
   minDate?: Date
@@ -22,73 +21,140 @@ export interface DatePickerProps extends Omit<React.HTMLAttributes<HTMLDivElemen
   label?: string
   showShortcuts?: boolean
   shortcuts?: DatePickerShortcut[]
+  shouldDisableDate?: (date: Date) => boolean
+  disablePast?: boolean
+  disableFuture?: boolean
+  error?: boolean
+  helperText?: string
+  onError?: (error: string | null, value: Date | null) => void
+}
+
+/** Build segment configs from date format */
+function getDateSegmentConfigs(format: DateFormat): { segments: SegmentConfig[]; delimiter: string } {
+  const month: SegmentConfig = { type: 'month', min: 1, max: 12, length: 2, placeholder: 'MM' }
+  const day: SegmentConfig = { type: 'day', min: 1, max: 31, length: 2, placeholder: 'DD' }
+  const year: SegmentConfig = { type: 'year', min: 1900, max: 2100, length: 4, placeholder: 'YYYY' }
+
+  switch (format) {
+    case 'MM/DD/YYYY': return { segments: [month, day, year], delimiter: '/' }
+    case 'DD/MM/YYYY': return { segments: [day, month, year], delimiter: '/' }
+    case 'YYYY-MM-DD': return { segments: [year, month, day], delimiter: '-' }
+  }
+}
+
+/** Get ordered values array matching segment order for a format */
+function getValuesForFormat(format: DateFormat, m: string, d: string, y: string): string[] {
+  switch (format) {
+    case 'MM/DD/YYYY': return [m, d, y]
+    case 'DD/MM/YYYY': return [d, m, y]
+    case 'YYYY-MM-DD': return [y, m, d]
+  }
 }
 
 const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ value, onChange, placeholder, formatDate, dateFormat, locale, minDate, maxDate, disabled = false, variant = 'default', label, showShortcuts = false, shortcuts = DEFAULT_DATE_SHORTCUTS, className, ...props }, ref) => {
+  ({ value, onChange, placeholder, dateFormat, locale, minDate, maxDate, disabled = false, variant = 'default', label, showShortcuts = false, shortcuts = DEFAULT_DATE_SHORTCUTS, shouldDisableDate, disablePast, disableFuture, error, helperText, onError, className, ...props }, ref) => {
     const [isOpen, setIsOpen] = React.useState(false)
     const [viewDate, setViewDate] = React.useState(value || new Date())
-    const [inputValue, setInputValue] = React.useState('')
+    const [internalError, setInternalError] = React.useState<string | null>(null)
     const containerRef = React.useRef<HTMLDivElement>(null)
     const inputRef = React.useRef<HTMLInputElement>(null)
-    const maskRef = React.useRef<ReturnType<typeof IMask> | null>(null)
 
     const effectiveLocale = React.useMemo(() => getEffectiveLocale(locale), [locale])
     const effectiveFormat = React.useMemo(() => dateFormat || detectDateFormat(effectiveLocale), [dateFormat, effectiveLocale])
     const segmentPlaceholder = React.useMemo(() => placeholder || getSegmentPlaceholder(effectiveFormat), [placeholder, effectiveFormat])
+    const { segments: segConfigs, delimiter } = React.useMemo(() => getDateSegmentConfigs(effectiveFormat), [effectiveFormat])
+    const delimiterKeys = React.useMemo(() => effectiveFormat === 'YYYY-MM-DD' ? ['-', ' '] : ['/', ' '], [effectiveFormat])
 
+    // Extended date disabled check
     const isDateDisabled = React.useCallback((date: Date) => {
       const d = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+      const today = new Date(); today.setHours(0, 0, 0, 0)
       if (minDate && d < new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate())) return true
       if (maxDate && d > new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate())) return true
+      if (disablePast && d < today) return true
+      if (disableFuture && d > today) return true
+      if (shouldDisableDate?.(d)) return true
       return false
-    }, [minDate, maxDate])
+    }, [minDate, maxDate, disablePast, disableFuture, shouldDisableDate])
 
-    // Setup IMask - must run before value sync
-    React.useEffect(() => {
-      if (!inputRef.current || formatDate) return
-      const config = getDateMaskConfig(effectiveFormat)
-      const mask = IMask(inputRef.current, config as any)
-      maskRef.current = mask
-      mask.on('accept', () => {
-        const val = mask.value || ''
-        setInputValue(val)
-        const parsed = parseDateFromInput(val, effectiveFormat)
-        if (parsed && !isDateDisabled(parsed)) { onChange?.(parsed); setViewDate(parsed) }
-      })
-      // Sync initial value
-      if (value) {
-        const formatted = formatDateByPattern(value, effectiveFormat)
-        mask.value = formatted
-        setInputValue(formatted)
+    // onChange callback from hook: fires on any segment value change
+    const handleSegmentChange = React.useCallback((_compositeValue: string, parsed: Record<string, number | string>) => {
+      const month = parsed.month as number
+      const day = parsed.day as number
+      const year = parsed.year as number
+
+      // Don't construct date from partial input (still has placeholder chars like M, D, Y)
+      // This prevents the feedback loop: partial digit → premature onChange → value prop sync → buffer reset
+      if (/[MDY]/.test(_compositeValue)) {
+        // Only sync calendar viewDate from completed segments
+        if (month >= 1 && month <= 12) {
+          setViewDate(prev => { const d = new Date(prev); d.setMonth(month - 1); return isNaN(d.getTime()) ? prev : d })
+        }
+        if (year >= 1900 && year <= 2100) {
+          setViewDate(prev => { const d = new Date(prev); d.setFullYear(year); return isNaN(d.getTime()) ? prev : d })
+        }
+        return
       }
-      return () => { mask.destroy(); maskRef.current = null }
-    }, [effectiveFormat, formatDate]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    // Sync inputValue with value prop changes
+      if (month && day && year && !isNaN(month) && !isNaN(day) && !isNaN(year)) {
+        const date = new Date(year, month - 1, day)
+        if (!isNaN(date.getTime()) && date.getMonth() === month - 1 && date.getDate() === day) {
+          if (!isDateDisabled(date)) {
+            setInternalError(null)
+            onError?.(null, date)
+            onChange?.(date)
+            setViewDate(date)
+          }
+        }
+      }
+    }, [isDateDisabled, onChange, onError])
+
+    const {
+      displayValue, handleKeyDown: segmentKeyDown, handleFocus, handleMouseUp, setSegmentValues, clear,
+    } = useSegmentInput({
+      segments: segConfigs, delimiter, inputRef, delimiterKeys, onChange: handleSegmentChange,
+    })
+
+    // Blur validation
+    const handleBlur = React.useCallback(() => {
+      if (!displayValue || displayValue === segmentPlaceholder) { setInternalError(null); return }
+      if (/[MDY]/.test(displayValue)) { setInternalError('Incomplete date'); onError?.('Incomplete date', null); return }
+      const parsed = parseDateFromInput(displayValue, effectiveFormat)
+      if (!parsed || isNaN(parsed.getTime())) { setInternalError('Invalid date'); onError?.('Invalid date', null); return }
+      if (isDateDisabled(parsed)) { setInternalError('Date is not available'); onError?.('Date is not available', parsed); return }
+      setInternalError(null); onError?.(null, parsed)
+    }, [displayValue, segmentPlaceholder, effectiveFormat, isDateDisabled, onError])
+
+    const displayError = error ?? !!internalError
+    const displayHelperText = helperText ?? internalError ?? undefined
+
+    // Sync value prop -> segments
     React.useEffect(() => {
-      if (!maskRef.current) return
       if (value) {
-        const formatted = formatDate ? formatDate(value) : formatDateByPattern(value, effectiveFormat)
-        setInputValue(formatted)
-        maskRef.current.value = formatted
+        const m = String(value.getMonth() + 1).padStart(2, '0')
+        const d = String(value.getDate()).padStart(2, '0')
+        const y = String(value.getFullYear())
+        setSegmentValues(getValuesForFormat(effectiveFormat, m, d, y))
       } else {
-        setInputValue('')
-        maskRef.current.value = ''
+        clear()
       }
-    }, [value, effectiveFormat, formatDate])
+    }, [value, effectiveFormat])
 
-    const handleSelect = (date: Date) => { if (!isDateDisabled(date)) { onChange?.(date); setIsOpen(false) } }
+    const handleSelect = (date: Date) => {
+      if (!isDateDisabled(date)) {
+        const m = String(date.getMonth() + 1).padStart(2, '0')
+        const d = String(date.getDate()).padStart(2, '0')
+        const y = String(date.getFullYear())
+        setSegmentValues(getValuesForFormat(effectiveFormat, m, d, y))
+        onChange?.(date)
+        setIsOpen(false)
+      }
+    }
+
     const handleShortcutSelect = (date: Date | null) => { onChange?.(date); if (date) setViewDate(date); setIsOpen(false) }
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-        e.preventDefault()
-        const delta = e.key === 'ArrowUp' ? 1 : -1
-        const cursorPos = inputRef.current?.selectionStart ?? 0
-        const newValue = incrementDateSegment(inputValue, effectiveFormat, cursorPos, delta)
-        if (maskRef.current) { maskRef.current.value = newValue; maskRef.current.updateValue(); setTimeout(() => inputRef.current?.setSelectionRange(cursorPos, cursorPos), 0) }
-      }
+      segmentKeyDown(e)
       if (e.key === 'Enter') setIsOpen(false)
     }
 
@@ -99,19 +165,27 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
       return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [isOpen])
 
-    const hasValue = !!value || (inputValue !== '' && inputValue !== segmentPlaceholder)
+    const hasValue = !!value || (displayValue !== '' && displayValue !== segmentPlaceholder)
 
     return (
       <div ref={containerRef} className={cn('relative', className)} {...props}>
         <FloatingLabelInput
-          label={label}
-          hasValue={hasValue}
-          variant={variant}
-          disabled={disabled}
+          label={label} hasValue={hasValue} variant={variant} disabled={disabled}
+          error={displayError} helperText={displayHelperText} segmented
           icon={<Calendar className="h-5 w-5 text-muted-foreground" />}
           onIconClick={() => !disabled && setIsOpen(!isOpen)}
           inputRef={inputRef}
-          inputProps={{ value: inputValue, onChange: (e) => setInputValue(e.target.value), onKeyDown: handleKeyDown, placeholder: label ? '' : segmentPlaceholder, 'aria-label': 'Date input' }}
+          inputProps={{
+            value: displayValue,
+            onChange: () => {},
+            onKeyDown: handleKeyDown,
+            onFocus: handleFocus,
+            onBlur: handleBlur,
+            onMouseUp: handleMouseUp,
+            placeholder: label ? '' : segmentPlaceholder,
+            'aria-label': 'Date input',
+            'aria-invalid': displayError || undefined,
+          }}
         />
 
         {isOpen && (
@@ -122,6 +196,7 @@ const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
                 viewDate={viewDate} value={value ?? null} locale={effectiveLocale} minDate={minDate} maxDate={maxDate}
                 onSelect={handleSelect} onViewDateChange={setViewDate} onClose={() => setIsOpen(false)}
                 onClear={() => { onChange?.(null); setIsOpen(false) }} onToday={() => { onChange?.(new Date()); setIsOpen(false) }}
+                isDateDisabled={isDateDisabled}
               />
             </div>
           </div>

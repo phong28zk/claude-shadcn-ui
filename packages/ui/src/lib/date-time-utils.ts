@@ -119,17 +119,6 @@ export function parseDateFromInput(input: string, pattern: DateFormat): Date | n
 }
 
 /**
- * Get IMask pattern for a date format
- */
-export function getMaskPattern(pattern: DateFormat): string {
-  switch (pattern) {
-    case 'MM/DD/YYYY': return '00/00/0000'
-    case 'DD/MM/YYYY': return '00/00/0000'
-    case 'YYYY-MM-DD': return '0000-00-00'
-  }
-}
-
-/**
  * Parse time string input
  * 24h: "14:30" -> { hour: 14, minute: 30 }
  * 12h: "02:30 PM" -> { hour: 2, minute: 30, period: 'PM' }

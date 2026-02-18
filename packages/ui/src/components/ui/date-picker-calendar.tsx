@@ -14,6 +14,7 @@ export interface DatePickerCalendarProps {
   onClose: () => void
   onClear: () => void
   onToday: () => void
+  isDateDisabled?: (date: Date) => boolean
 }
 
 type CalendarView = 'days' | 'months' | 'years'
@@ -25,18 +26,21 @@ type CalendarView = 'days' | 'months' | 'years'
 export function DatePickerCalendar({
   viewDate, value, locale = 'en-US', minDate, maxDate,
   onSelect, onViewDateChange, onClose: _onClose, onClear, onToday,
+  isDateDisabled: customIsDateDisabled,
 }: DatePickerCalendarProps) {
   const [calendarView, setCalendarView] = React.useState<CalendarView>('days')
   const year = viewDate.getFullYear(), month = viewDate.getMonth()
   const monthNames = React.useMemo(() => getLocalizedMonthNames(locale), [locale])
   const dayNames = React.useMemo(() => getLocalizedDayNames(locale), [locale])
 
+  // Use custom callback or fallback to min/max date check
   const isDateDisabled = React.useCallback((date: Date) => {
+    if (customIsDateDisabled) return customIsDateDisabled(date)
     const d = new Date(date.getFullYear(), date.getMonth(), date.getDate())
     if (minDate && d < new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate())) return true
     if (maxDate && d > new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate())) return true
     return false
-  }, [minDate, maxDate])
+  }, [minDate, maxDate, customIsDateDisabled])
 
   const isSameDay = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
 

@@ -874,7 +874,7 @@ function SearchBarPreview({ componentProps }: { componentProps: Record<string, u
 // ============ DatePicker & TimePicker Preview Wrappers ============
 
 function DatePickerPreview({ componentProps }: { componentProps: Record<string, unknown> }) {
-  const [value, setValue] = React.useState<Date | null>(new Date())
+  const [value, setValue] = React.useState<Date | null>(null)
   const pickerProps = { ...componentProps }
   if (!pickerProps.locale) delete pickerProps.locale
   return (
