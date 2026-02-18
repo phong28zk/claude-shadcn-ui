@@ -159,9 +159,9 @@ export function ComponentCard({ meta }: ComponentCardProps) {
       params={{ name: meta.slug }}
       className="group block"
     >
-      <div className="rounded-lg border border-border bg-card p-4 transition-all duration-200 hover:border-primary/50 hover:shadow-md">
+      <div className="glass-card rounded-lg p-4 transition-all duration-200 hover:border-[var(--glass-primary-border)] hover:shadow-md">
         {/* Preview area */}
-        <div className="mb-4 flex h-28 items-center justify-center overflow-hidden rounded-md bg-muted/30 p-3 pointer-events-none">
+        <div className="mb-4 flex h-28 items-center justify-center overflow-hidden rounded-md glass-subtle p-3 pointer-events-none">
           <div className="scale-90">{getPreviewElement(meta.slug)}</div>
         </div>
 

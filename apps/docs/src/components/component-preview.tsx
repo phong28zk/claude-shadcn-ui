@@ -114,7 +114,7 @@ interface ComponentPreviewProps {
 
 export function ComponentPreview({ slug, componentProps }: ComponentPreviewProps) {
   return (
-    <div className="rounded-lg border border-border bg-background p-6">
+    <div className="glass-card rounded-lg p-6">
       <div className="flex items-center justify-center min-h-[200px]">
         {renderComponent(slug, componentProps)}
       </div>
@@ -512,7 +512,7 @@ function renderComponent(slug: string, props: Record<string, unknown>) {
       return (
         <div className="flex gap-3 items-center">
           <IconButton {...props}><Heart /></IconButton>
-          <IconButton {...props} variant="solid"><Settings /></IconButton>
+          <IconButton {...props} variant="secondary"><Settings /></IconButton>
           <IconButton {...props} variant="ghost"><MoreVertical /></IconButton>
         </div>
       )
@@ -691,7 +691,7 @@ function renderComponent(slug: string, props: Record<string, unknown>) {
             title={(props.title as string) || 'App Title'}
             leading={<IconButton variant="ghost"><Menu /></IconButton>}
             trailing={<IconButton variant="ghost"><MoreVertical /></IconButton>}
-            variant={(props.variant as 'default' | 'solid' | 'spatial') || 'default'}
+            variant={(props.variant as 'default' | 'spatial') || 'default'}
             className="relative"
           />
         </div>

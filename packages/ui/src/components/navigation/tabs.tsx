@@ -14,7 +14,7 @@ export interface TabsProps
   tabs: Tab[]
   value: string
   onChange: (value: string) => void
-  variant?: 'default' | 'solid' | 'spatial'
+  variant?: 'default' | 'spatial'
 }
 
 const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
@@ -23,7 +23,6 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
 
     const variantClasses = {
       default: 'glass-subtle rounded-lg',
-      solid: 'solid rounded-lg',
       spatial: 'glass-subtle spatial rounded-lg',
     }
 
@@ -63,7 +62,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
                   layoutId="tab-indicator"
                   className={cn(
                     'absolute inset-0 rounded-md',
-                    variant === 'default' ? 'glass-button' : 'bg-background'
+                    'glass-button'
                   )}
                   initial={false}
                   transition={{

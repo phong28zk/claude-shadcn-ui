@@ -15,7 +15,7 @@ export interface NavigationRailProps
   value: string
   onChange: (value: string) => void
   collapsed?: boolean
-  variant?: 'default' | 'solid' | 'spatial'
+  variant?: 'default' | 'spatial'
 }
 
 const NavigationRail = React.forwardRef<HTMLElement, NavigationRailProps>(
@@ -35,7 +35,6 @@ const NavigationRail = React.forwardRef<HTMLElement, NavigationRailProps>(
 
     const variantClasses = {
       default: 'glass-nav border-r border-glass-border',
-      solid: 'solid-elevated border-r',
       spatial: 'glass-nav spatial-fixed border-r border-glass-border',
     }
 
@@ -77,7 +76,7 @@ const NavigationRail = React.forwardRef<HTMLElement, NavigationRailProps>(
                 {!prefersReducedMotion && isActive && (
                   <motion.div
                     layoutId="nav-rail-indicator"
-                    className="absolute inset-0 bg-accent rounded-lg"
+                    className="absolute inset-0 glass-primary rounded-lg"
                     initial={false}
                     transition={{
                       type: 'spring',

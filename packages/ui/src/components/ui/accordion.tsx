@@ -5,13 +5,12 @@ import { cn } from '@/lib/utils'
 
 export type AccordionProps = React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & {
   /** Accordion style variant */
-  variant?: 'default' | 'solid' | 'spatial'
+  variant?: 'default' | 'spatial'
   className?: string
 }
 
 const variantClasses = {
   default: 'glass-subtle',
-  solid: 'solid border border-border',
   spatial: 'glass-subtle spatial',
 }
 

@@ -14,7 +14,7 @@ export interface BottomNavigationProps
   items: BottomNavigationItem[]
   value: string
   onChange: (value: string) => void
-  variant?: 'default' | 'solid' | 'spatial'
+  variant?: 'default' | 'spatial'
 }
 
 const BottomNavigation = React.forwardRef<HTMLElement, BottomNavigationProps>(
@@ -23,7 +23,6 @@ const BottomNavigation = React.forwardRef<HTMLElement, BottomNavigationProps>(
 
     const variantClasses = {
       default: 'glass-nav border-t border-glass-border',
-      solid: 'solid-elevated border-t',
       spatial: 'glass-nav spatial-fixed border-t border-glass-border',
     }
 
@@ -60,7 +59,7 @@ const BottomNavigation = React.forwardRef<HTMLElement, BottomNavigationProps>(
                 {!prefersReducedMotion && isActive && (
                   <motion.div
                     layoutId="bottom-nav-indicator"
-                    className="absolute inset-0 bg-accent rounded-lg"
+                    className="absolute inset-0 glass-primary rounded-lg"
                     initial={false}
                     transition={{
                       type: 'spring',

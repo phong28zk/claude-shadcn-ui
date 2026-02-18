@@ -10,7 +10,7 @@ const fabVariants = cva(
     variants: {
       variant: {
         default: 'glass-button text-foreground hover:text-foreground',
-        solid: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        primary: 'glass-primary',
         spatial: 'glass-button spatial text-foreground hover:text-foreground',
       },
       size: {

@@ -12,11 +12,9 @@ const radioItemVariants = cva(
     variants: {
       variant: {
         default:
-          'glass-subtle border-glass-border data-[state=checked]:glass-medium data-[state=checked]:border-glass-border-strong',
-        solid:
-          'bg-background border border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary',
+          'glass-subtle border-glass-border data-[state=checked]:glass-primary data-[state=checked]:shadow-[var(--glass-indicator-glow)_var(--glass-primary-text)]',
         spatial:
-          'glass-subtle spatial border-glass-border data-[state=checked]:glass-medium data-[state=checked]:border-glass-border-strong hover:-translate-y-0.5',
+          'glass-subtle spatial border-glass-border data-[state=checked]:glass-primary data-[state=checked]:shadow-[var(--glass-indicator-glow)_var(--glass-primary-text)] hover:-translate-y-0.5',
       },
     },
     defaultVariants: {
@@ -58,8 +56,7 @@ const RadioGroupItem = React.forwardRef<
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
         <Circle
           className={cn(
-            'h-2 w-2 fill-current',
-            variant === 'solid' ? 'text-primary-foreground' : 'text-primary'
+            'h-2 w-2 fill-current text-[var(--glass-primary-text)]'
           )}
         />
       </RadioGroupPrimitive.Indicator>

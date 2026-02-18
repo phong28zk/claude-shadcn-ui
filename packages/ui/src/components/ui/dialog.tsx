@@ -36,12 +36,11 @@ export interface DialogContentProps
   /** Enable/disable animations (default: true) */
   animated?: boolean
   /** Dialog style variant */
-  variant?: 'default' | 'solid' | 'spatial'
+  variant?: 'default' | 'spatial'
 }
 
 const dialogVariantStyles = {
   default: 'glass-heavy',
-  solid: 'border bg-background shadow-lg backdrop-filter-none',
   spatial: 'glass-heavy spatial animate-spatial-emerge',
 }
 

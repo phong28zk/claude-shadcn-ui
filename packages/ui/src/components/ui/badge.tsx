@@ -8,14 +8,12 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: 'hover:bg-[var(--glass-bg-medium)]',
-        solid:
-          'border border-border bg-background backdrop-filter-none',
-        primary:
-          'border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80',
-        secondary:
-          'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        destructive:
-          'border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80',
+        primary: 'glass-primary',
+        secondary: 'glass-secondary',
+        destructive: 'glass-destructive',
+        success: 'glass-success',
+        warning: 'glass-warning',
+        info: 'glass-info',
         outline: 'border border-border text-foreground',
         spatial: 'spatial-float animate-spatial-float hover:bg-[var(--glass-bg-medium)]',
       },

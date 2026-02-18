@@ -10,9 +10,8 @@ const iconButtonVariants = cva(
     variants: {
       variant: {
         default: 'glass-button text-foreground hover:text-foreground',
-        solid:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        secondary: 'glass-secondary',
+        ghost: 'hover:glass-subtle',
         spatial: 'glass-button spatial text-foreground hover:text-foreground',
       },
       size: {

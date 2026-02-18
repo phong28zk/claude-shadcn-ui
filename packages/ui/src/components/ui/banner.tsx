@@ -8,10 +8,10 @@ const bannerVariants = cva(
     variants: {
       variant: {
         default: 'glass border-l-border',
-        solid: 'solid border-l-border',
-        info: 'glass border-l-blue-500 [&_svg]:text-blue-500',
-        warning: 'glass border-l-yellow-500 [&_svg]:text-yellow-500',
-        error: 'glass border-l-destructive [&_svg]:text-destructive',
+        info: 'glass-info border-l-[var(--glass-info-text)] [&_svg]:text-[var(--glass-info-text)]',
+        warning: 'glass-warning border-l-[var(--glass-warning-text)] [&_svg]:text-[var(--glass-warning-text)]',
+        error: 'glass-destructive border-l-[var(--glass-destructive-text)] [&_svg]:text-[var(--glass-destructive-text)]',
+        success: 'glass-success border-l-[var(--glass-success-text)] [&_svg]:text-[var(--glass-success-text)]',
         spatial: 'glass spatial-float border-l-border',
       },
     },

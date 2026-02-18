@@ -10,7 +10,6 @@ const segmentedButtonVariants = cva(
     variants: {
       variant: {
         default: 'glass',
-        solid: 'solid',
         spatial: 'glass spatial',
       },
     },
@@ -98,7 +97,7 @@ const SegmentedButton = React.forwardRef<HTMLDivElement, SegmentedButtonProps>(
               {shouldAnimate && isSelected && (
                 <motion.div
                   layoutId="segment-indicator"
-                  className="absolute inset-0 rounded-md bg-background shadow-sm"
+                  className="absolute inset-0 rounded-md glass-primary shadow-sm"
                   transition={{
                     duration: 0.2,
                     ease: [0.4, 0, 0.2, 1],
@@ -107,7 +106,7 @@ const SegmentedButton = React.forwardRef<HTMLDivElement, SegmentedButtonProps>(
                 />
               )}
               {!shouldAnimate && isSelected && (
-                <div className="absolute inset-0 rounded-md bg-background shadow-sm -z-10" />
+                <div className="absolute inset-0 rounded-md glass-primary shadow-sm -z-10" />
               )}
               {segment.icon && <span className="shrink-0">{segment.icon}</span>}
               <span>{segment.label}</span>

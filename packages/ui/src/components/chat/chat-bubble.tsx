@@ -24,17 +24,13 @@ export interface ChatBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Enable/disable animations (default: true) */
   animated?: boolean
   /** Bubble style variant */
-  variant?: 'default' | 'solid' | 'spatial'
+  variant?: 'default' | 'spatial'
 }
 
 const bubbleStyleVariants = {
   default: {
     user: 'glass-medium text-foreground',
     assistant: 'glass-subtle text-foreground font-serif',
-  },
-  solid: {
-    user: 'bg-primary text-primary-foreground',
-    assistant: 'bg-secondary text-secondary-foreground font-serif',
   },
   spatial: {
     user: 'glass-medium spatial animate-spatial-emerge text-foreground',

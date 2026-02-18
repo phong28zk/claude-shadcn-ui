@@ -8,8 +8,8 @@ const switchVariants = cva(
   {
     variants: {
       variant: {
-        default: 'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
-        spatial: 'spatial data-[state=checked]:bg-primary data-[state=unchecked]:bg-input hover:-translate-y-0.5',
+        default: 'data-[state=checked]:glass-primary data-[state=checked]:shadow-[var(--glass-indicator-glow)_var(--glass-primary-text)] data-[state=unchecked]:bg-input',
+        spatial: 'spatial data-[state=checked]:glass-primary data-[state=checked]:shadow-[var(--glass-indicator-glow)_var(--glass-primary-text)] data-[state=unchecked]:bg-input hover:-translate-y-0.5',
       },
     },
     defaultVariants: {

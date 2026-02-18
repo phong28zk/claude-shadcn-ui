@@ -11,7 +11,7 @@ export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Action slot (typically a Button) */
   action?: React.ReactNode
   /** Variant */
-  variant?: 'default' | 'solid'
+  variant?: 'default'
 }
 
 const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
@@ -20,9 +20,7 @@ const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       <div
         ref={ref}
         className={cn(
-          'flex flex-col items-center justify-center p-8 text-center rounded-xl',
-          variant === 'default' && 'glass-card',
-          variant === 'solid' && 'solid-card',
+          'flex flex-col items-center justify-center p-8 text-center rounded-xl glass-card',
           className
         )}
         {...props}

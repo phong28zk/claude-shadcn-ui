@@ -20,7 +20,7 @@ export interface DataTableProps<T> extends React.HTMLAttributes<HTMLDivElement> 
   /** Striped rows */
   striped?: boolean
   /** Table style variant */
-  variant?: 'default' | 'solid'
+  variant?: 'default'
   /** Row key accessor */
   rowKey?: keyof T | ((row: T) => string)
 }
@@ -78,7 +78,6 @@ function DataTable<T extends Record<string, unknown>>({
 
   const variantClasses = {
     default: 'glass-card',
-    solid: 'solid-card',
   }
 
   return (
@@ -97,8 +96,7 @@ function DataTable<T extends Record<string, unknown>>({
                 <th
                   key={String(column.key)}
                   className={cn(
-                    'px-4 py-3 text-left font-medium text-muted-foreground',
-                    variant === 'default' && 'glass-subtle',
+                    'px-4 py-3 text-left font-medium text-muted-foreground glass-subtle',
                     isSortable && 'cursor-pointer select-none hover:text-foreground',
                     column.className
                   )}

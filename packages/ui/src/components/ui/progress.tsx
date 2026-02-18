@@ -10,7 +10,6 @@ const progressVariants = cva('relative overflow-hidden', {
     },
     variant: {
       default: 'glass-subtle',
-      solid: 'solid',
       spatial: 'glass-subtle spatial-fixed',
     },
     size: {
@@ -118,7 +117,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
       >
         <div
           className={cn(
-            'h-full bg-primary transition-all duration-300 rounded-full',
+            'h-full glass-primary transition-all duration-300 rounded-full',
             isIndeterminate &&
               'animate-progress-indeterminate w-1/3'
           )}

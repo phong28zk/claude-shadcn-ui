@@ -23,9 +23,9 @@ function RootLayout() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background" style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(174,86,48,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(120,120,140,0.06) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(59,130,246,0.04) 0%, transparent 50%)' }}>
         {/* Header */}
-        <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className="glass-nav sticky top-0 z-50 w-full border-b border-border">
           <div className="container flex h-14 items-center">
             <button
               className="mr-4 md:hidden"
@@ -49,7 +49,7 @@ function RootLayout() {
           {/* Left Sidebar - Navigation */}
           <aside
             className={`
-              fixed inset-y-0 left-0 z-40 w-64 border-r border-border bg-background pt-14
+              fixed inset-y-0 left-0 z-40 w-64 border-r border-border glass-medium pt-14
               transition-transform duration-300
               md:sticky md:top-14 md:h-[calc(100vh-3.5rem)] md:translate-x-0 md:flex-shrink-0
               ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
@@ -65,8 +65,8 @@ function RootLayout() {
                   <li>
                     <Link
                       to="/"
-                      className="block rounded-md px-3 py-2 text-sm hover:bg-accent"
-                      activeProps={{ className: 'bg-accent font-medium' }}
+                      className="block rounded-md px-3 py-2 text-sm hover:glass-subtle"
+                      activeProps={{ className: 'glass-primary font-medium' }}
                       onClick={() => setSidebarOpen(false)}
                     >
                       Introduction
@@ -75,8 +75,8 @@ function RootLayout() {
                   <li>
                     <Link
                       to="/getting-started"
-                      className="block rounded-md px-3 py-2 text-sm hover:bg-accent"
-                      activeProps={{ className: 'bg-accent font-medium' }}
+                      className="block rounded-md px-3 py-2 text-sm hover:glass-subtle"
+                      activeProps={{ className: 'glass-primary font-medium' }}
                       onClick={() => setSidebarOpen(false)}
                     >
                       Installation
@@ -85,8 +85,8 @@ function RootLayout() {
                   <li>
                     <Link
                       to="/components"
-                      className="block rounded-md px-3 py-2 text-sm hover:bg-accent"
-                      activeProps={{ className: 'bg-accent font-medium' }}
+                      className="block rounded-md px-3 py-2 text-sm hover:glass-subtle"
+                      activeProps={{ className: 'glass-primary font-medium' }}
                       onClick={() => setSidebarOpen(false)}
                     >
                       All Components

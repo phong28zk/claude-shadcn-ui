@@ -17,7 +17,7 @@ export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Error step index (-1 for none) */
   errorStep?: number
   /** Stepper style variant */
-  variant?: 'default' | 'solid'
+  variant?: 'default'
 }
 
 const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
@@ -43,13 +43,10 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
     }
 
     const statusClasses = {
-      completed: 'bg-primary border-primary text-primary-foreground',
-      active: cn(
-        'border-primary ring-2 ring-primary/20',
-        variant === 'default' ? 'glass-medium' : 'bg-background'
-      ),
-      pending: variant === 'default' ? 'glass-subtle border-muted' : 'bg-muted border-muted',
-      error: 'bg-destructive border-destructive text-destructive-foreground',
+      completed: 'glass-primary border-primary text-primary-foreground',
+      active: 'glass-medium border-primary ring-2 ring-primary/20',
+      pending: 'glass-subtle border-muted',
+      error: 'glass-destructive border-destructive text-destructive-foreground',
     }
 
     return (

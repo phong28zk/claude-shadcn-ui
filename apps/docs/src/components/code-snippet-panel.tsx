@@ -51,9 +51,9 @@ export function CodeSnippetPanel({ meta, currentProps }: CodeSnippetPanelProps) 
   }
 
   return (
-    <div className="rounded-lg border border-border overflow-hidden">
+    <div className="glass-heavy rounded-lg overflow-hidden">
       {/* Tab bar */}
-      <div className="flex border-b border-border bg-muted/30 overflow-x-auto">
+      <div className="flex border-b border-border glass-subtle overflow-x-auto">
         <div className="flex flex-nowrap min-w-0">
           {packageManagers.map((pm) => (
             <button
@@ -118,7 +118,7 @@ export function CodeSnippetPanel({ meta, currentProps }: CodeSnippetPanelProps) 
 
       {/* Styles import note */}
       {activeTab !== 'manual' && (
-        <div className="border-t border-border px-4 py-2 bg-muted/30">
+        <div className="border-t border-border px-4 py-2 glass-subtle">
           <p className="text-xs text-muted-foreground">
             Don't forget to import styles:{' '}
             <code className="font-mono bg-muted px-1 rounded">

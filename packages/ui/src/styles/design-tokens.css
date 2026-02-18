@@ -250,6 +250,60 @@
     /* Refraction gradient - simulates light bending */
     --glass-refraction: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 100%);
 
+    /* ===== COLORED GLASS TOKENS (iOS 26 Tinted Glass) ===== */
+    /* Medium tint intensity: bg 0.18, border 0.30, hover-bg 0.25 */
+
+    /* Destructive Glass (Red tint) */
+    --glass-destructive-bg: rgba(239, 68, 68, 0.18);
+    --glass-destructive-bg-hover: rgba(239, 68, 68, 0.25);
+    --glass-destructive-border: rgba(239, 68, 68, 0.30);
+    --glass-destructive-border-hover: rgba(239, 68, 68, 0.45);
+    --glass-destructive-glow: 0 0 20px rgba(239, 68, 68, 0.20);
+    --glass-destructive-text: #dc2626;
+
+    /* Success Glass (Green tint) */
+    --glass-success-bg: rgba(34, 197, 94, 0.18);
+    --glass-success-bg-hover: rgba(34, 197, 94, 0.25);
+    --glass-success-border: rgba(34, 197, 94, 0.30);
+    --glass-success-border-hover: rgba(34, 197, 94, 0.45);
+    --glass-success-glow: 0 0 20px rgba(34, 197, 94, 0.20);
+    --glass-success-text: #16a34a;
+
+    /* Warning Glass (Amber tint) */
+    --glass-warning-bg: rgba(245, 158, 11, 0.18);
+    --glass-warning-bg-hover: rgba(245, 158, 11, 0.25);
+    --glass-warning-border: rgba(245, 158, 11, 0.30);
+    --glass-warning-border-hover: rgba(245, 158, 11, 0.45);
+    --glass-warning-glow: 0 0 20px rgba(245, 158, 11, 0.20);
+    --glass-warning-text: #d97706;
+
+    /* Info Glass (Blue tint) */
+    --glass-info-bg: rgba(59, 130, 246, 0.18);
+    --glass-info-bg-hover: rgba(59, 130, 246, 0.25);
+    --glass-info-border: rgba(59, 130, 246, 0.30);
+    --glass-info-border-hover: rgba(59, 130, 246, 0.45);
+    --glass-info-glow: 0 0 20px rgba(59, 130, 246, 0.20);
+    --glass-info-text: #2563eb;
+
+    /* Primary Glass (Terracotta tint) */
+    --glass-primary-bg: rgba(174, 86, 48, 0.18);
+    --glass-primary-bg-hover: rgba(174, 86, 48, 0.25);
+    --glass-primary-border: rgba(174, 86, 48, 0.30);
+    --glass-primary-border-hover: rgba(174, 86, 48, 0.45);
+    --glass-primary-glow: 0 0 20px rgba(174, 86, 48, 0.20);
+    --glass-primary-text: #ae5630;
+
+    /* Secondary Glass (Gray tint) */
+    --glass-secondary-bg: rgba(120, 120, 120, 0.12);
+    --glass-secondary-bg-hover: rgba(120, 120, 120, 0.18);
+    --glass-secondary-border: rgba(120, 120, 120, 0.25);
+    --glass-secondary-border-hover: rgba(120, 120, 120, 0.35);
+    --glass-secondary-glow: 0 0 12px rgba(120, 120, 120, 0.15);
+    --glass-secondary-text: inherit;
+
+    /* Form control indicator glow (stronger for small elements) */
+    --glass-indicator-glow: 0 0 8px 2px;
+
     /* Spatial/3D Depth Tokens (Apple Vision Pro inspired) */
     --spatial-perspective: 1000px;
     --spatial-z-near: 20px;
@@ -320,6 +374,49 @@
     --glass-inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
     --glass-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
     --glass-refraction: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
+
+    /* Colored Glass Dark Mode — bg 0.25, border 0.40, glow +50% */
+    --glass-destructive-bg: rgba(239, 68, 68, 0.25);
+    --glass-destructive-bg-hover: rgba(239, 68, 68, 0.32);
+    --glass-destructive-border: rgba(239, 68, 68, 0.40);
+    --glass-destructive-border-hover: rgba(239, 68, 68, 0.55);
+    --glass-destructive-glow: 0 0 24px rgba(239, 68, 68, 0.30);
+    --glass-destructive-text: #f87171;
+
+    --glass-success-bg: rgba(34, 197, 94, 0.25);
+    --glass-success-bg-hover: rgba(34, 197, 94, 0.32);
+    --glass-success-border: rgba(34, 197, 94, 0.40);
+    --glass-success-border-hover: rgba(34, 197, 94, 0.55);
+    --glass-success-glow: 0 0 24px rgba(34, 197, 94, 0.30);
+    --glass-success-text: #4ade80;
+
+    --glass-warning-bg: rgba(245, 158, 11, 0.25);
+    --glass-warning-bg-hover: rgba(245, 158, 11, 0.32);
+    --glass-warning-border: rgba(245, 158, 11, 0.40);
+    --glass-warning-border-hover: rgba(245, 158, 11, 0.55);
+    --glass-warning-glow: 0 0 24px rgba(245, 158, 11, 0.30);
+    --glass-warning-text: #fbbf24;
+
+    --glass-info-bg: rgba(59, 130, 246, 0.25);
+    --glass-info-bg-hover: rgba(59, 130, 246, 0.32);
+    --glass-info-border: rgba(59, 130, 246, 0.40);
+    --glass-info-border-hover: rgba(59, 130, 246, 0.55);
+    --glass-info-glow: 0 0 24px rgba(59, 130, 246, 0.30);
+    --glass-info-text: #60a5fa;
+
+    --glass-primary-bg: rgba(174, 86, 48, 0.25);
+    --glass-primary-bg-hover: rgba(174, 86, 48, 0.32);
+    --glass-primary-border: rgba(174, 86, 48, 0.40);
+    --glass-primary-border-hover: rgba(174, 86, 48, 0.55);
+    --glass-primary-glow: 0 0 24px rgba(174, 86, 48, 0.30);
+    --glass-primary-text: #d4845c;
+
+    --glass-secondary-bg: rgba(180, 180, 180, 0.18);
+    --glass-secondary-bg-hover: rgba(180, 180, 180, 0.25);
+    --glass-secondary-border: rgba(180, 180, 180, 0.35);
+    --glass-secondary-border-hover: rgba(180, 180, 180, 0.45);
+    --glass-secondary-glow: 0 0 16px rgba(180, 180, 180, 0.20);
+    --glass-secondary-text: inherit;
 
     /* Spatial Shadows Dark Mode */
     --spatial-shadow-near: 0 4px 12px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);

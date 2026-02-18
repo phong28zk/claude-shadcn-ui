@@ -7,7 +7,7 @@ export interface TopAppBarProps extends React.HTMLAttributes<HTMLElement> {
   title?: string
   leading?: React.ReactNode
   trailing?: React.ReactNode
-  variant?: 'default' | 'solid' | 'spatial'
+  variant?: 'default' | 'spatial'
   scrollBehavior?: 'fixed' | 'scroll' | 'elevated'
 }
 
@@ -38,7 +38,6 @@ const TopAppBar = React.forwardRef<HTMLElement, TopAppBarProps>(
     const baseClasses = 'sticky top-0 z-50 w-full'
     const variantClasses = {
       default: 'glass-nav border-b border-glass-border',
-      solid: 'solid-elevated border-b',
       spatial: 'glass-nav spatial-fixed border-b border-glass-border',
     }
 

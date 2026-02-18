@@ -12,11 +12,9 @@ const checkboxVariants = cva(
     variants: {
       variant: {
         default:
-          'glass-subtle border-glass-border data-[state=checked]:glass-medium data-[state=checked]:border-glass-border-strong data-[state=checked]:text-primary',
-        solid:
-          'bg-background border border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground',
+          'glass-subtle border-glass-border data-[state=checked]:glass-primary data-[state=checked]:shadow-[var(--glass-indicator-glow)_var(--glass-primary-text)] data-[state=checked]:text-[var(--glass-primary-text)]',
         spatial:
-          'glass-subtle spatial border-glass-border data-[state=checked]:glass-medium data-[state=checked]:border-glass-border-strong data-[state=checked]:text-primary hover:-translate-y-0.5',
+          'glass-subtle spatial border-glass-border data-[state=checked]:glass-primary data-[state=checked]:shadow-[var(--glass-indicator-glow)_var(--glass-primary-text)] data-[state=checked]:text-[var(--glass-primary-text)] hover:-translate-y-0.5',
       },
     },
     defaultVariants: {

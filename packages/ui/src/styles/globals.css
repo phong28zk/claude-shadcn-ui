@@ -289,6 +289,140 @@
     border-radius: inherit;
   }
 
+  /* ===== TINTED GLASS UTILITIES (iOS 26 Colored Glass) ===== */
+  .glass-destructive {
+    background: var(--glass-destructive-bg);
+    backdrop-filter: blur(var(--glass-blur-md));
+    -webkit-backdrop-filter: blur(var(--glass-blur-md));
+    border: 1px solid var(--glass-destructive-border);
+    box-shadow: var(--glass-destructive-glow), var(--glass-inner-glow);
+    color: var(--glass-destructive-text);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--motion-duration-hover) var(--motion-ease-default);
+  }
+  .glass-destructive:hover, .glass-destructive:active {
+    background: var(--glass-destructive-bg-hover);
+    border-color: var(--glass-destructive-border-hover);
+  }
+
+  .glass-success {
+    background: var(--glass-success-bg);
+    backdrop-filter: blur(var(--glass-blur-md));
+    -webkit-backdrop-filter: blur(var(--glass-blur-md));
+    border: 1px solid var(--glass-success-border);
+    box-shadow: var(--glass-success-glow), var(--glass-inner-glow);
+    color: var(--glass-success-text);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--motion-duration-hover) var(--motion-ease-default);
+  }
+  .glass-success:hover, .glass-success:active {
+    background: var(--glass-success-bg-hover);
+    border-color: var(--glass-success-border-hover);
+  }
+
+  .glass-warning {
+    background: var(--glass-warning-bg);
+    backdrop-filter: blur(var(--glass-blur-md));
+    -webkit-backdrop-filter: blur(var(--glass-blur-md));
+    border: 1px solid var(--glass-warning-border);
+    box-shadow: var(--glass-warning-glow), var(--glass-inner-glow);
+    color: var(--glass-warning-text);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--motion-duration-hover) var(--motion-ease-default);
+  }
+  .glass-warning:hover, .glass-warning:active {
+    background: var(--glass-warning-bg-hover);
+    border-color: var(--glass-warning-border-hover);
+  }
+
+  .glass-info {
+    background: var(--glass-info-bg);
+    backdrop-filter: blur(var(--glass-blur-md));
+    -webkit-backdrop-filter: blur(var(--glass-blur-md));
+    border: 1px solid var(--glass-info-border);
+    box-shadow: var(--glass-info-glow), var(--glass-inner-glow);
+    color: var(--glass-info-text);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--motion-duration-hover) var(--motion-ease-default);
+  }
+  .glass-info:hover, .glass-info:active {
+    background: var(--glass-info-bg-hover);
+    border-color: var(--glass-info-border-hover);
+  }
+
+  .glass-primary {
+    background: var(--glass-primary-bg);
+    backdrop-filter: blur(var(--glass-blur-md));
+    -webkit-backdrop-filter: blur(var(--glass-blur-md));
+    border: 1px solid var(--glass-primary-border);
+    box-shadow: var(--glass-primary-glow), var(--glass-inner-glow);
+    color: var(--glass-primary-text);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--motion-duration-hover) var(--motion-ease-default);
+  }
+  .glass-primary:hover, .glass-primary:active {
+    background: var(--glass-primary-bg-hover);
+    border-color: var(--glass-primary-border-hover);
+  }
+
+  .glass-secondary {
+    background: var(--glass-secondary-bg);
+    backdrop-filter: blur(var(--glass-blur-md));
+    -webkit-backdrop-filter: blur(var(--glass-blur-md));
+    border: 1px solid var(--glass-secondary-border);
+    box-shadow: var(--glass-secondary-glow), var(--glass-inner-glow);
+    color: var(--glass-secondary-text);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--motion-duration-hover) var(--motion-ease-default);
+  }
+  .glass-secondary:hover, .glass-secondary:active {
+    background: var(--glass-secondary-bg-hover);
+    border-color: var(--glass-secondary-border-hover);
+  }
+
+  /* Liquid Glass Shimmer — wrapper <span> approach (avoids ::before/::after conflicts) */
+  .glass-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.1) 55%, transparent 60%);
+    opacity: 0;
+    transition: opacity var(--motion-duration-hover) var(--motion-ease-default);
+    pointer-events: none;
+    border-radius: inherit;
+    z-index: 1;
+  }
+
+  /* Parent hover triggers shimmer */
+  *:hover > .glass-shimmer {
+    opacity: 1;
+    animation: liquid-glass-hover 0.6s ease-out;
+  }
+
+  /* Mobile: active state trigger */
+  @media (hover: none) {
+    *:hover > .glass-shimmer {
+      opacity: 0;
+      animation: none;
+    }
+    *:active > .glass-shimmer {
+      opacity: 1;
+      animation: liquid-glass-hover 0.4s ease-out;
+    }
+  }
+
+  /* Reduced motion: no shimmer animation */
+  @media (prefers-reduced-motion: reduce) {
+    .glass-shimmer {
+      display: none;
+    }
+  }
+
   /* Solid Variant Utilities (non-glass, opaque backgrounds) */
   .solid {
     background: hsl(var(--surface-solid));

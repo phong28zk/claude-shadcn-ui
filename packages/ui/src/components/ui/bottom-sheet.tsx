@@ -10,7 +10,6 @@ const bottomSheetVariants = cva(
     variants: {
       variant: {
         default: 'glass-heavy border border-b-0',
-        solid: 'bg-background border border-b-0',
         spatial: 'glass-heavy spatial animate-spatial-emerge border border-b-0',
       },
     },

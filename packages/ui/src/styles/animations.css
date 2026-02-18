@@ -209,6 +209,12 @@
     animation: spatial-focus-lift var(--spatial-transition) ease-out forwards;
   }
 
+  /* Liquid Glass Keyframes (iOS 26 shimmer on hover) */
+  @keyframes liquid-glass-hover {
+    0% { opacity: 0.3; transform: translateX(-100%) skewX(-15deg); }
+    100% { opacity: 0; transform: translateX(200%) skewX(-15deg); }
+  }
+
   /* Skeleton shimmer animation */
   @keyframes skeleton-shimmer {
     0% {

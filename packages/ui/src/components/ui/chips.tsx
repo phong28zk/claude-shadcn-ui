@@ -9,7 +9,7 @@ const chipVariants = cva(
     variants: {
       variant: {
         default: 'glass-subtle border-glass-border',
-        solid: 'bg-secondary text-secondary-foreground border border-border',
+        secondary: 'glass-secondary',
         spatial: 'glass-subtle spatial border-glass-border hover:-translate-y-1',
       },
       type: {
@@ -29,9 +29,9 @@ const chipVariants = cva(
         className: 'glass-medium border-glass-border-strong text-primary',
       },
       {
-        variant: 'solid',
+        variant: 'secondary',
         selected: true,
-        className: 'bg-primary text-primary-foreground border-primary',
+        className: 'glass-primary',
       },
     ],
     defaultVariants: {
@@ -49,7 +49,7 @@ export interface ChipProps
   selected?: boolean
   onSelect?: () => void
   type?: 'filter' | 'input' | 'suggestion'
-  variant?: 'default' | 'solid' | 'spatial'
+  variant?: 'default' | 'secondary' | 'spatial'
   removable?: boolean
   onRemove?: () => void
 }

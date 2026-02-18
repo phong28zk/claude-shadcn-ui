@@ -13,11 +13,11 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Timeline items */
   items: TimelineItem[]
   /** Timeline style variant */
-  variant?: 'default' | 'solid' | 'spatial'
+  variant?: 'default' | 'spatial'
 }
 
 const statusClasses = {
-  completed: 'bg-primary border-primary text-primary-foreground',
+  completed: 'glass-primary border-primary text-primary-foreground',
   active: 'glass-medium border-primary ring-2 ring-primary/20',
   pending: 'glass-subtle border-muted',
 }
@@ -55,7 +55,6 @@ const Timeline = React.forwardRef<HTMLDivElement, TimelineProps>(
                   className={cn(
                     'flex-1 pb-4',
                     variant === 'default' && 'glass-card p-4',
-                    variant === 'solid' && 'solid-card p-4',
                     variant === 'spatial' && 'glass-card spatial p-4'
                   )}
                 >

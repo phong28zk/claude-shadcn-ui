@@ -11,7 +11,6 @@ const snackbarVariants = cva(
     variants: {
       variant: {
         default: 'glass-medium text-foreground',
-        solid: 'solid-elevated text-foreground',
         spatial: 'glass-medium spatial-float text-foreground',
       },
     },

@@ -31,7 +31,7 @@ export function ThemeCustomizer() {
       {/* Toggle button - fixed position */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed right-4 top-20 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background shadow-md hover:bg-accent transition-colors"
+        className="fixed right-4 top-20 z-50 flex h-10 w-10 items-center justify-center rounded-full glass-button shadow-md transition-colors"
         aria-label="Toggle theme customizer"
       >
         <Palette className="h-5 w-5" />
@@ -40,7 +40,7 @@ export function ThemeCustomizer() {
       {/* Sidebar panel */}
       <div
         className={`
-          fixed right-0 top-0 z-40 h-full w-72 border-l border-border bg-background shadow-xl
+          fixed right-0 top-0 z-40 h-full w-72 border-l border-border glass-heavy shadow-xl
           transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}
         `}
@@ -140,7 +140,7 @@ export function ThemeCustomizer() {
         </div>
 
         {/* Footer actions */}
-        <div className="absolute bottom-0 left-0 right-0 border-t border-border bg-background p-4">
+        <div className="absolute bottom-0 left-0 right-0 border-t border-border glass-medium p-4">
           <div className="flex gap-2">
             <Button
               variant="outline"

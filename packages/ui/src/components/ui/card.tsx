@@ -7,12 +7,11 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Enable/disable animations (default: true) */
   animated?: boolean
   /** Card style variant */
-  variant?: 'default' | 'solid' | 'subtle' | 'heavy' | 'spatial'
+  variant?: 'default' | 'subtle' | 'heavy' | 'spatial'
 }
 
 const variantStyles = {
   default: 'glass-card',
-  solid: 'solid-card bg-background border border-border shadow',
   subtle: 'glass-subtle rounded-xl',
   heavy: 'glass-heavy rounded-xl',
   spatial: 'glass-card spatial',
