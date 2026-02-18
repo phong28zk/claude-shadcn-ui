@@ -42,7 +42,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       suggestions = [],
       onSuggestionSelect,
       variant = 'default',
-      _mobileExpanded = true,
+      mobileExpanded: _mobileExpanded = true,
       placeholder = 'Search...',
       className,
       ...props

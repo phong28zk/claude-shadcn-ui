@@ -1,5 +1,6 @@
 // Utilities
 export { cn } from './lib/utils'
+export type { DateFormat } from './lib/date-time-utils'
 
 // Styles - import side effect
 import './styles/globals.css'

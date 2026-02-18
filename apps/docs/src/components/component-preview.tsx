@@ -628,18 +628,10 @@ function renderComponent(slug: string, props: Record<string, unknown>) {
 
     // ============ Phase 5: UI Misc Components ============
     case 'date-picker':
-      return (
-        <div className="w-full max-w-sm">
-          <DatePicker placeholder="Select a date" {...props} />
-        </div>
-      )
+      return <DatePickerPreview componentProps={props} />
 
     case 'time-picker':
-      return (
-        <div className="w-full max-w-sm">
-          <TimePicker placeholder="Select a time" {...props} />
-        </div>
-      )
+      return <TimePickerPreview componentProps={props} />
 
     case 'skeleton':
       return (
@@ -876,6 +868,30 @@ function SearchBarPreview({ componentProps }: { componentProps: Record<string, u
       ]}
       {...componentProps}
     />
+  )
+}
+
+// ============ DatePicker & TimePicker Preview Wrappers ============
+
+function DatePickerPreview({ componentProps }: { componentProps: Record<string, unknown> }) {
+  const [value, setValue] = React.useState<Date | null>(new Date())
+  const pickerProps = { ...componentProps }
+  if (!pickerProps.locale) delete pickerProps.locale
+  return (
+    <div className="w-full max-w-sm">
+      <DatePicker value={value} onChange={setValue} placeholder="Type or select a date" {...pickerProps} />
+    </div>
+  )
+}
+
+function TimePickerPreview({ componentProps }: { componentProps: Record<string, unknown> }) {
+  const [value, setValue] = React.useState('10:30 AM')
+  const pickerProps = { ...componentProps }
+  if (!pickerProps.locale) delete pickerProps.locale
+  return (
+    <div className="w-full max-w-sm">
+      <TimePicker value={value} onChange={setValue} placeholder="Type or select a time" {...pickerProps} />
+    </div>
   )
 }
 

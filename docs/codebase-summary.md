@@ -133,8 +133,8 @@ All components support the new `spatial` variant with 3D depth, elevation shadow
 
 | Component | Purpose | Key Features |
 |-----------|---------|--------------|
-| **DatePicker** | Date selection | Calendar with range support |
-| **TimePicker** | Time selection | Spinner-based time input |
+| **DatePicker** | Date selection | Calendar with i18n, date format detection, locale support |
+| **TimePicker** | Time selection | Spinner-based time input with locale-aware AM/PM labels |
 | **ContextMenu** | Right-click menu | Radix-based context menu |
 
 ### Misc Components (5)
@@ -466,6 +466,7 @@ export { Component, componentVariants }
 | clsx | ^2.1.1 | Class string utility |
 | tailwind-merge | ^2.6.0 | Tailwind class merging |
 | lucide-react | ^0.471.1 | Icon library |
+| imask | ^7.x | Input masking for date/time fields |
 
 ### Dev Tools
 
@@ -538,6 +539,16 @@ export { Component, componentVariants }
 ### Utility Functions
 
 - **`cn()`** (`lib/utils.ts`): Merges classnames with Tailwind resolution
+- **Date/Time utilities** (`lib/date-time-utils.ts`): Internationalization support for DatePicker/TimePicker
+  - `getEffectiveLocale()`: SSR-safe locale fallback
+  - `detectDateFormat()`: Auto-detect format from locale (MM/DD/YYYY, DD/MM/YYYY, YYYY-MM-DD)
+  - `getLocalizedMonthNames()`: Locale-aware month labels
+  - `getLocalizedDayNames()`: Locale-aware weekday labels
+  - `getLocalizedPeriodLabels()`: Locale-aware AM/PM labels
+  - `formatDateByPattern()`: Format dates per detected pattern
+  - `parseDateFromInput()`: Parse input strings with validation
+  - `parseTimeFromInput()`: Parse time strings (12h/24h formats)
+  - `getMaskPattern()`: Get IMask pattern for input masking
 
 ## Code Standards
 

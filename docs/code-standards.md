@@ -1275,8 +1275,147 @@ className="px-spacing-4 py-spacing-2"  // Using design tokens
 <Button variant={isActive ? 'active' : 'default'}>
 ```
 
+## Date/Time Components & i18n
+
+### Overview
+
+DatePicker and TimePicker components support full internationalization via the `locale` prop using the native Intl API. No external translation libraries needed.
+
+### DatePicker i18n Pattern
+
+**Props:**
+```typescript
+interface DatePickerProps {
+  locale?: string           // BCP 47 locale (e.g., 'en-US', 'de-DE', 'ja-JP')
+  dateFormat?: DateFormat   // Override auto-detected format
+  // ... other props
+}
+
+type DateFormat = 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY-MM-DD'
+```
+
+**Automatic Format Detection:**
+```typescript
+// Based on locale, format auto-detects:
+// 'en-US' → 'MM/DD/YYYY'
+// 'en-GB', 'de-DE' → 'DD/MM/YYYY'
+// 'ja-JP', 'zh-CN' → 'YYYY-MM-DD'
+<DatePicker locale="de-DE" />  // Automatically uses DD/MM/YYYY
+```
+
+**Manual Override:**
+```typescript
+// Force specific format regardless of locale
+<DatePicker locale="en-US" dateFormat="DD/MM/YYYY" />
+```
+
+**Localized Labels:**
+```typescript
+// Month and weekday names automatically localize via Intl.DateTimeFormat
+// German: Januar, Februar, März...
+// Spanish: enero, febrero, marzo...
+// Japanese: 1月, 2月, 3月...
+<DatePicker locale="ja-JP" />  // Japanese month/day names
+```
+
+### TimePicker i18n Pattern
+
+**Props:**
+```typescript
+interface TimePickerProps {
+  locale?: string  // BCP 47 locale for AM/PM labels
+  // ... other props
+}
+```
+
+**Localized AM/PM Labels:**
+```typescript
+// AM/PM labels adapt to locale via Intl.DateTimeFormat
+// English: 'AM', 'PM'
+// Some locales: Different symbols or text
+<TimePicker locale="ja-JP" />  // Japanese time labels
+```
+
+### Date/Time Utilities API
+
+All utilities in `lib/date-time-utils.ts`:
+
+```typescript
+// Detect date format for a locale (returns pattern string)
+const format = detectDateFormat('de-DE')  // 'DD/MM/YYYY'
+
+// Get localized month names
+const months = getLocalizedMonthNames('ja-JP')
+// ['1月', '2月', ..., '12月']
+
+// Get localized weekday names
+const days = getLocalizedDayNames('fr-FR', 'short')
+// ['dim.', 'lun.', 'mar.', ...]
+
+// Get localized AM/PM labels
+const periods = getLocalizedPeriodLabels('pt-BR')
+// { am: 'AM', pm: 'PM' } or locale-specific
+
+// Format dates per pattern
+const formatted = formatDateByPattern(new Date(), 'DD/MM/YYYY')
+// '18/02/2026'
+
+// Parse date input with validation
+const parsed = parseDateFromInput('18/02/2026', 'DD/MM/YYYY')
+// Date object or null if invalid
+
+// Parse time input (12h/24h)
+const time = parseTimeFromInput('14:30', '24h')
+// { hour: 14, minute: 30 }
+
+const time12 = parseTimeFromInput('02:30 PM', '12h')
+// { hour: 2, minute: 30, period: 'PM' }
+
+// Get IMask pattern for input validation
+const mask = getMaskPattern('DD/MM/YYYY')  // '00/00/0000'
+```
+
+### SSR Safety
+
+All utilities handle SSR gracefully:
+```typescript
+export function getEffectiveLocale(locale?: string): string {
+  if (locale) return locale
+  // Safe check - navigator may not exist during SSR
+  if (typeof navigator !== 'undefined' && navigator.language) {
+    return navigator.language
+  }
+  return 'en-US'  // Fallback
+}
+```
+
+### Implementation Pattern
+
+```typescript
+// DatePicker component example
+const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
+  ({ locale, dateFormat, ...props }, ref) => {
+    // Auto-detect format if not provided
+    const effectiveFormat = dateFormat || detectDateFormat(locale)
+
+    // Get localized labels
+    const months = getLocalizedMonthNames(locale)
+    const dayNames = getLocalizedDayNames(locale)
+
+    // Setup IMask pattern
+    const maskPattern = getMaskPattern(effectiveFormat)
+
+    return (
+      <div ref={ref} {...props}>
+        {/* Render calendar with localized labels */}
+      </div>
+    )
+  }
+)
+```
+
 ---
 
-**Standards Version:** 1.0
-**Last Updated:** 2026-02-15
+**Standards Version:** 1.1
+**Last Updated:** 2026-02-18
 **Maintained By:** Development Team
