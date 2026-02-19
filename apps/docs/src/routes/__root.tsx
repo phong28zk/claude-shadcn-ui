@@ -12,10 +12,90 @@ import {
   getAllCategories,
   getCategoryLabel,
 } from '../lib/component-registry'
+import type { ComponentCategory } from '../lib/types'
 
 export const Route = createRootRoute({
   component: RootLayout,
 })
+
+/** Shared sidebar navigation content */
+function SidebarNav({ categories, onLinkClick }: { categories: ComponentCategory[]; onLinkClick: () => void }) {
+  return (
+    <nav className="space-y-5 p-5">
+      {/* Getting Started */}
+      <div>
+        <h3 className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground/70">
+          Getting Started
+        </h3>
+        <div className="border-l border-[var(--glass-border)] pl-3 ml-1">
+          <ul className="space-y-1">
+            <li>
+              <Link
+                to="/"
+                className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
+                activeProps={{ className: 'glass-primary font-medium text-foreground' }}
+                onClick={onLinkClick}
+              >
+                Introduction
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/getting-started"
+                className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
+                activeProps={{ className: 'glass-primary font-medium text-foreground' }}
+                onClick={onLinkClick}
+              >
+                Installation
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/components"
+                className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
+                activeProps={{ className: 'glass-primary font-medium text-foreground' }}
+                onClick={onLinkClick}
+              >
+                All Components
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Dynamic component categories */}
+      {categories.map((category) => {
+        const components = getComponentsByCategory(category)
+        if (components.length === 0) return null
+
+        return (
+          <div key={category}>
+            <h3 className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground/70">
+              {getCategoryLabel(category)}
+            </h3>
+            <div className="border-l border-[var(--glass-border)] pl-3 ml-1">
+              <ul className="space-y-1">
+                {components.map((meta) => (
+                  <li key={meta.slug}>
+                    <Link
+                      to="/components/$name"
+                      params={{ name: meta.slug }}
+                      className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
+                      activeProps={{ className: 'glass-primary font-medium text-foreground' }}
+                      onClick={onLinkClick}
+                    >
+                      {meta.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )
+      })}
+    </nav>
+  )
+}
 
 function RootLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -46,88 +126,24 @@ function RootLayout() {
         </header>
 
         <div className="flex">
-          {/* Left Sidebar - Navigation */}
+          {/* Desktop Sidebar - in-flow flex child, hidden below md */}
+          <aside className="w-0 md:w-64 flex-shrink-0 overflow-hidden md:overflow-visible border-r border-transparent md:border-border glass-medium">
+            <div className="sticky top-0 h-[calc(100vh-0rem)] overflow-y-auto w-64">
+              <SidebarNav categories={categories} onLinkClick={() => setSidebarOpen(false)} />
+            </div>
+          </aside>
+
+          {/* Mobile Sidebar - fixed overlay, only on small screens */}
           <aside
             className={`
               fixed inset-y-0 left-0 z-40 w-64 border-r border-border glass-medium pt-14
-              transition-transform duration-300
-              md:sticky md:top-14 md:h-[calc(100vh)] md:translate-x-0 md:flex-shrink-0
+              transition-transform duration-300 md:pointer-events-none md:invisible
               ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
             `}
           >
-            <nav className="space-y-5 p-5 overflow-y-auto h-full">
-              {/* Getting Started */}
-              <div>
-                <h3 className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground/70">
-                  Getting Started
-                </h3>
-                <div className="border-l border-[var(--glass-border)] pl-3 ml-1">
-                  <ul className="space-y-1">
-                    <li>
-                      <Link
-                        to="/"
-                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
-                        activeProps={{ className: 'glass-primary font-medium text-foreground' }}
-                        onClick={() => setSidebarOpen(false)}
-                      >
-                        Introduction
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/getting-started"
-                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
-                        activeProps={{ className: 'glass-primary font-medium text-foreground' }}
-                        onClick={() => setSidebarOpen(false)}
-                      >
-                        Installation
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/components"
-                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
-                        activeProps={{ className: 'glass-primary font-medium text-foreground' }}
-                        onClick={() => setSidebarOpen(false)}
-                      >
-                        All Components
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Dynamic component categories */}
-              {categories.map((category) => {
-                const components = getComponentsByCategory(category)
-                if (components.length === 0) return null
-
-                return (
-                  <div key={category}>
-                    <h3 className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground/70">
-                      {getCategoryLabel(category)}
-                    </h3>
-                    <div className="border-l border-[var(--glass-border)] pl-3 ml-1">
-                      <ul className="space-y-1">
-                        {components.map((meta) => (
-                          <li key={meta.slug}>
-                            <Link
-                              to="/components/$name"
-                              params={{ name: meta.slug }}
-                              className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
-                              activeProps={{ className: 'glass-primary font-medium text-foreground' }}
-                              onClick={() => setSidebarOpen(false)}
-                            >
-                              {meta.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )
-              })}
-            </nav>
+            <div className="overflow-y-auto h-full">
+              <SidebarNav categories={categories} onLinkClick={() => setSidebarOpen(false)} />
+            </div>
           </aside>
 
           {/* Overlay for mobile */}
@@ -139,10 +155,8 @@ function RootLayout() {
           )}
 
           {/* Main content */}
-          <main className="flex-1 min-w-0 py-6 px-6 md:px-8 md:ml-0">
-            <div className="mx-auto max-w-5xl">
-              <Outlet />
-            </div>
+          <main className="flex-1 min-w-0 py-6 px-6 md:px-10 lg:px-16">
+            <Outlet />
           </main>
         </div>
 
