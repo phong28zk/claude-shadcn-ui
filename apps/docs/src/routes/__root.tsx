@@ -26,7 +26,7 @@ function RootLayout() {
       <div className="min-h-screen bg-background" style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(174,86,48,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(120,120,140,0.06) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(59,130,246,0.04) 0%, transparent 50%)' }}>
         {/* Header */}
         <header className="glass-nav sticky top-0 z-50 w-full border-b border-border">
-          <div className="container flex h-14 items-center">
+          <div className="flex h-14 items-center px-4 sm:px-6 lg:px-8">
             <button
               className="mr-4 md:hidden glass-button rounded-md p-2 transition-all"
               onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -51,7 +51,7 @@ function RootLayout() {
             className={`
               fixed inset-y-0 left-0 z-40 w-64 border-r border-border glass-medium pt-14
               transition-transform duration-300
-              md:sticky md:top-14 md:h-[calc(100vh-3.5rem)] md:translate-x-0 md:flex-shrink-0
+              md:sticky md:top-14 md:h-[calc(100vh)] md:translate-x-0 md:flex-shrink-0
               ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
             `}
           >
