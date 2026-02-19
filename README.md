@@ -2,6 +2,8 @@
 
 A React component library featuring a **liquid glass design system** with 58 production-ready components. Built on ShadCN UI patterns with iOS 26-inspired glassmorphism, Google Sans typography, and Apple Vision Pro-inspired Spatial UI 3D depth.
 
+**Live Docs:** [liquidcn-ui-docs.vercel.app](https://liquidcn-ui-docs.vercel.app)
+
 ## Features
 
 - **58 components** across UI primitives, chat, navigation, containment, selection, and layout categories
