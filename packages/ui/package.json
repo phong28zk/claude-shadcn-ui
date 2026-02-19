@@ -1,22 +1,23 @@
 {
-  "name": "glasscn-ui",
+  "name": "liquidcn-ui",
   "version": "0.1.0",
   "description": "Liquid glass design system with M3 components - React UI library",
   "author": "phong28zk",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phong28zk/glasscn-ui.git"
+    "url": "git+https://github.com/phong28zk/liquidcn-ui.git"
   },
-  "homepage": "https://github.com/phong28zk/glasscn-ui#readme",
+  "homepage": "https://github.com/phong28zk/liquidcn-ui#readme",
   "bugs": {
-    "url": "https://github.com/phong28zk/glasscn-ui/issues"
+    "url": "https://github.com/phong28zk/liquidcn-ui/issues"
   },
   "keywords": [
     "react",
     "components",
     "ui",
-    "glasscn",
+    "liquidcn",
+    "liquid-glass",
     "glass",
     "m3",
     "material3",
@@ -38,8 +39,8 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./styles": "./dist/glasscn-ui.css",
-    "./styles.css": "./dist/glasscn-ui.css"
+    "./styles": "./dist/liquidcn-ui.css",
+    "./styles.css": "./dist/liquidcn-ui.css"
   },
   "files": [
     "dist",

@@ -1,5 +1,5 @@
 import type { Story } from '@ladle/react'
-import { ThemeToggle, ThemeProvider } from 'glasscn-ui'
+import { ThemeToggle, ThemeProvider } from 'liquidcn-ui'
 
 export const Default: Story = () => (
   <ThemeProvider>

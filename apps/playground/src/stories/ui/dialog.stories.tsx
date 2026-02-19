@@ -8,7 +8,7 @@ import {
   DialogTrigger,
   DialogFooter,
   Button,
-} from 'glasscn-ui'
+} from 'liquidcn-ui'
 
 export const Default: Story = () => (
   <Dialog>

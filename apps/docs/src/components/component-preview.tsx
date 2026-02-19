@@ -104,7 +104,7 @@ import {
   TopAppBar,
   TypingIndicator,
   Sidebar,
-} from 'glasscn-ui'
+} from 'liquidcn-ui'
 import { Bold, ChevronDown, Plus, Heart, Settings, MoreVertical, Info, Inbox, Pencil, Share2, Trash2, Menu, Home, Search, User } from 'lucide-react'
 
 interface ComponentPreviewProps {
@@ -546,7 +546,7 @@ function renderComponent(slug: string, props: Record<string, unknown>) {
         <div className="w-full max-w-sm">
           <Accordion type="single" collapsible {...props}>
             <AccordionItem value="item-1">
-              <AccordionTrigger>What is glasscn-ui?</AccordionTrigger>
+              <AccordionTrigger>What is liquidcn-ui?</AccordionTrigger>
               <AccordionContent>A glass-morphism component library for React.</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { Button, Card } from 'glasscn-ui'
+import { Button, Card } from 'liquidcn-ui'
 import { CodeBlock } from '@/components/code-block'
 import { ArrowRight } from 'lucide-react'
 
@@ -8,12 +8,12 @@ export const Route = createFileRoute('/')({
 })
 
 function HomePage() {
-  const installCode = `npm install glasscn-ui
+  const installCode = `bun add liquidcn-ui
 # or
-bun add glasscn-ui`
+npm install liquidcn-ui`
 
-  const quickStartCode = `import { Button, ThemeProvider } from 'glasscn-ui'
-import 'glasscn-ui/styles'
+  const quickStartCode = `import { Button, ThemeProvider } from 'liquidcn-ui'
+import 'liquidcn-ui/styles'
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
       {/* Hero Section */}
       <div className="glass-card p-8 rounded-2xl mb-16">
         <h1 className="text-4xl font-bold tracking-tight mb-4">
-          Claude ShadCN UI
+          LiquidCN UI
         </h1>
         <p className="text-xl text-muted-foreground mb-8">
           A React component library styled with Claude AI's design language, built on ShadCN UI patterns.

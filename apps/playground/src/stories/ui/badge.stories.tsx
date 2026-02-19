@@ -1,5 +1,5 @@
 import type { Story } from '@ladle/react'
-import { Badge } from 'glasscn-ui'
+import { Badge } from 'liquidcn-ui'
 
 export const Default: Story = () => <Badge>Badge</Badge>
 

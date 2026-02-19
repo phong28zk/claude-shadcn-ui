@@ -1,5 +1,5 @@
 {
-  "name": "glasscn-ui-monorepo",
+  "name": "liquidcn-ui-monorepo",
   "private": true,
   "workspaces": ["packages/*", "apps/*"],
   "scripts": {

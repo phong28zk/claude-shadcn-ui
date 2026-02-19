@@ -4,43 +4,31 @@
 
 import { useState } from 'react'
 import { Check, Copy } from 'lucide-react'
-import type { ComponentMeta, PackageManager } from '../lib/types'
+import type { PackageManager } from '../lib/types'
 import {
   generateInstallCommand,
-  generateFullSnippet,
   getPackageManagers,
 } from '../lib/code-generator'
 import { CodeBlock } from './code-block'
 
-interface CodeSnippetPanelProps {
-  meta: ComponentMeta
-  currentProps: Record<string, unknown>
-}
-
-type TabType = PackageManager | 'manual'
-
-export function CodeSnippetPanel({ meta, currentProps }: CodeSnippetPanelProps) {
-  const [activeTab, setActiveTab] = useState<TabType>('bun')
+/**
+ * InstallationPanel - Tabbed package manager install commands
+ */
+export function CodeSnippetPanel() {
+  const [activeTab, setActiveTab] = useState<PackageManager>('bun')
   const [copied, setCopied] = useState(false)
 
   const packageManagers = getPackageManagers()
 
-  const getCode = (): string => {
-    if (activeTab === 'manual') {
-      return generateFullSnippet(meta, currentProps)
-    }
-    return generateInstallCommand(activeTab)
-  }
-
   const handleCopy = async () => {
+    const code = generateInstallCommand(activeTab)
     try {
-      await navigator.clipboard.writeText(getCode())
+      await navigator.clipboard.writeText(code)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
-      // Fallback
       const textarea = document.createElement('textarea')
-      textarea.value = getCode()
+      textarea.value = code
       document.body.appendChild(textarea)
       textarea.select()
       document.execCommand('copy')
@@ -68,16 +56,6 @@ export function CodeSnippetPanel({ meta, currentProps }: CodeSnippetPanelProps) 
               {pm}
             </button>
           ))}
-          <button
-            onClick={() => setActiveTab('manual')}
-            className={`px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap
-              ${activeTab === 'manual'
-                ? 'bg-background text-foreground border-b-2 border-primary'
-                : 'text-muted-foreground hover:text-foreground'
-              }`}
-          >
-            Code
-          </button>
         </div>
 
         {/* Copy button */}
@@ -101,32 +79,23 @@ export function CodeSnippetPanel({ meta, currentProps }: CodeSnippetPanelProps) 
         </div>
       </div>
 
-      {/* Code content */}
+      {/* Install command */}
       <div className="p-0">
-        {activeTab === 'manual' ? (
-          <CodeBlock
-            code={generateFullSnippet(meta, currentProps)}
-            language="tsx"
-          />
-        ) : (
-          <CodeBlock
-            code={generateInstallCommand(activeTab)}
-            language="bash"
-          />
-        )}
+        <CodeBlock
+          code={generateInstallCommand(activeTab)}
+          language="bash"
+        />
       </div>
 
       {/* Styles import note */}
-      {activeTab !== 'manual' && (
-        <div className="border-t border-border px-4 py-2 glass-subtle">
-          <p className="text-xs text-muted-foreground">
-            Don't forget to import styles:{' '}
-            <code className="font-mono bg-muted px-1 rounded">
-              import 'glasscn-ui/styles'
-            </code>
-          </p>
-        </div>
-      )}
+      <div className="border-t border-border px-4 py-2 glass-subtle">
+        <p className="text-xs text-muted-foreground">
+          Don't forget to import styles:{' '}
+          <code className="font-mono bg-muted px-1 rounded">
+            import 'liquidcn-ui/styles'
+          </code>
+        </p>
+      </div>
     </div>
   )
 }

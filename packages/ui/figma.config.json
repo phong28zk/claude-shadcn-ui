@@ -4,7 +4,7 @@
     "include": ["src/figma/**/*.figma.tsx"],
     "parser": "react",
     "importPaths": {
-      "glasscn-ui": ["../components/ui/*", "../components/chat/*"]
+      "liquidcn-ui": ["../components/ui/*", "../components/chat/*"]
     }
   }
 }

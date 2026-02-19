@@ -15,7 +15,7 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-} from 'glasscn-ui'
+} from 'liquidcn-ui'
 
 export default {
   title: 'Glass / Showcase',

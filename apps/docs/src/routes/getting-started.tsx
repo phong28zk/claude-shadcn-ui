@@ -6,14 +6,14 @@ export const Route = createFileRoute('/getting-started')({
 })
 
 function GettingStartedPage() {
-  const installCode = `npm install glasscn-ui
+  const installCode = `bun add liquidcn-ui
 # or
-bun add glasscn-ui
+npm install liquidcn-ui
 # or
-yarn add glasscn-ui`
+yarn add liquidcn-ui`
 
-  const setupCode = `import { ThemeProvider } from 'glasscn-ui'
-import 'glasscn-ui/styles'
+  const setupCode = `import { ThemeProvider } from 'liquidcn-ui'
+import 'liquidcn-ui/styles'
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
   )
 }`
 
-  const basicUsageCode = `import { Button, Input, Card } from 'glasscn-ui'
+  const basicUsageCode = `import { Button, Input, Card } from 'liquidcn-ui'
 
 function MyComponent() {
   return (
@@ -53,7 +53,7 @@ function MyComponent() {
         Getting Started
       </h1>
       <p className="text-xl text-muted-foreground mb-12">
-        Install and configure Claude ShadCN UI in your React project.
+        Install and configure LiquidCN UI in your React project.
       </p>
 
       {/* Installation */}
@@ -113,7 +113,7 @@ function MyComponent() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">TypeScript Support</h2>
         <p className="text-muted-foreground mb-4">
-          Claude ShadCN UI is built with TypeScript and exports all component types.
+          LiquidCN UI is built with TypeScript and exports all component types.
           You'll get full IntelliSense and type checking out of the box.
         </p>
         <div className="p-4 bg-muted/50 rounded-lg">
@@ -127,7 +127,7 @@ function MyComponent() {
       <section>
         <h2 className="text-2xl font-semibold mb-4">Next Steps</h2>
         <p className="text-muted-foreground mb-4">
-          Now that you've set up Claude ShadCN UI, explore the component documentation:
+          Now that you've set up LiquidCN UI, explore the component documentation:
         </p>
         <ul className="space-y-2 text-muted-foreground">
           <li>

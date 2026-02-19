@@ -20,7 +20,7 @@ import {
   ChatBubble,
   TypingIndicator,
   ThemeToggle,
-} from 'glasscn-ui'
+} from 'liquidcn-ui'
 import { Bold } from 'lucide-react'
 import type { ComponentMeta } from '../lib/types'
 

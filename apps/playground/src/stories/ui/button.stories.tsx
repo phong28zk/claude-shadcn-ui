@@ -1,5 +1,5 @@
 import type { Story } from '@ladle/react'
-import { Button } from 'glasscn-ui'
+import { Button } from 'liquidcn-ui'
 
 export const Default: Story = () => <Button>Button</Button>
 

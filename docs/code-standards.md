@@ -1,11 +1,11 @@
-# Claude ShadCN UI Library - Code Standards
+# LiquidCN UI Library - Code Standards
 
 **Last Updated:** 2026-02-15
 **Version:** 0.1.0
 
 ## Overview
 
-This document defines coding standards, patterns, and conventions used throughout the Claude ShadCN UI Library to ensure consistency, maintainability, and quality across all components and packages.
+This document defines coding standards, patterns, and conventions used throughout the LiquidCN UI Library to ensure consistency, maintainability, and quality across all components and packages.
 
 ## Table of Contents
 
@@ -1015,7 +1015,7 @@ The component registry is the single source of truth for all component metadata.
     }
   ],
   defaultProps: { variant: 'default' },
-  importStatement: "import { ComponentName } from 'glasscn-ui'",
+  importStatement: "import { ComponentName } from 'liquidcn-ui'",
   hasChildren: false,
   isCompound: false
 }

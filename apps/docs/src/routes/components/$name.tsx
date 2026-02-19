@@ -5,11 +5,13 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
-import { Badge, Button } from 'glasscn-ui'
+import { Badge, Button } from 'liquidcn-ui'
 import { getComponent } from '../../lib/component-registry'
+import { generateImportCode, generateUsageCode } from '../../lib/code-generator'
 import { ComponentPreview } from '../../components/component-preview'
 import { PropsEditor } from '../../components/props-editor'
 import { CodeSnippetPanel } from '../../components/code-snippet-panel'
+import { CodeBlock } from '../../components/code-block'
 
 export const Route = createFileRoute('/components/$name')({
   component: ComponentSimulatorPage,
@@ -77,10 +79,19 @@ function ComponentSimulatorPage() {
             <ComponentPreview slug={meta.slug} componentProps={props} />
           </div>
 
-          {/* Code snippets */}
+          {/* Installation */}
           <div>
-            <h2 className="text-lg font-semibold mb-3">Installation & Usage</h2>
-            <CodeSnippetPanel meta={meta} currentProps={props} />
+            <h2 className="text-lg font-semibold mb-3">Installation</h2>
+            <CodeSnippetPanel />
+          </div>
+
+          {/* Usage */}
+          <div>
+            <h2 className="text-lg font-semibold mb-3">Usage</h2>
+            <div className="space-y-3">
+              <CodeBlock code={generateImportCode(meta)} language="tsx" showLineNumbers={false} />
+              <CodeBlock code={generateUsageCode(meta, props)} language="tsx" showLineNumbers={false} />
+            </div>
           </div>
         </div>
 

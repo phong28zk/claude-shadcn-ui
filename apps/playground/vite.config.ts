@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      'glasscn-ui': resolve(__dirname, '../../packages/ui/src/index.ts'),
+      'liquidcn-ui': resolve(__dirname, '../../packages/ui/src/index.ts'),
     },
   },
   server: {

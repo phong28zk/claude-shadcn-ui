@@ -1,6 +1,6 @@
 # Glasscn UI - Design Guidelines
 
-Design system documentation for glasscn-ui library with liquid glass effects and M3 typography.
+Design system documentation for liquidcn-ui library with liquid glass effects and M3 typography.
 
 ---
 

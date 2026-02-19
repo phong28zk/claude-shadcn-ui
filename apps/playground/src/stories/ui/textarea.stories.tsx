@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Story } from '@ladle/react'
-import { Textarea } from 'glasscn-ui'
+import { Textarea } from 'liquidcn-ui'
 
 export const Default: Story = () => (
   <Textarea placeholder="Type your message here..." />

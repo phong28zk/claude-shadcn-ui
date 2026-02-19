@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Story } from '@ladle/react'
-import { ChatInput, ChatBubble } from 'glasscn-ui'
+import { ChatInput, ChatBubble } from 'liquidcn-ui'
 
 export const Default: Story = () => {
   const [messages, setMessages] = useState<string[]>([])

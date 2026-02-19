@@ -7,7 +7,7 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 }
 
 const textareaVariantStyles = {
-  // BREAKING: default is now solid for better readability (glasscn-ui v0.1.0)
+  // BREAKING: default is now solid for better readability (liquidcn-ui v0.1.0)
   default: 'solid-input bg-background border border-border',
   glass: 'glass-input border-0',
   solid: 'solid-input bg-background border border-border',

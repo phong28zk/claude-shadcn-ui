@@ -7,7 +7,7 @@ import {
   CardContent,
   CardFooter,
   Button,
-} from 'glasscn-ui'
+} from 'liquidcn-ui'
 
 export const Default: Story = () => (
   <Card className="w-[350px]">

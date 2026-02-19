@@ -1,4 +1,4 @@
-# Claude ShadCN UI Library - Development Roadmap
+# LiquidCN UI Library - Development Roadmap
 
 **Last Updated:** 2026-02-19
 **Version:** 0.1.0
@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-The Claude ShadCN UI Library (Glasscn) is a comprehensive, production-ready React component library featuring 58+ components with a glass-first design system, full i18n support, and spatial UI effects. The library has completed its core architectural overhaul including glassmorphism implementation, animation systems, and documentation app redesign.
+The LiquidCN UI Library (Glasscn) is a comprehensive, production-ready React component library featuring 58+ components with a glass-first design system, full i18n support, and spatial UI effects. The library has completed its core architectural overhaul including glassmorphism implementation, animation systems, and documentation app redesign.
 
 ## Project Phases & Status
 

@@ -16,7 +16,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "glasscn-ui": ["../../packages/ui/src/index.ts"]
+      "liquidcn-ui": ["../../packages/ui/src/index.ts"]
     }
   },
   "include": ["src"],

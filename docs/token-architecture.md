@@ -1,6 +1,6 @@
 # Token Architecture
 
-3-tier design token system for glasscn-ui.
+3-tier design token system for liquidcn-ui.
 
 ---
 

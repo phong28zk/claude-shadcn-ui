@@ -1,16 +1,16 @@
-# Claude ShadCN UI Library - System Architecture
+# LiquidCN UI Library - System Architecture
 
 **Last Updated:** 2026-02-15
 **Version:** 0.1.0
 
 ## Architecture Overview
 
-The Claude ShadCN UI Library follows a monorepo architecture using Turborepo with three primary packages: the core component library (`packages/ui`), an interactive playground (`apps/playground`), and a documentation site (`apps/docs`). The system employs a modular component design pattern with CSS variables for theming, enabling consistent light/dark mode support across all 58 components.
+The LiquidCN UI Library follows a monorepo architecture using Turborepo with three primary packages: the core component library (`packages/ui`), an interactive playground (`apps/playground`), and a documentation site (`apps/docs`). The system employs a modular component design pattern with CSS variables for theming, enabling consistent light/dark mode support across all 58 components.
 
 ## Monorepo Structure
 
 ```
-glasscn-ui/
+liquidcn-ui/
 ├── packages/ui/                  # Core library (published to NPM)
 ├── apps/playground/              # StoryLite component showcase
 ├── apps/docs/                    # TanStack Router documentation
@@ -456,7 +456,7 @@ apps/playground/
 
 ```typescript
 // Button Story Example
-import { Button } from 'glasscn-ui'
+import { Button } from 'liquidcn-ui'
 
 export const Basic = () => <Button>Click me</Button>
 
@@ -535,7 +535,7 @@ All 58 components defined with schema:
     { name: 'disabled', type: 'boolean', default: false, ... }
   ],
   defaultProps: { variant: 'default', size: 'default', disabled: false },
-  importStatement: "import { Button } from 'glasscn-ui'",
+  importStatement: "import { Button } from 'liquidcn-ui'",
   hasChildren: true,
   isCompound: false
 }

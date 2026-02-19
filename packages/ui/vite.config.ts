@@ -15,7 +15,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'GlasscnUI',
+      name: 'LiquidcnUI',
       formats: ['es', 'cjs'],
       fileName: (format) => `index.${format === 'es' ? 'mjs' : 'cjs'}`,
     },
@@ -28,7 +28,7 @@ export default defineConfig({
         },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') {
-            return 'styles/globals.css'
+            return 'liquidcn-ui.css'
           }
           return assetInfo.name || 'assets/[name]-[hash][extname]'
         },

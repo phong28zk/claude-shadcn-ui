@@ -18,7 +18,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from 'glasscn-ui'
+} from 'liquidcn-ui'
 
 export default {
   title: 'Spatial / Showcase',

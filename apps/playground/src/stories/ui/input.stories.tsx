@@ -1,5 +1,5 @@
 import type { Story } from '@ladle/react'
-import { Input } from 'glasscn-ui'
+import { Input } from 'liquidcn-ui'
 
 export const Default: Story = () => <Input placeholder="Enter text..." />
 

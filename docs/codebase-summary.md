@@ -11,7 +11,7 @@ Glasscn UI is a React component library featuring a liquid glass design system w
 ## Project Structure
 
 ```
-glasscn-ui-monorepo/
+liquidcn-ui-monorepo/
 ├── packages/
 │   └── ui/                          # Main library package
 │       ├── src/
@@ -501,13 +501,13 @@ export { Component, componentVariants }
 
 ```json
 {
-  "name": "glasscn-ui",
+  "name": "liquidcn-ui",
   "version": "0.1.0",
   "description": "Liquid glass design system with M3 components - React UI library",
   "author": "phong28zk",
   "license": "MIT",
-  "keywords": ["react", "components", "ui", "glasscn", "glass", "m3", "material3", "tailwind", "typescript"],
-  "repository": "https://github.com/phong28zk/glasscn-ui",
+  "keywords": ["react", "components", "ui", "liquidcn", "glass", "m3", "material3", "tailwind", "typescript"],
+  "repository": "https://github.com/phong28zk/liquidcn-ui",
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
@@ -618,8 +618,8 @@ export { Component, componentVariants }
 
 ## Resources
 
-- **GitHub:** https://github.com/phong28zk/glasscn-ui
-- **NPM:** https://npmjs.com/glasscn-ui
+- **GitHub:** https://github.com/phong28zk/liquidcn-ui
+- **NPM:** https://npmjs.com/liquidcn-ui
 - **Radix UI Docs:** https://radix-ui.com
 - **Tailwind CSS:** https://tailwindcss.com
 - **Vite Docs:** https://vitejs.dev

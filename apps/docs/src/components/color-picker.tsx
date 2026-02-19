@@ -3,7 +3,7 @@
  */
 
 import { useCallback, useMemo } from 'react'
-import { Input } from 'glasscn-ui'
+import { Input } from 'liquidcn-ui'
 import {
   cssValueToHsl,
   hslToCssValue,

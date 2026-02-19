@@ -2,7 +2,7 @@
  * ThemeCustomizer - Collapsible sidebar panel for theme customization
  */
 
-import { Button, Separator } from 'glasscn-ui'
+import { Button, Separator } from 'liquidcn-ui'
 import { Palette, X, RotateCcw, Copy, Check } from 'lucide-react'
 import { useState } from 'react'
 import { ColorPicker } from './color-picker'

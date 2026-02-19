@@ -3,7 +3,7 @@
  */
 
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
-import { ThemeProvider, ThemeToggle } from 'glasscn-ui'
+import { ThemeProvider, ThemeToggle } from 'liquidcn-ui'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { ThemeCustomizer } from '../components/theme-customizer'
@@ -103,7 +103,7 @@ function RootLayout() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-background" style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(174,86,48,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(120,120,140,0.06) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(59,130,246,0.04) 0%, transparent 50%)' }}>
+      <div className="h-screen flex flex-col overflow-hidden bg-background" style={{ background: 'radial-gradient(ellipse at 20% 50%, rgba(174,86,48,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(120,120,140,0.06) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(59,130,246,0.04) 0%, transparent 50%)' }}>
         {/* Header */}
         <header className="glass-nav sticky top-0 z-50 w-full border-b border-border">
           <div className="flex h-14 items-center px-4 sm:px-6 lg:px-8">
@@ -116,7 +116,7 @@ function RootLayout() {
             </button>
             <div className="flex flex-1 items-center justify-between">
               <Link to="/" className="text-xl font-bold">
-                Claude ShadCN UI
+                LiquidCN UI
               </Link>
               <div className="flex items-center gap-4">
                 <ThemeToggle />
@@ -125,10 +125,10 @@ function RootLayout() {
           </div>
         </header>
 
-        <div className="flex">
+        <div className="flex flex-1 overflow-hidden">
           {/* Desktop Sidebar - in-flow flex child, hidden below md */}
           <aside className="w-0 md:w-64 flex-shrink-0 overflow-hidden md:overflow-visible border-r border-transparent md:border-border glass-medium">
-            <div className="sticky top-0 h-[calc(100vh-0rem)] overflow-y-auto w-64">
+            <div className="h-full overflow-y-auto w-64">
               <SidebarNav categories={categories} onLinkClick={() => setSidebarOpen(false)} />
             </div>
           </aside>
@@ -155,7 +155,7 @@ function RootLayout() {
           )}
 
           {/* Main content */}
-          <main className="flex-1 min-w-0 py-6 px-6 md:px-10 lg:px-16">
+          <main className="flex-1 min-w-0 overflow-y-auto py-6 px-6 md:px-10 lg:px-16">
             <Outlet />
           </main>
         </div>

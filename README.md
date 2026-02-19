@@ -1,4 +1,4 @@
-# Claude ShadCN UI
+# LiquidCN UI
 
 A React component library styled with Claude AI's design language, built on ShadCN UI patterns.
 
@@ -14,16 +14,16 @@ A React component library styled with Claude AI's design language, built on Shad
 ## Installation
 
 ```bash
-npm install glasscn-ui
+bun add liquidcn-ui
 # or
-bun add glasscn-ui
+npm install liquidcn-ui
 ```
 
 ## Quick Start
 
 ```tsx
-import { Button, ThemeProvider } from 'glasscn-ui'
-import 'glasscn-ui/styles'
+import { Button, ThemeProvider } from 'liquidcn-ui'
+import 'liquidcn-ui/styles'
 
 function App() {
   return (

@@ -4,7 +4,7 @@
 
 import type { ComponentMeta, PackageManager } from './types'
 
-const PACKAGE_NAME = 'glasscn-ui'
+const PACKAGE_NAME = 'liquidcn-ui'
 
 /**
  * Generate install command for package manager
