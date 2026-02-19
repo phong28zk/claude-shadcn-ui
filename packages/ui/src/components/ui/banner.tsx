@@ -1,9 +1,11 @@
 import * as React from 'react'
+import { motion } from 'framer-motion'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
 
 const bannerVariants = cva(
-  'relative w-full flex items-center gap-4 px-4 py-3 border-l-4 shadow-sm',
+  'relative overflow-hidden w-full flex items-center gap-4 px-4 py-3 border-l-4 shadow-sm',
   {
     variants: {
       variant: {
@@ -39,13 +41,19 @@ export interface BannerProps
 
 const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
   ({ className, variant, message, icon, actions, ...props }, ref) => {
+    const prefersReducedMotion = useReducedMotion()
+
     return (
-      <div
-        className={cn(bannerVariants({ variant, className }))}
+      <motion.div
         ref={ref}
+        className={cn(bannerVariants({ variant, className }))}
         role="alert"
-        {...props}
+        initial={prefersReducedMotion ? false : { opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
+        {...(props as React.ComponentProps<typeof motion.div>)}
       >
+        <span className="glass-shimmer" aria-hidden="true" />
         {icon && (
           <div className="shrink-0 flex items-center [&_svg]:h-5 [&_svg]:w-5">
             {icon}
@@ -65,7 +73,7 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
             ))}
           </div>
         )}
-      </div>
+      </motion.div>
     )
   }
 )

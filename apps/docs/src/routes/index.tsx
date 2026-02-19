@@ -26,7 +26,7 @@ function App() {
   return (
     <div>
       {/* Hero Section */}
-      <div className="mb-16">
+      <div className="glass-card p-8 rounded-2xl mb-16">
         <h1 className="text-4xl font-bold tracking-tight mb-4">
           Claude ShadCN UI
         </h1>
@@ -49,19 +49,19 @@ function App() {
       </div>
 
       {/* Installation */}
-      <section className="mb-16">
+      <section className="mb-16 border-t border-[var(--glass-border)] pt-10">
         <h2 className="text-2xl font-semibold mb-4">Installation</h2>
         <CodeBlock code={installCode} language="bash" showLineNumbers={false} />
       </section>
 
       {/* Quick Start */}
-      <section className="mb-16">
+      <section className="mb-16 border-t border-[var(--glass-border)] pt-10">
         <h2 className="text-2xl font-semibold mb-4">Quick Start</h2>
         <CodeBlock code={quickStartCode} language="tsx" />
       </section>
 
       {/* Features */}
-      <section className="mb-16">
+      <section className="mb-16 border-t border-[var(--glass-border)] pt-10">
         <h2 className="text-2xl font-semibold mb-6">Features</h2>
         <div className="grid gap-4 md:grid-cols-2">
           <Card className="p-6">
@@ -92,7 +92,7 @@ function App() {
       </section>
 
       {/* Component Categories */}
-      <section>
+      <section className="border-t border-[var(--glass-border)] pt-10">
         <h2 className="text-2xl font-semibold mb-6">Component Categories</h2>
         <div className="space-y-4">
           <Card className="p-6">

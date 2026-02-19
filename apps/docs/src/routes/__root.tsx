@@ -28,7 +28,7 @@ function RootLayout() {
         <header className="glass-nav sticky top-0 z-50 w-full border-b border-border">
           <div className="container flex h-14 items-center">
             <button
-              className="mr-4 md:hidden"
+              className="mr-4 md:hidden glass-button rounded-md p-2 transition-all"
               onClick={() => setSidebarOpen(!sidebarOpen)}
               aria-label="Toggle sidebar"
             >
@@ -55,44 +55,46 @@ function RootLayout() {
               ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
             `}
           >
-            <nav className="space-y-6 p-6 overflow-y-auto h-full">
+            <nav className="space-y-5 p-5 overflow-y-auto h-full">
               {/* Getting Started */}
               <div>
-                <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+                <h3 className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground/70">
                   Getting Started
                 </h3>
-                <ul className="space-y-1">
-                  <li>
-                    <Link
-                      to="/"
-                      className="block rounded-md px-3 py-2 text-sm hover:glass-subtle"
-                      activeProps={{ className: 'glass-primary font-medium' }}
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      Introduction
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/getting-started"
-                      className="block rounded-md px-3 py-2 text-sm hover:glass-subtle"
-                      activeProps={{ className: 'glass-primary font-medium' }}
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      Installation
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/components"
-                      className="block rounded-md px-3 py-2 text-sm hover:glass-subtle"
-                      activeProps={{ className: 'glass-primary font-medium' }}
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      All Components
-                    </Link>
-                  </li>
-                </ul>
+                <div className="border-l border-[var(--glass-border)] pl-3 ml-1">
+                  <ul className="space-y-1">
+                    <li>
+                      <Link
+                        to="/"
+                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
+                        activeProps={{ className: 'glass-primary font-medium text-foreground' }}
+                        onClick={() => setSidebarOpen(false)}
+                      >
+                        Introduction
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/getting-started"
+                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
+                        activeProps={{ className: 'glass-primary font-medium text-foreground' }}
+                        onClick={() => setSidebarOpen(false)}
+                      >
+                        Installation
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/components"
+                        className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
+                        activeProps={{ className: 'glass-primary font-medium text-foreground' }}
+                        onClick={() => setSidebarOpen(false)}
+                      >
+                        All Components
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
 
               {/* Dynamic component categories */}
@@ -102,24 +104,26 @@ function RootLayout() {
 
                 return (
                   <div key={category}>
-                    <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+                    <h3 className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground/70">
                       {getCategoryLabel(category)}
                     </h3>
-                    <ul className="space-y-1">
-                      {components.map((meta) => (
-                        <li key={meta.slug}>
-                          <Link
-                            to="/components/$name"
-                            params={{ name: meta.slug }}
-                            className="block rounded-md px-3 py-2 text-sm hover:bg-accent"
-                            activeProps={{ className: 'bg-accent font-medium' }}
-                            onClick={() => setSidebarOpen(false)}
-                          >
-                            {meta.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="border-l border-[var(--glass-border)] pl-3 ml-1">
+                      <ul className="space-y-1">
+                        {components.map((meta) => (
+                          <li key={meta.slug}>
+                            <Link
+                              to="/components/$name"
+                              params={{ name: meta.slug }}
+                              className="block rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
+                              activeProps={{ className: 'glass-primary font-medium text-foreground' }}
+                              onClick={() => setSidebarOpen(false)}
+                            >
+                              {meta.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 )
               })}
@@ -129,7 +133,7 @@ function RootLayout() {
           {/* Overlay for mobile */}
           {sidebarOpen && (
             <div
-              className="fixed inset-0 z-30 bg-background/80 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-30 bg-black/40 backdrop-blur-md md:hidden"
               onClick={() => setSidebarOpen(false)}
             />
           )}

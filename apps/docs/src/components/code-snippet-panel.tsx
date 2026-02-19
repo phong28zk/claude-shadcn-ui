@@ -84,7 +84,7 @@ export function CodeSnippetPanel({ meta, currentProps }: CodeSnippetPanelProps) 
         <div className="ml-auto px-2 py-1 flex-shrink-0">
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent whitespace-nowrap"
+            className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:glass-subtle whitespace-nowrap"
           >
             {copied ? (
               <>

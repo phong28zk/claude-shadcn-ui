@@ -60,7 +60,8 @@ const ChatInput = React.forwardRef<HTMLTextAreaElement, ChatInputProps>(
     }
 
     return (
-      <div className="flex items-end gap-2 w-full">
+      <div className="flex items-end gap-2 w-full glass-input rounded-xl p-2 relative overflow-hidden">
+        <span className="glass-shimmer" aria-hidden="true" />
         <textarea
           ref={textareaRef}
           value={value}
@@ -70,7 +71,7 @@ const ChatInput = React.forwardRef<HTMLTextAreaElement, ChatInputProps>(
           disabled={disabled}
           placeholder={placeholder}
           className={cn(
-            'flex min-h-[60px] w-full resize-none rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm transition-all',
+            'flex min-h-[60px] w-full resize-none rounded-lg bg-transparent px-3 py-2 text-base placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm transition-all',
             inputVariantStyles[variant],
             className
           )}
@@ -80,7 +81,7 @@ const ChatInput = React.forwardRef<HTMLTextAreaElement, ChatInputProps>(
         <button
           onClick={handleSend}
           disabled={disabled || !value.trim()}
-          className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground shadow transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-50 shrink-0 mb-0.5"
+          className="flex h-9 w-9 items-center justify-center rounded-md glass-primary transition-all shrink-0 mb-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
           type="button"
         >
           <Send className="h-4 w-4" />

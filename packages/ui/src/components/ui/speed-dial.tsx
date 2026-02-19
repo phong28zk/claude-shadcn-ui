@@ -66,9 +66,9 @@ const SpeedDial = React.forwardRef<HTMLDivElement, SpeedDialProps>(
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
             'flex items-center justify-center w-14 h-14 rounded-full shadow-lg',
-            'bg-primary text-primary-foreground',
+            'glass-primary',
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-            'transition-colors hover:bg-primary/90',
+            'transition-all',
             variant === 'spatial' && 'spatial'
           )}
           whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}

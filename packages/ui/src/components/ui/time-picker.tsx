@@ -182,7 +182,7 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
                   onSelect={handleSelect} onPeriodChange={handlePeriodChange}
                 />
               )}
-              <button onClick={() => setIsOpen(false)} className="w-full mt-3 py-2 min-h-12 text-sm rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90">Done</button>
+              <button onClick={() => setIsOpen(false)} className="w-full mt-3 py-2 min-h-12 text-sm rounded-2xl glass-primary transition-all">Done</button>
             </div>
           </div>
         )}

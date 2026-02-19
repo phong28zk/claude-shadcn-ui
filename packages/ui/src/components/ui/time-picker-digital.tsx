@@ -36,7 +36,7 @@ export function TimePickerDigital({
             className={cn(
               'w-full px-3 py-2 min-h-10 text-sm text-left rounded-xl transition-colors',
               'hover:bg-[var(--glass-bg-light)]',
-              selectedHour === hour && 'bg-primary text-primary-foreground'
+              selectedHour === hour && 'glass-primary'
             )}
           >
             {String(hour).padStart(2, '0')}
@@ -54,7 +54,7 @@ export function TimePickerDigital({
             className={cn(
               'w-full px-3 py-2 min-h-10 text-sm text-left rounded-xl transition-colors',
               'hover:bg-[var(--glass-bg-light)]',
-              selectedMinute === minute && 'bg-primary text-primary-foreground'
+              selectedMinute === minute && 'glass-primary'
             )}
           >
             {String(minute).padStart(2, '0')}
@@ -73,7 +73,7 @@ export function TimePickerDigital({
               className={cn(
                 'px-3 py-2 min-h-10 text-sm rounded-xl transition-colors',
                 'hover:bg-[var(--glass-bg-light)]',
-                period === p && 'bg-primary text-primary-foreground'
+                period === p && 'glass-primary'
               )}
             >
               {p === 'AM' ? periodLabels.am : periodLabels.pm}

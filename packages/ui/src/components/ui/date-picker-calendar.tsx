@@ -77,10 +77,10 @@ export function DatePickerCalendar({
           <ChevronLeft className="h-5 w-5" />
         </button>
         <div className="flex items-center gap-1">
-          <button onClick={() => setCalendarView(calendarView === 'months' ? 'days' : 'months')} className={cn('px-2 py-1 rounded-lg hover:bg-[var(--glass-bg-light)] text-lg font-medium', calendarView === 'months' && 'bg-primary/10')}>
+          <button onClick={() => setCalendarView(calendarView === 'months' ? 'days' : 'months')} className={cn('px-2 py-1 rounded-lg hover:bg-[var(--glass-bg-light)] text-lg font-medium', calendarView === 'months' && 'bg-[var(--glass-primary-bg)]')}>
             {monthNames[month]}
           </button>
-          <button onClick={() => setCalendarView(calendarView === 'years' ? 'days' : 'years')} className={cn('px-2 py-1 rounded-lg hover:bg-[var(--glass-bg-light)] text-lg font-medium', calendarView === 'years' && 'bg-primary/10')}>
+          <button onClick={() => setCalendarView(calendarView === 'years' ? 'days' : 'years')} className={cn('px-2 py-1 rounded-lg hover:bg-[var(--glass-bg-light)] text-lg font-medium', calendarView === 'years' && 'bg-[var(--glass-primary-bg)]')}>
             {year}
           </button>
         </div>
@@ -104,7 +104,7 @@ export function DatePickerCalendar({
                 <button key={index} onClick={() => isCurrentMonth && !isDisabled && onSelect(date)} disabled={isDisabled || !isCurrentMonth}
                   className={cn('h-10 w-10 text-sm rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center justify-center',
                     !isCurrentMonth && 'text-muted-foreground/40', isCurrentMonth && !isSelected && 'hover:bg-[var(--glass-bg-light)]',
-                    isSelected && 'bg-primary text-primary-foreground', isTodayDate && !isSelected && 'ring-1 ring-primary', isDisabled && 'opacity-50 cursor-not-allowed')}>
+                    isSelected && 'glass-primary', isTodayDate && !isSelected && 'ring-1 ring-primary', isDisabled && 'opacity-50 cursor-not-allowed')}>
                   {day}
                 </button>
               )
@@ -117,7 +117,7 @@ export function DatePickerCalendar({
       {calendarView === 'months' && (
         <div className="grid grid-cols-3 gap-2">
           {monthNames.map((name, i) => (
-            <button key={i} onClick={() => handleMonthSelect(i)} className={cn('py-3 px-2 text-sm rounded-xl hover:bg-[var(--glass-bg-light)] min-h-10', month === i && 'bg-primary text-primary-foreground')}>
+            <button key={i} onClick={() => handleMonthSelect(i)} className={cn('py-3 px-2 text-sm rounded-xl hover:bg-[var(--glass-bg-light)] min-h-10', month === i && 'glass-primary')}>
               {name.slice(0, 3)}
             </button>
           ))}
@@ -129,7 +129,7 @@ export function DatePickerCalendar({
         <div className="grid grid-cols-3 gap-2">
           {years.map((y) => (
             <button key={y} onClick={() => handleYearSelect(y)} disabled={y < minYear || y > maxYear}
-              className={cn('py-3 px-2 text-sm rounded-xl hover:bg-[var(--glass-bg-light)] min-h-10', year === y && 'bg-primary text-primary-foreground', (y < minYear || y > maxYear) && 'opacity-50 cursor-not-allowed')}>
+              className={cn('py-3 px-2 text-sm rounded-xl hover:bg-[var(--glass-bg-light)] min-h-10', year === y && 'glass-primary', (y < minYear || y > maxYear) && 'opacity-50 cursor-not-allowed')}>
               {y}
             </button>
           ))}

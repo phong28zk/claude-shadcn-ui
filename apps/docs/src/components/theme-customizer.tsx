@@ -50,7 +50,7 @@ export function ThemeCustomizer() {
           <h2 className="font-semibold">Theme Customizer</h2>
           <button
             onClick={() => setIsOpen(false)}
-            className="rounded-md p-1 hover:bg-accent"
+            className="rounded-md p-1 hover:glass-subtle"
             aria-label="Close"
           >
             <X className="h-4 w-4" />

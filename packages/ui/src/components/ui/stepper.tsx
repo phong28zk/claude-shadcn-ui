@@ -82,12 +82,13 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                 {/* Step indicator */}
                 <div
                   className={cn(
-                    'w-8 h-8 rounded-full flex items-center justify-center',
+                    'relative overflow-hidden w-8 h-8 rounded-full flex items-center justify-center',
                     'border-2 text-sm font-medium transition-colors',
                     statusClasses[status]
                   )}
                   aria-current={status === 'active' ? 'step' : undefined}
                 >
+                  <span className="glass-shimmer" aria-hidden="true" />
                   {status === 'completed' ? (
                     <Check className="w-4 h-4" />
                   ) : status === 'error' ? (

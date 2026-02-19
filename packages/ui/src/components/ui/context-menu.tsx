@@ -75,18 +75,21 @@ const ContextMenuItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item> & {
     inset?: boolean
   }
->(({ className, inset, ...props }, ref) => (
+>(({ className, inset, children, ...props }, ref) => (
   <ContextMenuPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex cursor-default select-none items-center rounded-md px-2 py-1.5 text-sm outline-none',
+      'relative overflow-hidden flex cursor-default select-none items-center rounded-md px-2 py-1.5 text-sm outline-none',
       'focus:bg-[var(--glass-bg-light)] focus:text-foreground',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       inset && 'pl-8',
       className
     )}
     {...props}
-  />
+  >
+    <span className="glass-shimmer" aria-hidden="true" />
+    {children}
+  </ContextMenuPrimitive.Item>
 ))
 ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName
 
@@ -97,7 +100,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
   <ContextMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      'relative flex cursor-default select-none items-center rounded-md py-1.5 pl-8 pr-2 text-sm outline-none',
+      'relative overflow-hidden flex cursor-default select-none items-center rounded-md py-1.5 pl-8 pr-2 text-sm outline-none',
       'focus:bg-[var(--glass-bg-light)] focus:text-foreground',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className
@@ -105,6 +108,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
     checked={checked}
     {...props}
   >
+    <span className="glass-shimmer" aria-hidden="true" />
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <ContextMenuPrimitive.ItemIndicator>
         <Check className="h-4 w-4" />

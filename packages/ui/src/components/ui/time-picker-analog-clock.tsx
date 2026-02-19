@@ -153,7 +153,7 @@ export function TimePickerAnalogClock({
       {format === '12h' && (
         <div className="flex gap-2 mt-3">
           {(['AM', 'PM'] as const).map((p) => (
-            <button key={p} onClick={() => onPeriodChange(p)} className={cn('px-4 py-2 min-h-10 text-sm rounded-xl transition-colors', period === p ? 'bg-primary text-primary-foreground' : 'hover:bg-[var(--glass-bg-light)]')}>
+            <button key={p} onClick={() => onPeriodChange(p)} className={cn('px-4 py-2 min-h-10 text-sm rounded-xl transition-colors', period === p ? 'glass-primary' : 'hover:bg-[var(--glass-bg-light)]')}>
               {p === 'AM' ? periodLabels.am : periodLabels.pm}
             </button>
           ))}

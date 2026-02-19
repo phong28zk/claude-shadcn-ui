@@ -54,7 +54,7 @@ const DrawerItem = React.forwardRef<
     )}
   >
     {active && (
-      <div className="absolute left-0 w-1 h-6 bg-primary rounded-r-full" />
+      <div className="absolute left-0 w-1 h-6 bg-[var(--glass-primary-border)] rounded-r-full" />
     )}
     {icon && <span className="[&_svg]:w-5 [&_svg]:h-5 shrink-0">{icon}</span>}
     <span className="flex-1 text-left">{label}</span>

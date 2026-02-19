@@ -53,9 +53,10 @@ const MessageList = React.forwardRef<HTMLDivElement, MessageListProps>(
         {showScrollButton && (
           <button
             onClick={scrollToBottom}
-            className="absolute bottom-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-opacity hover:bg-primary/90"
+            className="absolute bottom-4 right-4 flex h-8 w-8 items-center justify-center rounded-full glass-primary shadow-lg transition-all relative overflow-hidden"
             type="button"
           >
+            <span className="glass-shimmer" aria-hidden="true" />
             <ChevronDown className="h-4 w-4" />
             <span className="sr-only">Scroll to bottom</span>
           </button>

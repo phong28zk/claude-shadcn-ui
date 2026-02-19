@@ -36,9 +36,10 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
         {collapsible && (
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="absolute -right-3 top-6 z-10 flex h-6 w-6 items-center justify-center rounded-full border bg-background shadow-sm hover:bg-accent"
+            className="relative overflow-hidden absolute -right-3 top-6 z-10 flex h-6 w-6 items-center justify-center rounded-full border bg-background shadow-sm hover:bg-accent"
             type="button"
           >
+            <span className="glass-shimmer" aria-hidden="true" />
             {collapsed ? (
               <ChevronRight className="h-3 w-3" />
             ) : (

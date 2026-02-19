@@ -45,7 +45,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
               key={tab.value}
               onClick={() => onChange(tab.value)}
               className={cn(
-                'relative inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md',
+                'relative overflow-hidden inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md',
                 'text-sm font-medium transition-colors whitespace-nowrap',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                 isActive
@@ -57,6 +57,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
               aria-controls={`tabpanel-${tab.value}`}
               id={`tab-${tab.value}`}
             >
+              <span className="glass-shimmer" aria-hidden="true" />
               {!prefersReducedMotion && isActive && (
                 <motion.div
                   layoutId="tab-indicator"

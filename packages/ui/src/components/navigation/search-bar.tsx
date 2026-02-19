@@ -129,7 +129,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
               key="expanded"
               className={cn(
                 'flex items-center gap-2 px-3 py-2 rounded-lg',
-                'solid-input bg-background border border-border',
+                'glass-input',
                 variantClasses[variant]
               )}
               initial={prefersReducedMotion ? false : { width: 40, opacity: 0.8 }}

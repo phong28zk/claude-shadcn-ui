@@ -18,10 +18,10 @@ export function CodeBlock({ code, language = 'tsx', showLineNumbers = true }: Co
   }
 
   return (
-    <div className="relative group">
+    <div className="relative group glass-heavy rounded-xl overflow-hidden">
       <button
         onClick={handleCopy}
-        className="absolute right-2 top-2 p-2 rounded-md bg-white/10 hover:bg-white/20 transition-colors opacity-0 group-hover:opacity-100"
+        className="absolute right-2 top-2 p-2 rounded-md glass-button transition-all opacity-0 group-hover:opacity-100 z-10"
         aria-label="Copy code"
       >
         {copied ? (

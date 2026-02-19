@@ -4,13 +4,13 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const toggleVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors hover:glass-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:glass-primary data-[state=on]:text-[var(--glass-primary-text)] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'relative overflow-hidden inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors hover:glass-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:glass-primary data-[state=on]:text-[var(--glass-primary-text)] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
         default: 'bg-transparent',
         outline:
-          'border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground',
+          'glass-subtle border-[var(--glass-border)] shadow-sm hover:glass-medium',
         spatial: 'spatial bg-transparent hover:-translate-y-0.5',
       },
       size: {
@@ -33,12 +33,15 @@ export interface ToggleProps
 const Toggle = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Root>,
   ToggleProps
->(({ className, variant, size, ...props }, ref) => (
+>(({ className, variant, size, children, ...props }, ref) => (
   <TogglePrimitive.Root
     ref={ref}
     className={cn(toggleVariants({ variant, size, className }))}
     {...props}
-  />
+  >
+    <span className="glass-shimmer" aria-hidden="true" />
+    {children}
+  </TogglePrimitive.Root>
 ))
 
 Toggle.displayName = TogglePrimitive.Root.displayName

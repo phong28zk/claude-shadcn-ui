@@ -52,8 +52,8 @@ const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
         return (
           <span
             className={cn(
-              'inline-flex items-center text-sm',
-              isLast ? 'font-medium text-foreground' : 'text-muted-foreground'
+              'inline-flex items-center text-sm rounded-md px-2 py-0.5',
+              isLast ? 'font-medium text-foreground glass-primary' : 'text-muted-foreground'
             )}
             aria-current={isLast ? 'page' : undefined}
           >
@@ -66,8 +66,8 @@ const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
         <a
           href={item.href}
           className={cn(
-            'inline-flex items-center text-sm text-muted-foreground',
-            'hover:text-foreground transition-colors',
+            'inline-flex items-center text-sm text-muted-foreground rounded-md px-2 py-0.5',
+            'hover:text-foreground hover:bg-[var(--glass-bg-light)] transition-all',
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded'
           )}
         >
@@ -80,7 +80,7 @@ const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
       <nav
         ref={ref}
         aria-label="Breadcrumb"
-        className={cn('flex items-center', className)}
+        className={cn('flex items-center glass-subtle rounded-lg px-3 py-1.5', className)}
         {...props}
       >
         <ol className="flex items-center gap-1.5">

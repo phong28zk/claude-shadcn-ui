@@ -95,6 +95,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         role={isClickable ? 'button' : undefined}
         tabIndex={isClickable ? 0 : undefined}
         className={cn(
+          'relative overflow-hidden',
           listItemVariants({ dense, clickable: isClickable, selected }),
           className
         )}
@@ -102,6 +103,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         onKeyDown={handleKeyDown}
         {...props}
       >
+        <span className="glass-shimmer" aria-hidden="true" />
         {leading && <div className="flex-shrink-0">{leading}</div>}
         <div className="flex-1 min-w-0">{children}</div>
         {trailing && <div className="flex-shrink-0 ml-auto">{trailing}</div>}

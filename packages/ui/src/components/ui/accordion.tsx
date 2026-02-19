@@ -46,7 +46,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        'flex flex-1 items-center justify-between py-4 px-4 text-sm font-medium',
+        'relative overflow-hidden flex flex-1 items-center justify-between py-4 px-4 text-sm font-medium',
         'transition-all hover:bg-[var(--glass-bg-light)]',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset',
         '[&[data-state=open]>svg]:rotate-180',
@@ -54,6 +54,7 @@ const AccordionTrigger = React.forwardRef<
       )}
       {...props}
     >
+      <span className="glass-shimmer" aria-hidden="true" />
       {children}
       <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
     </AccordionPrimitive.Trigger>

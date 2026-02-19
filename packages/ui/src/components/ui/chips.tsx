@@ -4,7 +4,7 @@ import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const chipVariants = cva(
-  'inline-flex items-center gap-1.5 rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+  'relative overflow-hidden inline-flex items-center gap-1.5 rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
@@ -79,6 +79,7 @@ const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
 
     const content = (
       <>
+        <span className="glass-shimmer" aria-hidden="true" />
         <span className="truncate">{children}</span>
         {removable && onRemove && (
           <button

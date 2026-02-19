@@ -228,6 +228,15 @@
     --motion-scale-hover: 1.02;
     --motion-scale-press: 0.98;
 
+    /* Spring timing split (iOS 26) */
+    --motion-spring-enter: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    --motion-spring-exit:  200ms cubic-bezier(0.4, 0, 1, 1);
+    --motion-press-in:      80ms cubic-bezier(0.4, 0, 0.6, 1);
+
+    /* Focus ring double-ring (iOS 26) */
+    --focus-ring-inner: 0 0 0 2px rgba(255, 255, 255, 0.9);
+    --focus-ring-outer: 0 0 0 4px hsl(var(--ring));
+
     /* Glassmorphism Tokens (iOS 26 Liquid Glass) - Desktop */
     --glass-blur-sm: 12px;
     --glass-blur-md: 20px;
@@ -362,10 +371,10 @@
     --surface-solid-muted: var(--primitive-gray-800);
     --surface-solid-elevated: var(--primitive-gray-900);
 
-    /* Glassmorphism Dark Mode - Enhanced liquid glass */
-    --glass-bg-light: rgba(255, 255, 255, 0.1);
-    --glass-bg-medium: rgba(255, 255, 255, 0.15);
-    --glass-bg-heavy: rgba(255, 255, 255, 0.22);
+    /* Glassmorphism Dark Mode - Enhanced liquid glass (conservative trim — Validation Session 1) */
+    --glass-bg-light: rgba(255, 255, 255, 0.09);
+    --glass-bg-medium: rgba(255, 255, 255, 0.13);
+    --glass-bg-heavy: rgba(255, 255, 255, 0.19);
     --glass-border: rgba(255, 255, 255, 0.15);
     --glass-border-strong: rgba(255, 255, 255, 0.25);
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);

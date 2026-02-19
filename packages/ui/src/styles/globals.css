@@ -172,6 +172,8 @@
     box-shadow: var(--glass-shadow);
     position: relative;
     overflow: hidden;
+    contain: paint;
+    isolation: isolate;
   }
 
   /* Noise texture overlay for glass surfaces */
@@ -241,12 +243,13 @@
   .glass-button {
     @apply glass-subtle rounded-lg;
     transition: all var(--motion-duration-hover) var(--motion-ease-default);
+    will-change: transform;
   }
 
   .glass-button:hover {
     background: var(--glass-bg-medium);
     border-color: var(--glass-border-strong);
-    transform: translateY(-1px);
+    transform: scale(1.02) translateY(-1px);
     box-shadow: var(--glass-shadow);
   }
 
@@ -414,6 +417,15 @@
       opacity: 1;
       animation: liquid-glass-hover 0.4s ease-out;
     }
+  }
+
+  /* Double-ring focus for glass elements (iOS 26 pattern) */
+  .glass-button:focus-visible,
+  .glass-input:focus-visible,
+  .glass-primary:focus-visible,
+  .glass-destructive:focus-visible {
+    box-shadow: var(--focus-ring-inner), var(--focus-ring-outer);
+    outline: none;
   }
 
   /* Reduced motion: no shimmer animation */

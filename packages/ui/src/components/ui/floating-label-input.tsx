@@ -33,9 +33,9 @@ const FloatingLabelInput = React.forwardRef<HTMLDivElement, FloatingLabelInputPr
       <div ref={ref} className={cn('w-full', className)}>
         <div
           className={cn(
-            'relative flex h-12 w-full items-center rounded-3xl border bg-background transition-colors',
-            error ? 'border-destructive' : 'border-border',
-            isFocused && !error && 'border-primary',
+            'relative flex h-12 w-full items-center rounded-3xl glass-input transition-all',
+            error && 'border-destructive! shadow-[var(--glass-destructive-glow)]',
+            isFocused && !error && 'border-[var(--glass-border-strong)]',
             variant === 'spatial' && 'spatial',
             disabled && 'opacity-50 cursor-not-allowed'
           )}

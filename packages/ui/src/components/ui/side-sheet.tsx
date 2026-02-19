@@ -72,12 +72,16 @@ SideSheetContent.displayName = DialogPrimitive.Content.displayName
 
 const SideSheetHeader = ({
   className,
+  children,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn('flex flex-col space-y-2 text-left', className)}
+    className={cn('relative overflow-hidden flex flex-col space-y-2 text-left', className)}
     {...props}
-  />
+  >
+    <span className="glass-shimmer" aria-hidden="true" />
+    {children}
+  </div>
 )
 SideSheetHeader.displayName = 'SideSheetHeader'
 

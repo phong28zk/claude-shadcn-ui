@@ -53,11 +53,12 @@ const Timeline = React.forwardRef<HTMLDivElement, TimelineProps>(
                 {/* Content */}
                 <div
                   className={cn(
-                    'flex-1 pb-4',
+                    'relative overflow-hidden flex-1 pb-4',
                     variant === 'default' && 'glass-card p-4',
                     variant === 'spatial' && 'glass-card spatial p-4'
                   )}
                 >
+                  <span className="glass-shimmer" aria-hidden="true" />
                   <div className="flex items-start justify-between gap-2">
                     <h4 className="font-medium text-foreground">{item.title}</h4>
                     {item.date && (
