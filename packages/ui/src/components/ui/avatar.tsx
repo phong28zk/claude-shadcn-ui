@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const avatarVariants = cva(
-  'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full',
+  'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full transition-transform duration-[var(--duration-fast,150ms)] ease-[var(--ease-spring,cubic-bezier(0.22,1,0.36,1))] hover:scale-110',
   {
     variants: {
       variant: {

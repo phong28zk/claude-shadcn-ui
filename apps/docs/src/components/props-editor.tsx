@@ -2,7 +2,10 @@
  * PropsEditor - Dynamic form controls based on PropSchema
  */
 
-import { Input, Switch } from 'liquidcn-ui'
+import {
+  Input, Switch,
+  Select, SelectTrigger, SelectValue, SelectContent, SelectItem,
+} from 'liquidcn-ui'
 import { RotateCcw } from 'lucide-react'
 import type { PropSchema } from '../lib/types'
 
@@ -49,17 +52,21 @@ export function PropsEditor({ schema, values, onChange }: PropsEditorProps) {
 
           {/* Control based on type */}
           {prop.type === 'select' && prop.options && (
-            <select
+            <Select
               value={String(values[prop.name] ?? prop.default)}
-              onChange={(e) => handleChange(prop.name, e.target.value)}
-              className="w-full h-9 rounded-md glass-input px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              onValueChange={(value) => handleChange(prop.name, value)}
             >
-              {prop.options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full h-9">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {prop.options.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           )}
 
           {prop.type === 'boolean' && (

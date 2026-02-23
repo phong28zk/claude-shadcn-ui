@@ -15,7 +15,7 @@ export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
-  ({ icon, title, description, action, variant = 'default', className, ...props }, ref) => {
+  ({ icon, title, description, action, variant: _variant = 'default', className, ...props }, ref) => {
     return (
       <div
         ref={ref}

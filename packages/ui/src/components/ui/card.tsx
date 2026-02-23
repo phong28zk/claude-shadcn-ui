@@ -31,7 +31,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     if (shouldAnimate) {
       const hoverProps = variant === 'spatial'
         ? { scale: 1.02, y: -4, boxShadow: 'var(--spatial-shadow-hover)' }
-        : { scale: 1.02, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }
+        : { y: -2, boxShadow: '0 8px 24px -4px rgb(0 0 0 / 0.12), 0 4px 8px -2px rgb(0 0 0 / 0.06)' }
 
       return (
         <motion.div
@@ -39,8 +39,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
           className={baseClassName}
           whileHover={hoverProps}
           transition={{
-            duration: 0.25,
-            ease: [0.4, 0, 0.2, 1],
+            duration: 0.2,
+            ease: [0.22, 1, 0.36, 1],
           }}
           {...(props as React.ComponentProps<typeof motion.div>)}
         />

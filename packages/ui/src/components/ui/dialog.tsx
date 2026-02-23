@@ -6,9 +6,9 @@ import { useReducedMotion } from '@/hooks/use-reduced-motion'
 import { cn } from '@/lib/utils'
 
 const dialogMotionVariants = {
-  initial: { opacity: 0, scale: 0.95 },
-  animate: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 0.95 },
+  initial: { opacity: 0, scale: 0.95, y: 8 },
+  animate: { opacity: 1, scale: 1, y: 0 },
+  exit: { opacity: 0, scale: 0.97 },
 }
 
 const Dialog = DialogPrimitive.Root
@@ -69,7 +69,7 @@ const DialogContent = React.forwardRef<
             animate="animate"
             exit="exit"
             variants={dialogMotionVariants}
-            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             {children}
           </motion.div>

@@ -12,6 +12,7 @@ import {
   getAllCategories,
   getCategoryLabel,
 } from '../lib/component-registry'
+import { frameworks } from '../lib/installation-steps'
 import type { ComponentCategory } from '../lib/types'
 
 export const Route = createRootRoute({
@@ -48,6 +49,21 @@ function SidebarNav({ categories, onLinkClick }: { categories: ComponentCategory
               >
                 Installation
               </Link>
+              <ul className="ml-3 mt-1 space-y-1 border-l border-[var(--glass-border)] pl-3">
+                {frameworks.map((fw) => (
+                  <li key={fw.id}>
+                    <Link
+                      to="/getting-started/$framework"
+                      params={{ framework: fw.id }}
+                      className="block rounded-md px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:glass-subtle transition-all"
+                      activeProps={{ className: 'glass-primary font-medium text-foreground' }}
+                      onClick={onLinkClick}
+                    >
+                      {fw.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </li>
             <li>
               <Link

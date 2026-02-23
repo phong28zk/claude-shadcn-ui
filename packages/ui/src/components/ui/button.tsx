@@ -73,9 +73,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <motion.button
           className={baseClassName}
           ref={ref}
-          whileHover={isSpatial ? { scale: 1.02, y: -2 } : { scale: 1.02 }}
-          whileTap={isSpatial ? { scale: 0.98, y: 1 } : { scale: 0.98 }}
-          transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
+          whileHover={isSpatial ? { scale: 1.02, y: -2 } : { scale: 1.02, y: -1 }}
+          whileTap={isSpatial ? { scale: 0.97, y: 1 } : { scale: 0.97 }}
+          transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
           {...(props as React.ComponentProps<typeof motion.button>)}
         >
           {content}

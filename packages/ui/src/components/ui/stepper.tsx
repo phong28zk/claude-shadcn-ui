@@ -27,7 +27,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
       activeStep,
       orientation = 'horizontal',
       errorStep = -1,
-      variant = 'default',
+      variant: _variant = 'default',
       className,
       ...props
     },
