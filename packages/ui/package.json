@@ -6,11 +6,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phong28zk/liquidcn-ui.git"
+    "url": "git+https://github.com/phong28zk/claude-shadcn-ui.git"
   },
-  "homepage": "https://github.com/phong28zk/liquidcn-ui#readme",
+  "homepage": "https://liquidcn-ui-docs.vercel.app/",
   "bugs": {
-    "url": "https://github.com/phong28zk/liquidcn-ui/issues"
+    "url": "https://github.com/phong28zk/claude-shadcn-ui/issues"
   },
   "keywords": [
     "react",

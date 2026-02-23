@@ -4,8 +4,8 @@
 
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
 import { ThemeProvider, ThemeToggle } from 'liquidcn-ui'
-import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { Menu, X, Github, Star } from 'lucide-react'
+import { useState, useEffect } from 'react'
 import { ThemeCustomizer } from '../components/theme-customizer'
 import {
   getComponentsByCategory,
@@ -97,9 +97,37 @@ function SidebarNav({ categories, onLinkClick }: { categories: ComponentCategory
   )
 }
 
+const GITHUB_REPO = 'phong28zk/claude-shadcn-ui'
+const GITHUB_URL = `https://github.com/${GITHUB_REPO}`
+
+/** Fetch GitHub star count with caching */
+function useGitHubStars() {
+  const [stars, setStars] = useState<number | null>(null)
+
+  useEffect(() => {
+    const cached = sessionStorage.getItem('gh-stars')
+    if (cached) {
+      setStars(Number(cached))
+      return
+    }
+    fetch(`https://api.github.com/repos/${GITHUB_REPO}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.stargazers_count != null) {
+          setStars(data.stargazers_count)
+          sessionStorage.setItem('gh-stars', String(data.stargazers_count))
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  return stars
+}
+
 function RootLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const categories = getAllCategories()
+  const stars = useGitHubStars()
 
   return (
     <ThemeProvider>
@@ -118,7 +146,28 @@ function RootLayout() {
               <Link to="/" className="text-xl font-bold">
                 LiquidCN UI
               </Link>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="GitHub repository"
+                >
+                  <Github className="h-4 w-4" />
+                  <span className="hidden sm:inline">GitHub</span>
+                </a>
+                <a
+                  href={`${GITHUB_URL}/stargazers`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+                  aria-label="Star on GitHub"
+                >
+                  <Star className="h-3.5 w-3.5" />
+                  {stars !== null && <span>{stars}</span>}
+                  <span className="hidden sm:inline">Star</span>
+                </a>
                 <ThemeToggle />
               </div>
             </div>
